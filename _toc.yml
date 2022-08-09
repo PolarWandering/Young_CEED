@@ -1,0 +1,11 @@
+format: jb-book
+root: book/intro
+
+parts:
+- caption: Overview
+  chapters:
+    - file: introduction.md
+    - file: Preprocessing.ipynb
+- caption: Analysis
+  chapters:
+    - file: code/Global_plate_model.ipynb
