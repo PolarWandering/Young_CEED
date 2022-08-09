@@ -12,7 +12,7 @@ from shapely.geometry import Polygon
 from scripts.auxiliar import spherical2cartesian, shape, eigen_decomposition
 
 
-def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age):
+def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, window_method='static', min_vgps=25):
     """
     function to generate running mean APWP..
     """
@@ -22,9 +22,23 @@ def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, t
     running_means = pd.DataFrame(columns=['age','N','n_studies','k','A95','csd','plon','plat'])
     
     for age in mean_pole_ages:
-        window_min = age - (window_length / 2.)
-        window_max = age + (window_length / 2.)
+        
+        if window_method == 'static':
+            window_min = age - (window_length / 2.)
+            window_max = age + (window_length / 2.)
+        elif window_method == 'n_vgps':
+            delta_w = 0.0
+            window_min, window_max = age, age
+            while data.loc[(data[age_label] >= window_min) & (data[age_label] <= window_max)].shape[0] < min_vgps:
+                delta_w += 0.1
+                window_min -= delta_w
+                window_max += delta_w
+                assert delta_w < (max_age-min_age)/2., "It is not possible to find the desired number of vgps. Please reduce the value of min_vgps."
+        else:
+            raise ValueError("The methods hasn't been specified.")
+            
         poles = data.loc[(data[age_label] >= window_min) & (data[age_label] <= window_max)]
+        print(window_max-window_min)
         number_studies = len(poles['Study'].unique())
         mean = ipmag.fisher_mean(dec=poles[plon_label].tolist(), inc=poles[plat_label].tolist())
 
@@ -34,6 +48,7 @@ def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, t
     running_means.reset_index(drop=1, inplace=True)
     
     return running_means
+
 
 def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age):
     """
