@@ -19,6 +19,9 @@ repository:
   url                       : https://github.com/PolarWandering/Young_CEED  
   branch                    : main  
   
+html:
+  use_repository_button: true
+  
 launch_buttons:
   notebook_interface: "jupyterlab"
   
