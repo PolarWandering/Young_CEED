@@ -11,6 +11,19 @@ copyright                   : "2022"  # Copyright year to be placed in the foote
 logo                        : book/logo.png  # A path to the book logo
 
 execute:
-  execute_notebooks: 'off'
+  execute_notebooks: 'off'  # Eventually we want this to be 'on'.
+  
+
+# Binder support
+repository:
+  url                       : https://github.com/PolarWandering/Young_CEED  
+  branch                    : main  
+  
+launch_buttons:
+  notebook_interface: "jupyterlab"
+  
+launch_buttons:
+  binderhub_url: "https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/HEAD"  
+  colab_url: "https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb" # just for one notebook for now
 
 
