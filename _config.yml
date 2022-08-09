@@ -26,7 +26,7 @@ launch_buttons:
   notebook_interface: "jupyterlab"
   
 launch_buttons:
-  binderhub_url: "https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/HEAD"  
+  binderhub_url: "https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main"  
   colab_url: "https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb" # just for one notebook for now
 
 
