@@ -82,14 +82,32 @@ def print_pole_statistics(pole, vgp_mean, vgp_mean_recomputed):
         print(f"{'Recomputed pp from dir.' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean_recomputed['n'] : ^10}{vgp_mean_recomputed['inc'] : ^10.1f}{vgp_mean_recomputed['dec'] : ^10.1f}{vgp_mean_recomputed['alpha95'] : >5.1f}")
         print(f"")
 
+        
 def test_fishqq(merged):
-    if len(merged) <= 10: print (' - Not enough sites to conduct quantile-quantile test')
+    print('')
+    print('Fisher distribution Q-Q test on VGPs')
+    print('------------------------------------')
+    if len(merged) <= 10: print ('Not enough sites to conduct quantile-quantile test')
     else:                              
         plt.figure(1,figsize=(7,3))
         ipmag.fishqq(di_block=merged)               
         plt.show()
 
-def reversal_test(mode1, mode2):
+        
+def reversal_tests(mode1, mode2):
+    """
+    Conduct reversal tests on data of two polarities that have been split using the
+    pmag.separate_directions() function. The function implements the bootstrap 
+    reversal mean test (Tauxe et al., 1991), the Watson common mean reversal test 
+    with classification (McFadden and McElhinny, 1990), and the Bayesian reversal 
+    test (Heslop & Roberts, 2018),
+    
+    Parameters
+    ----------
+    mode1 : a di_block of directions in one polarity
+    mode2 : a di_block of directions in the opposite polarity
+    """
+    
     if len(mode1) == 0 or len(mode2) == 0: 
         print (' ')
         print (' - Only one polarity; cannot conduct Bootstrapped reversal test')
@@ -97,9 +115,24 @@ def reversal_test(mode1, mode2):
         print (' ')
         print (' - Not enough sites from one (or both) polarity populations to conduct reversal test')
     else: 
-        flipped2 = np.delete(np.array(ipmag.do_flip(di_block=mode2)), -1, axis=1)
-        ipmag.common_mean_bootstrap(mode1, flipped2)      
+        flipped2 = ipmag.do_flip(di_block=mode2, unit_vector=False)
+        
+        print('Bootstrap reversal mean test (Tauxe et al., 1991)')
+        print('------------------------------------------------')
+        ipmag.common_mean_bootstrap(mode1, flipped2) 
+        print('')
+        
+        print('Watson common mean reversal test with classification (McFadden and McElhinny, 1990)')
+        print('------------------------------------------------')
+        ipmag.common_mean_watson(mode1, flipped2)
+        print('')
+    
+    print('Bayesian reversal test (Heslop & Roberts, 2018)')
+    print('------------------------------------------------')
+    P = bayes_probability_heslop(mode1, mode2)
+    if P != 9999: print(bayes_support(P))            
 
+        
 def invert_polarity(mode1, mode2):
     '''
     Direcctions are flipped to a single polarity and pooled into a single variable (merged)
