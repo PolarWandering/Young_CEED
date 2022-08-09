@@ -1,0 +1,14 @@
+name: polarwandering
+channels:
+  - conda-forge
+dependencies:
+  - future
+  - matplotlib
+  - cartopy
+  - wxpython
+  - pandas
+  - requests
+  - jupyter
+  - conda-forge::python-wget
+  - seaborn
+  - openpyxl
