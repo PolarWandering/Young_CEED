@@ -65,25 +65,50 @@ def get_alpha95(df_vgps):
     return df_vgps
 
 
-def print_pole_statistics(pole, vgp_mean, vgp_mean_recomputed):
+def print_pole_statistics(reported_pole, vgp_mean, vgp_mean_recomputed):
     
-    if len(vgp_mean) == 0:
-        print(f"{'' : <20}{'Pole' : <30}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
-        print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")
-        print(f"{'Recomputed paleopole' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole' : ^10}")
-        print(f"{'Recomputed pp from dir.' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole' : ^10}")
-    elif len(vgp_mean_recomputed) == 0:
-        print(f"{'' : <20}{'Pole' : <30}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
-        print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")
-        print(f"{'Recomputed paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean['n'] : ^10}{vgp_mean['inc'] : ^10.1f}{vgp_mean['dec'] : ^10.1f}{vgp_mean['alpha95'] : >5.1f}")
-        print(f"{'Recomputed pp from dir.' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole from directions' : ^10}")
-    else:
-        print(f"{'' : <30}{'Pole' : ^10}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
-        print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")    
-        print(f"{'Recomputed paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean['n'] : ^10}{vgp_mean['inc'] : ^10.1f}{vgp_mean['dec'] : ^10.1f}{vgp_mean['alpha95'] : >5.1f}")
-        print(f"{'Recomputed pp from dir.' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean_recomputed['n'] : ^10}{vgp_mean_recomputed['inc'] : ^10.1f}{vgp_mean_recomputed['dec'] : ^10.1f}{vgp_mean_recomputed['alpha95'] : >5.1f}")
-        print(f"")
-
+    pole_summary = pd.DataFrame(columns = ['N', 'Plat', 'Plon', 'A95'],
+                                 index=['Reported mean pole', 
+                                        'Mean pole (calculated from VGPs)',
+                                        'Mean pole (calculated from transformed directions)'])
+    
+    if len(reported_pole) > 0:
+        pole_summary['Plon']['Reported mean pole'] = reported_pole.iloc[0]['Plon']
+        pole_summary['Plat']['Reported mean pole'] = reported_pole.iloc[0]['Plat']
+        pole_summary['A95']['Reported mean pole'] = reported_pole.iloc[0]['A95']
+        pole_summary['N']['Reported mean pole'] = reported_pole.iloc[0]['N']
+        
+    if len(vgp_mean) > 0:
+        pole_summary['Plon']['Mean pole (calculated from VGPs)'] = round(vgp_mean['dec'],1)
+        pole_summary['Plat']['Mean pole (calculated from VGPs)'] = round(vgp_mean['inc'],1)
+        pole_summary['A95']['Mean pole (calculated from VGPs)'] = round(vgp_mean['alpha95'],1)
+        pole_summary['N']['Mean pole (calculated from VGPs)'] = round(vgp_mean['n'],1)
+        
+    if len(vgp_mean_recomputed) > 0:
+        pole_summary['Plon']['Mean pole (calculated from transformed directions)'] = round(vgp_mean_recomputed['dec'],1)
+        pole_summary['Plat']['Mean pole (calculated from transformed directions)'] = round(vgp_mean_recomputed['inc'],1)
+        pole_summary['A95']['Mean pole (calculated from transformed directions)'] = round(vgp_mean_recomputed['alpha95'],1)
+        pole_summary['N']['Mean pole (calculated from transformed directions)'] = round(vgp_mean_recomputed['n'],1)
+        
+    display(pole_summary)
+        
+    #     print(f"{'' : <20}{'Pole' : <30}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
+    #     print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")
+    #     print(f"{'Recomputed paleopole' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole' : ^10}")
+    #     print(f"{'Recomputed pp from dir.' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole' : ^10}")
+    # elif len(vgp_mean_recomputed) == 0:
+    #     print(f"{'' : <20}{'Pole' : <30}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
+    #     print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")
+    #     print(f"{'Recomputed paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean['n'] : ^10}{vgp_mean['inc'] : ^10.1f}{vgp_mean['dec'] : ^10.1f}{vgp_mean['alpha95'] : >5.1f}")
+    #     print(f"{'Recomputed pp from dir.' : <30}{'':^10}{'Not enough vgps to recompute a Paleopole from directions' : ^10}")
+    # else:
+    #     print(f"{'' : <30}{'Pole' : ^10}{'N' : ^10}{'Plat' : ^10}{'Plon' : ^10}{'A95' : >5}")        
+    #     print(f"{'Reported paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{pole.iloc[0]['N'] : ^10}{pole.iloc[0]['Plat'] : ^10}{pole.iloc[0]['Plon'] : ^10}{pole.iloc[0]['A95'] : >5}")    
+    #     print(f"{'Recomputed paleopole' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean['n'] : ^10}{vgp_mean['inc'] : ^10.1f}{vgp_mean['dec'] : ^10.1f}{vgp_mean['alpha95'] : >5.1f}")
+    #     print(f"{'Recomputed pp from dir.' : <30}{pole.iloc[0]['pole'] : ^10}{vgp_mean_recomputed['n'] : ^10}{vgp_mean_recomputed['inc'] : ^10.1f}{vgp_mean_recomputed['dec'] : ^10.1f}{vgp_mean_recomputed['alpha95'] : >5.1f}")
+    #     print(f"")
+        
+    return pole_summary
         
 def test_fishqq(merged):
     print('')
