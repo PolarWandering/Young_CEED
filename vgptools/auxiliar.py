@@ -25,7 +25,7 @@ def get_files_in_directory(path):
 
 def cartesian2spherical(v):
     """
-    Take an array of lenght 3 correspoingt to a 3-dimensional vector and returns a array of lenght 2
+    Take an array of length corresponding to a 3-dimensional vector and returns a array of length 2
     with co-latitade and longitude
     """
     theta = np.arcsin(v[2])         #facu     theta = np.arccos(v[2]) 
@@ -109,7 +109,8 @@ def print_pole_statistics(reported_pole, vgp_mean, vgp_mean_recomputed):
     #     print(f"")
         
     return pole_summary
-        
+       
+    
 def test_fishqq(merged):
     print('')
     print('Fisher distribution Q-Q test on VGPs')
