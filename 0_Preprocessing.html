@@ -1,0 +1,1077 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Exploration and Preprocessing of VGP database &#8212; Polar Wandering</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Polar Wandering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="book/intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main/v2/gh/PolarWandering/Young_CEED/main?urlpath=tree/0_Preprocessing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb/github/PolarWandering/Young_CEED/blob/main/0_Preprocessing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/PolarWandering/Young_CEED"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/0_Preprocessing.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Exploration and Preprocessing of VGP database
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-scientific-python-libraries">
+     Import scientific Python libraries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-study-files">
+     Gather study files
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-study-inspection">
+     Single study inspection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#separate-the-xlsx-file-into-two-different-dfs-df-vgps-and-df-poles">
+       Separate the *.xlsx file into two different DFs,
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         df_vgps
+        </span>
+       </code>
+       and
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         df_poles
+        </span>
+       </code>
+       .
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-then-proceed-to-populate-the-vgp-dataframe-df-vgps-following-different-criteria">
+     We then proceed to populate the VGP DataFrame (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       df_vgps
+      </span>
+     </code>
+     ) following different criteria
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-polarity-of-vgps-against-directions">
+     Check polarity of VGPs against directions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#catch-some-exceptions">
+       Catch some exceptions:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#summarize-site-level-data">
+       Summarize site level data
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterate-through-all-the-files-to-catch-exceptions">
+   Iterate through all the files to catch exceptions:
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Exploration and Preprocessing of VGP database</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Exploration and Preprocessing of VGP database
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-scientific-python-libraries">
+     Import scientific Python libraries
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-study-files">
+     Gather study files
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#single-study-inspection">
+     Single study inspection
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#separate-the-xlsx-file-into-two-different-dfs-df-vgps-and-df-poles">
+       Separate the *.xlsx file into two different DFs,
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         df_vgps
+        </span>
+       </code>
+       and
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         df_poles
+        </span>
+       </code>
+       .
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-then-proceed-to-populate-the-vgp-dataframe-df-vgps-following-different-criteria">
+     We then proceed to populate the VGP DataFrame (
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       df_vgps
+      </span>
+     </code>
+     ) following different criteria
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#check-polarity-of-vgps-against-directions">
+     Check polarity of VGPs against directions
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#catch-some-exceptions">
+       Catch some exceptions:
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#summarize-site-level-data">
+       Summarize site level data
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#iterate-through-all-the-files-to-catch-exceptions">
+   Iterate through all the files to catch exceptions:
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="exploration-and-preprocessing-of-vgp-database">
+<h1>Exploration and Preprocessing of VGP database<a class="headerlink" href="#exploration-and-preprocessing-of-vgp-database" title="Permalink to this headline">#</a></h1>
+<p>This notebook preprocessing site level data from the VGP database compilation, conducts associated statistical tests and make some visualizations of data at the study level.</p>
+<section id="import-scientific-python-libraries">
+<h2>Import scientific Python libraries<a class="headerlink" href="#import-scientific-python-libraries" title="Permalink to this headline">#</a></h2>
+<p>Import scipy python libraries as well as functions written for the project within vgptools.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pmagpy</span> <span class="kn">import</span> <span class="n">ipmag</span><span class="p">,</span> <span class="n">pmag</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">optimize</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
+                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> 
+                               <span class="n">print_pole_statistics</span><span class="p">,</span> <span class="n">test_fishqq</span><span class="p">,</span> 
+                               <span class="n">statistical_tests</span><span class="p">,</span> <span class="n">summary_figure</span><span class="p">,</span>
+                               <span class="n">invert_polarity</span><span class="p">,</span> <span class="n">Plot_VgpsAndSites</span><span class="p">)</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_colwidth&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gather-study-files">
+<h2>Gather study files<a class="headerlink" href="#gather-study-files" title="Permalink to this headline">#</a></h2>
+<p>We retrieve all the spreadsheet files corresponding to different studies for which site level data are compiled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">data_path_VGP</span> <span class="o">=</span> <span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/data/vgp_database&#39;</span>
+<span class="n">files_names</span> <span class="o">=</span> <span class="n">get_files_in_directory</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">)</span>
+
+<span class="n">xlsx_file_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files_names</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">)]</span> 
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files_names</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">)]</span> 
+<span class="n">df_files</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">paths</span><span class="p">,</span>  <span class="s1">&#39;name_xlsx&#39;</span><span class="p">:</span> <span class="n">xlsx_file_names</span><span class="p">})</span>
+<span class="n">df_files</span><span class="p">[[</span><span class="s1">&#39;name_xlsx&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="single-study-inspection">
+<h2>Single study inspection<a class="headerlink" href="#single-study-inspection" title="Permalink to this headline">#</a></h2>
+<p>In order to understand what is going on in one single site, we can conduct statistical tests and visualize the data.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">file_idx</span> <span class="o">=</span> <span class="mi">21</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="separate-the-xlsx-file-into-two-different-dfs-df-vgps-and-df-poles">
+<h3>Separate the *.xlsx file into two different DFs, <code class="docutils literal notranslate"><span class="pre">df_vgps</span></code> and <code class="docutils literal notranslate"><span class="pre">df_poles</span></code>.<a class="headerlink" href="#separate-the-xlsx-file-into-two-different-dfs-df-vgps-and-df-poles" title="Permalink to this headline">#</a></h3>
+<p>Note: the the number of lines to be skipped is hardcoded</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">split_datasheet</span> <span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">file_idx</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Reads in datasheets and splits them into pole and vgp collections to be filtered, collated and compiled.</span>
+<span class="sd">    Input: standard vgp datasheet (as described in datasheet template)</span>
+<span class="sd">    Output: separate dataframes comprised of the study-level poles and site-level vgps extracted from the datasheet</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">df_files</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">][</span><span class="n">file_idx</span><span class="p">])</span> <span class="c1">#, skip_blank_lines=True</span>
+    <span class="n">df_poles</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">df_files</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">][</span><span class="n">file_idx</span><span class="p">],</span> 
+                             <span class="n">skiprows</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Study level data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span>
+                             <span class="n">nrows</span>  <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="mi">1</span><span class="p">)]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">df_files</span><span class="p">[</span><span class="s1">&#39;path&#39;</span><span class="p">][</span><span class="n">file_idx</span><span class="p">],</span> 
+                            <span class="n">skiprows</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;Site level data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1">#cast columns</span>
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                              <span class="s2">&quot;slat&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;slon&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;dec&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;inc&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+                              <span class="s2">&quot;VGP_lat&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;VGP_lon&quot;</span><span class="p">:</span><span class="nb">float</span>
+                             <span class="p">})</span>
+    <span class="n">df_poles</span> <span class="o">=</span> <span class="n">df_poles</span><span class="o">.</span><span class="n">astype</span><span class="p">({</span><span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                              <span class="s2">&quot;slat&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;slon&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;dec&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;inc&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span>
+                              <span class="s2">&quot;Plat&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">:</span><span class="nb">float</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">df_poles</span><span class="p">,</span> <span class="n">df_vgps</span><span class="p">)</span>
+
+<span class="n">df_poles</span><span class="p">,</span> <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">split_datasheet</span><span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">file_idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="we-then-proceed-to-populate-the-vgp-dataframe-df-vgps-following-different-criteria">
+<h2>We then proceed to populate the VGP DataFrame (<code class="docutils literal notranslate"><span class="pre">df_vgps</span></code>) following different criteria<a class="headerlink" href="#we-then-proceed-to-populate-the-vgp-dataframe-df-vgps-following-different-criteria" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>In a previous step, we have calculated the site coordinates of all studies in which these coordinates were not reported, but the Dec/Inc and Plat/Plon were.</p></li>
+<li><p>When VGP coordinates are NOT reported in the original manuscript but the dec/inc and location of the sites was, we calculate them, and take them as face value.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_vgps[&#39;VGP_lon&#39;] = df_vgps.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[0] if (np.isnan(row.VGP_lon) &amp; (~np.isnan(row.dec) &amp; ~np.isnan(row.slat))) else row.VGP_lon, axis =1) </span>
+<span class="c1"># df_vgps[&#39;VGP_lat&#39;] = df_vgps.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[1] if (np.isnan(row.VGP_lat) &amp; (~np.isnan(row.dec) &amp; ~np.isnan(row.slat))) else row.VGP_lat, axis =1) </span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="check-polarity-of-vgps-against-directions">
+<h2>Check polarity of VGPs against directions<a class="headerlink" href="#check-polarity-of-vgps-against-directions" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Some sites report the backward VGP (so that the VGPs are in the same hemisphere/closer to the principal component). We proceed to check polarity of VGPs against directions. To do that, we recalculate the vgps from the original Dec/Inc.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#First we calculate for the entire dataframe the vgps if there is dec/inc and slat/slon values</span>
+<span class="k">def</span> <span class="nf">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">):</span>
+    <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">inc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slon</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">inc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slon</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">df_vgps</span>
+
+<span class="n">df_vgps</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>Check distance (<code class="docutils literal notranslate"><span class="pre">df_vgps['GCD_vgps']</span></code>) between the reported VGPs and the recalculated from the directions.</p></li>
+</ol>
+<p>In this step we fill the column <code class="docutils literal notranslate"><span class="pre">df_vgps['coherent_vgps']</span></code> with the following tags:</p>
+<ul class="simple">
+<li><p>‘spurious’ if inconsistent combination of site coordinates + dec/inc + vgp data (+- 4 degrees away from the reported or its backward)</p></li>
+<li><p>‘coherent’ if correct</p></li>
+<li><p>‘inverted’ if inverted</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">check_coherence_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">):</span>
+
+    <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;GCD_vgps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">GCD_cartesian</span><span class="p">(</span><span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">VGP_lat</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">VGP_lon</span><span class="p">)]),</span> <span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">VGP_lat_recalc</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">VGP_lon_recalc</span><span class="p">)])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># False if Spurious, True if correct, nan if inverted</span>
+    <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="s1">&#39;spurious&#39;</span> <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">GCD_vgps</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="ow">and</span> <span class="n">row</span><span class="o">.</span><span class="n">GCD_vgps</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">176</span><span class="p">))</span> <span class="k">else</span> <span class="p">(</span><span class="s1">&#39;coherent&#39;</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">GCD_vgps</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;inverted&#39;</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">GCD_vgps</span> <span class="o">&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="mi">176</span><span class="p">)</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="p">),</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1">#True if it is ok, nan</span>
+    
+    <span class="k">return</span> <span class="n">df_vgps</span>
+<span class="n">df_vgps</span> <span class="o">=</span> <span class="n">check_coherence_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="catch-some-exceptions">
+<h3>Catch some exceptions:<a class="headerlink" href="#catch-some-exceptions" title="Permalink to this headline">#</a></h3>
+<ul class="simple">
+<li><p>Missing slat/slon and/or dec/in where no vgp is reported</p></li>
+<li><p>Missing dec/inc and/or vgp where no site coordinates are reported; cannot calculate site locations.</p></li>
+<li><p>Inconsistent combination of site coordinates + dec/inc + vgp</p></li>
+<li><p>Recalculated VGP was inverted.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">):</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Missing slat/slon from sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Missing dec/inc from sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Missing reported VGPs from sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">|</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())</span> <span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>    
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Missing slat/slon and/or dec/inc from sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[(</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">())]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2"> where no vgp is reported; cannot calculate vgp&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spurious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Inconsistent combination of site coordinates + dec/inc + vgp data from site(s) </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spurious&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;inverted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; inverted vgp from sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;inverted&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coherent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot; =&gt; Coherent dec/inc in sites (&#39;name&#39;): </span><span class="si">{</span><span class="n">df_vgps</span><span class="p">[</span><span class="n">df_vgps</span><span class="p">[</span><span class="s1">&#39;coherent_vgps&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;coherent&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        
+<span class="n">verbose</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="summarize-site-level-data">
+<h3>Summarize site level data<a class="headerlink" href="#summarize-site-level-data" title="Permalink to this headline">#</a></h3>
+<p>For each reported pole from the selected manuscript, we iterate through the constituent site-level data and:</p>
+<ol class="simple">
+<li><p>cast all vgps into a common polarity and re-compute the Fisher mean paleomagnetic pole</p></li>
+<li><p>plot the site locations, vgps, and the results of reversal and Fisher distribution tests</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#Groupby iterates through DFs (i) &#39;grouped by&#39; the column of interest </span>
+<span class="n">misf1</span><span class="o">=</span> <span class="p">[]</span>
+<span class="n">misf2</span><span class="o">=</span> <span class="p">[]</span>
+<span class="n">studies</span><span class="o">=</span> <span class="p">[]</span>
+<span class="n">pps</span><span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span> <span class="nf">process_study</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span><span class="n">file_idx</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">pole</span><span class="p">,</span> <span class="n">df_pole</span> <span class="ow">in</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">):</span>
+
+        <span class="c1"># value represent the index and i represent the DF grouped by the variable of interest  </span>
+        <span class="k">if</span> <span class="n">pole</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#discards vgps discarded by authors</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;==&gt;Analyzing pole </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="c1">#try:</span>
+
+            <span class="n">directions_block</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">make_di_block</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> 
+                                                   <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                                                   <span class="n">unit_vector</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">di_mode1</span><span class="p">,</span> <span class="n">di_mode2</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">separate_directions</span><span class="p">(</span><span class="n">di_block</span><span class="o">=</span><span class="n">directions_block</span><span class="p">)</span>
+
+            <span class="n">vgp_recalc_block</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">make_di_block</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> 
+                                                   <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span>
+                                                   <span class="n">unit_vector</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="c1">#split recalculated vgp population into polarities             </span>
+            <span class="n">vgp_mode1</span><span class="p">,</span> <span class="n">vgp_mode2</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">separate_directions</span><span class="p">(</span><span class="n">di_block</span><span class="o">=</span><span class="n">vgp_recalc_block</span><span class="p">)</span>
+            <span class="n">merged_vgps</span> <span class="o">=</span> <span class="n">invert_polarity</span><span class="p">(</span><span class="n">vgp_mode1</span><span class="p">,</span> <span class="n">vgp_mode2</span><span class="p">)</span>
+            <span class="n">vgp_mean_recomputed</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">di_block</span> <span class="o">=</span> <span class="n">merged_vgps</span><span class="p">)</span>
+
+            <span class="c1"># calculate the Fisher mean of reported VGPs</span>
+            <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+            <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>
+            <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+            <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>             
+            <span class="n">vgp_mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+            <span class="c1">#reported pole</span>
+            <span class="n">reported_pole</span> <span class="o">=</span> <span class="n">df_poles</span><span class="p">[</span><span class="n">df_poles</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pole</span><span class="p">]</span>
+
+            <span class="n">study_number</span> <span class="o">=</span> <span class="n">file_idx</span>
+            <span class="n">study_folder</span> <span class="o">=</span> <span class="s1">&#39;./study_summaries&#39;</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">study_number</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">study_folder</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">study_folder</span><span class="p">)</span>
+
+            <span class="n">pole_number</span> <span class="o">=</span> <span class="n">pole</span>
+            <span class="n">pole_folder</span> <span class="o">=</span> <span class="n">study_folder</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pole_number</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pole_folder</span><span class="p">):</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">pole_folder</span><span class="p">)</span>
+
+            <span class="n">pole_summary</span> <span class="o">=</span> <span class="n">print_pole_statistics</span><span class="p">(</span><span class="n">reported_pole</span><span class="p">,</span> 
+                                                 <span class="n">vgp_mean</span><span class="p">,</span> 
+                                                 <span class="n">vgp_mean_recomputed</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pole_folder</span> <span class="o">+</span> <span class="s1">&#39;/pole_summary.tex&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pole_summary</span><span class="o">.</span><span class="n">to_latex</span><span class="p">())</span>
+
+            <span class="n">stat_test_results</span> <span class="o">=</span> <span class="n">statistical_tests</span><span class="p">(</span><span class="n">di_mode1</span><span class="p">,</span> <span class="n">di_mode2</span><span class="p">,</span> <span class="n">merged_vgps</span><span class="p">,</span> 
+                                                  <span class="n">study_number</span><span class="o">=</span><span class="n">file_idx</span><span class="p">,</span> 
+                                                  <span class="n">pole_number</span><span class="o">=</span><span class="n">pole</span><span class="p">,</span> 
+                                                  <span class="n">save_folder</span><span class="o">=</span><span class="n">pole_folder</span><span class="p">)</span>
+
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pole_folder</span> <span class="o">+</span> <span class="s1">&#39;/stat_test.tex&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">tf</span><span class="p">:</span>
+                <span class="n">tf</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">stat_test_results</span><span class="o">.</span><span class="n">to_latex</span><span class="p">())</span>
+
+            <span class="n">summary_figure</span><span class="p">(</span><span class="n">df_pole</span><span class="p">,</span> <span class="n">vgp_mode1</span><span class="p">,</span> <span class="n">vgp_mode2</span><span class="p">,</span> 
+                           <span class="n">reported_pole</span><span class="p">,</span> <span class="n">vgp_mean</span><span class="p">,</span> <span class="n">pole_folder</span><span class="p">)</span>
+
+    <span class="c1">#         except: #could be expanded!</span>
+    <span class="c1">#             print(f&quot; DEBUG POLE (index): {file_idx}, in_situ_pole: {pole}&quot;) </span>
+            
+            
+            <span class="n">study_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">])</span>
+            <span class="n">study_name</span> <span class="o">=</span> <span class="n">study_name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+            <span class="n">pole_local_folder</span> <span class="o">=</span> <span class="s1">&#39;./&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">study_number</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pole_number</span><span class="p">)</span>
+            <span class="n">tex_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./study_summaries/SI_study_summary.tex&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">pole_number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\section{&#39;</span> <span class="o">+</span> <span class="n">study_name</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+                <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\subsection{Pole &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pole_number</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\subsection{Pole &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\input{&#39;</span> <span class="o">+</span> <span class="n">pole_local_folder</span> <span class="o">+</span> <span class="s1">&#39;/pole_summary.tex&#39;</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\input{&#39;</span> <span class="o">+</span> <span class="n">pole_local_folder</span> <span class="o">+</span> <span class="s1">&#39;/stat_test.tex&#39;</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">begin</span><span class="si">{figure}</span><span class="s1">[H]&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\centering&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\includegraphics[width=5 in]{&#39;</span> <span class="o">+</span> <span class="n">pole_local_folder</span> <span class="o">+</span> <span class="s1">&#39;/pole_summary.png}&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\caption{Summary of data from study &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">file_idx</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="n">study_name</span> <span class="o">+</span> <span class="s1">&#39;}&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;\end</span><span class="si">{figure}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">tex_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+   
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">pause</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+            
+<span class="n">process_study</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span><span class="n">file_idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="iterate-through-all-the-files-to-catch-exceptions">
+<h1>Iterate through all the files to catch exceptions:<a class="headerlink" href="#iterate-through-all-the-files-to-catch-exceptions" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">31</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;========================= NEW POLE : </span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">file_idx</span><span class="si">}</span><span class="s1">) =======================&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_poles</span><span class="p">,</span> <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">split_datasheet</span><span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">file_idx</span><span class="p">)</span>
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">check_coherence_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    <span class="n">verbose</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    <span class="n">process_study</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span><span class="n">file_idx</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">studies</span><span class="p">,</span> <span class="n">pps</span><span class="p">,</span> <span class="n">misf</span><span class="p">,</span> <span class="n">froms</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_files</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;========================= NEW POLE : </span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">file_idx</span><span class="si">}</span><span class="s1">) =======================&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_poles</span><span class="p">,</span> <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">split_datasheet</span><span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">file_idx</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">continue</span>
+        
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">check_coherence_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+   
+    <span class="n">verbose</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    
+    <span class="c1">#Groupby iterates through DFs (i) &#39;grouped by&#39; the column of interest </span>
+    
+    
+
+    
+    <span class="k">for</span> <span class="n">pole</span><span class="p">,</span> <span class="n">df_pole</span> <span class="ow">in</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">):</span>
+
+        <span class="c1"># value represent the index and i represent the DF grouped by the variable of interest  </span>
+        <span class="k">if</span> <span class="n">pole</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#discards vgps discarded by authors</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;==&gt;Analyzing pole </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="c1">#split recalculated vgp population into different polarities by comparison against principal component axis             </span>
+                <span class="n">vgp_recalc_block</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>            
+                <span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">separate_directions</span><span class="p">(</span><span class="n">di_block</span><span class="o">=</span><span class="n">vgp_recalc_block</span><span class="p">)</span>
+
+                <span class="c1">#reversal test            </span>
+                <span class="n">reversal_test</span><span class="p">(</span><span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span><span class="p">)</span>    
+
+                <span class="c1">#Bayesian reversal Test</span>
+                <span class="n">P</span> <span class="o">=</span> <span class="n">bayes_probability_heslop</span><span class="p">(</span><span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">P</span> <span class="o">!=</span> <span class="mi">9999</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Bayesian reversal test (Heslop &amp; Roberts, 2018) indicates: </span><span class="si">{</span><span class="n">bayes_support</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>            
+
+                <span class="c1">#invert one polarity population, merge populations and test whether a distribution is Fisherian</span>
+                <span class="n">merged</span> <span class="o">=</span> <span class="n">invert_polarity</span><span class="p">(</span><span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span><span class="p">)</span>
+                <span class="n">test_fishqq</span><span class="p">(</span><span class="n">merged</span><span class="p">)</span>
+
+                <span class="c1"># calculate the Fisher mean of reported VGPs to test reproducibility (we first fill the &#39;reported&#39; if empty)</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>
+
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>             
+
+                <span class="n">vgp_mean_recomputed</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">di_block</span> <span class="o">=</span> <span class="n">merged</span><span class="p">)</span>
+                <span class="n">vgp_mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+                <span class="c1">#Reported pole</span>
+                <span class="n">pp</span> <span class="o">=</span> <span class="n">df_poles</span><span class="p">[</span><span class="n">df_poles</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pole</span><span class="p">]</span>
+
+                <span class="n">print_pole_statistics</span><span class="p">(</span><span class="n">pp</span><span class="p">,</span> <span class="n">vgp_mean</span><span class="p">,</span> <span class="n">vgp_mean_recomputed</span><span class="p">)</span>
+
+                <span class="c1">#di_block = ipmag.make_di_block(df_pole[&#39;VGP_lon&#39;].tolist(),df_pole[&#39;VGP_lat&#39;].tolist())</span>
+
+                <span class="c1"># Plot sites and directions</span>
+                <span class="n">Plot_VgpsAndSites</span><span class="p">(</span><span class="n">df_pole</span><span class="p">,</span> <span class="n">pp</span><span class="p">,</span> <span class="n">vgp_mean</span><span class="p">,</span> <span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span><span class="p">)</span> 
+                
+                
+                <span class="n">studies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">])</span>
+                <span class="n">pps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span>
+                <span class="n">misf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pmag</span><span class="o">.</span><span class="n">angle</span><span class="p">([</span><span class="n">vgp_mean</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">vgp_mean</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plat&#39;</span><span class="p">]])[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">froms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;reported&#39;</span><span class="p">)</span>
+                
+                <span class="n">studies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">])</span>
+                <span class="n">pps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span>                
+                <span class="n">misf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pmag</span><span class="o">.</span><span class="n">angle</span><span class="p">([</span><span class="n">vgp_mean_recomputed</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">vgp_mean_recomputed</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plat&#39;</span><span class="p">]])[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">froms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;recalculated&#39;</span><span class="p">)</span>
+                
+            <span class="k">except</span><span class="p">:</span> <span class="c1">#could be expanded!</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; DEBUG POLE (index): </span><span class="si">{</span><span class="n">file_idx</span><span class="si">}</span><span class="s2">, in_situ_pole: </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">studies</span><span class="p">,</span> <span class="n">pps</span><span class="p">,</span> <span class="n">misf</span><span class="p">,</span> <span class="n">froms</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">file_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_files</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;========================= NEW POLE : </span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">file_idx</span><span class="si">}</span><span class="s1">) =======================&#39;</span><span class="p">)</span>
+    
+    <span class="n">df_poles</span><span class="p">,</span> <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">split_datasheet</span><span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">file_idx</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">continue</span>
+        
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+    
+    <span class="n">df_vgps</span> <span class="o">=</span> <span class="n">check_coherence_vgps</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">)</span>
+   
+    <span class="c1">#verbose(df_vgps)</span>
+    
+    <span class="c1">#Groupby iterates through DFs (i) &#39;grouped by&#39; the column of interest </span>
+    
+    
+
+    
+    <span class="k">for</span> <span class="n">pole</span><span class="p">,</span> <span class="n">df_pole</span> <span class="ow">in</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">):</span>
+
+        <span class="c1"># value represent the index and i represent the DF grouped by the variable of interest  </span>
+        <span class="k">if</span> <span class="n">pole</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> <span class="c1">#discards vgps discarded by authors</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;==&gt;Analizing pole </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">]</span><span class="si">}</span><span class="s2">).&quot;</span><span class="p">)</span>
+          
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1">#split recalculated vgp population into different polarities by comparison against principal component axis             </span>
+                <span class="n">vgp_recalc_block</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>            
+                <span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">separate_directions</span><span class="p">(</span><span class="n">di_block</span><span class="o">=</span><span class="n">vgp_recalc_block</span><span class="p">)</span>
+
+                <span class="c1">#reversal test            </span>
+                <span class="c1"># reversal_test(mode1, mode2)    </span>
+
+                <span class="c1">#Bayesian reversal Test</span>
+                <span class="c1"># P = bayes_probability_heslop(mode1, mode2)</span>
+                <span class="c1"># if P != 9999: print(f&quot;Bayesian reversal test (Heslop &amp; Roberts, 2018) indicates: {bayes_support(P)}&quot;)            </span>
+
+                <span class="c1">#invert one polarity population, merge populations and test whether a distribution is Fisherian</span>
+                <span class="n">merged</span> <span class="o">=</span> <span class="n">invert_polarity</span><span class="p">(</span><span class="n">mode1</span><span class="p">,</span> <span class="n">mode2</span><span class="p">)</span>
+                <span class="c1"># test_fishqq(merged)</span>
+
+                <span class="c1"># calculate the Fisher mean of reported VGPs to test reproducibility (we first fill the &#39;reported&#39; if empty)</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">(),</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon_recalc&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>
+
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">],</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">])</span>
+                <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lat&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">,(</span><span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;VGP_lon&#39;</span><span class="p">])</span>             
+
+                <span class="n">vgp_mean_recomputed</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">di_block</span> <span class="o">=</span> <span class="n">merged</span><span class="p">)</span>
+                <span class="n">vgp_mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_NH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+
+                <span class="c1">#Reported pole</span>
+                <span class="n">pp</span> <span class="o">=</span> <span class="n">df_poles</span><span class="p">[</span><span class="n">df_poles</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pole</span><span class="p">]</span>
+
+                <span class="c1">#print_pole_statistics(pp, vgp_mean, vgp_mean_recomputed)</span>
+
+                <span class="c1">#di_block = ipmag.make_di_block(df_pole[&#39;VGP_lon&#39;].tolist(),df_pole[&#39;VGP_lat&#39;].tolist())</span>
+
+                <span class="c1"># Plot sites and directions</span>
+                <span class="c1"># Plot_VgpsAndSites(df_pole, pp, vgp_mean, mode1, mode2) </span>
+
+                <span class="c1"># if not (len(vgp_mean_recomputed)!=0 &amp; len(vgp_mean)!=0): </span>
+
+                
+                <span class="n">misf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pmag</span><span class="o">.</span><span class="n">angle</span><span class="p">([</span><span class="n">vgp_mean</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">vgp_mean</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plat&#39;</span><span class="p">]])[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">froms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;reported&#39;</span><span class="p">)</span>
+                <span class="n">studies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">])</span>
+                <span class="n">pps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span>
+                
+                <span class="n">misf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pmag</span><span class="o">.</span><span class="n">angle</span><span class="p">([</span><span class="n">vgp_mean_recomputed</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">vgp_mean_recomputed</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]],</span> <span class="p">[</span><span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">pp</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Plat&#39;</span><span class="p">]])[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">studies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">file_idx</span><span class="p">])</span>
+                <span class="n">pps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pole</span><span class="p">)</span>                                
+                <span class="n">froms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;recalculated&#39;</span><span class="p">)</span>
+                    
+            <span class="k">except</span><span class="p">:</span> <span class="c1">#could be expanded!</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; DEBUG POLE (index): </span><span class="si">{</span><span class="n">file_idx</span><span class="si">}</span><span class="s2">, in_situ_pole: </span><span class="si">{</span><span class="n">pole</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> 
+            
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dictionary</span><span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Study&#39;</span><span class="p">:</span> <span class="n">studies</span><span class="p">,</span> <span class="s1">&#39;in_study_pole&#39;</span><span class="p">:</span> <span class="n">pps</span><span class="p">,</span> <span class="s1">&#39;Misfit&#39;</span><span class="p">:</span> <span class="n">misf</span><span class="p">,</span> <span class="s1">&#39;From&#39;</span> <span class="p">:</span> <span class="n">froms</span><span class="p">}</span>
+<span class="n">df_misfits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+
+<span class="n">df_misfits</span> <span class="o">=</span> <span class="n">df_misfits</span><span class="p">[</span><span class="o">~</span><span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;Misfit&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()]</span>
+
+<span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;Misfit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;Misfit&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">180</span> <span class="o">-</span> <span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;Misfit&#39;</span><span class="p">],</span> <span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;Misfit&#39;</span><span class="p">])</span>
+<span class="n">df_misfits</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">)})</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Study&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="s2">&quot;Misfit&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;in_study_pole&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_misfits</span><span class="p">[</span><span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;From&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;reported&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Distance from the reported Paleopole and the reported VGPs&quot;</span><span class="p">)</span>
+<span class="c1">#ax.xaxis.get_label().set_fontsize(20)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;whitegrid&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">rc</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">:(</span><span class="mi">16</span><span class="p">,</span><span class="mi">8</span><span class="p">)})</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Study&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span> <span class="s2">&quot;Misfit&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;in_study_pole&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df_misfits</span><span class="p">[</span><span class="n">df_misfits</span><span class="p">[</span><span class="s1">&#39;From&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;recalculated&#39;</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Distance from the reported Paleopole and the recalculated VGPs&quot;</span><span class="p">)</span>
+<span class="c1">#ax.xaxis.get_label().set_fontsize(20)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Young CEED Team<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
