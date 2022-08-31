@@ -4,9 +4,147 @@ from pmagpy import pmag, ipmag
 import matplotlib.pyplot as plt
 import pandas as pd
 
+def dfs_vgps_recomputed_poles(data_path_VGP, by_study = True):
+    
+    '''
+    input: Pass an unfiltered DF. If by_study == True there will by one pole for each "Study",
+    otherwise, for each study we evaluate if there is more than one pole for study and we return
+    in accordance.
+    output: Selected entries that were considered by their authors to the calculation of PPs.
+    
+    Note: This is achieved taking advantage on the values in column df_unfiltered[`in_study_pole`]. Zero
+    valued entries were discarder and integers labels different poles within the same study.
+    '''    
+
+    files_names = get_files_in_directory(data_path_VGP)
+    xlsx_file_names = [os.path.splitext(os.path.basename(open(file,'r').name))[0] for file in files_names if file.endswith('.xlsx')]
+    paths = [file for file in files_names if file.endswith('.xlsx')]
+    df_files = pd.DataFrame({'path': paths,  'name_xlsx': xlsx_file_names})
+
+    df_vgp_unfiltered, df_poles_original = merge_files(df_files)
+
+    if by_study == True: 
+        df_filtered, df_pole_compilation = original_selection(df_vgp_unfiltered, df_poles_original, by_study = True)
+    else:
+        df_filtered, df_pole_compilation = original_selection(df_vgp_unfiltered, df_poles_original, by_study = False)
+    
+    df_pole_compilation = df_pole_compilation.astype({"N":int})
+    
+    return df_filtered, df_pole_compilation    
+    
+
+def merge_files(df_files):
+    
+    for i in df_files.index:   # cycle over each file in database
+
+        # import data and assign to dataframes
+        df_poles_temp, df_vgps_temp = split_datasheet(df_files, i)
+
+        df_vgps_temp['rej_crit'] = [[int(float(j)) for j in str(i.rej_crit).split(';') if ~np.isnan(float(j))] for _,i in df_vgps_temp.iterrows()]
+        df_vgps_temp['Study'] = df_files.name_xlsx[i]
+        df_poles_temp['Study'] = df_files.name_xlsx[i]
+        # 
+        if not df_vgps_temp.empty:
+
+            df_vgps_temp = recalc_vgps(df_vgps_temp)       
+            df_vgps_temp = go_reverse(df_vgps_temp)        
+            df_vgps_temp = get_alpha95(df_vgps_temp)        
+            df_vgps_temp = get_k(df_vgps_temp)
+            df_vgps_temp = get_ages(df_vgps_temp, round_ceil = False)
+
+            df_vgps_temp['age_uncertainty'] = df_vgps_temp['max_age'] - df_vgps_temp['min_age']
+
+            if i == 0 : df_vgp_unfiltered = pd.DataFrame(data=None, columns=df_vgps_temp.columns); df_poles_original = pd.DataFrame(data=None, columns=df_poles_temp.columns)
+
+            # parse data
+            df_vgp_unfiltered = df_vgp_unfiltered.append(df_vgps_temp, ignore_index=True)
+            df_poles_original = df_poles_original.append(df_poles_temp, ignore_index=True)
+    
+    return df_vgp_unfiltered, df_poles_original
+
+
+def original_selection(df_unfiltered, df_poles_original, by_study = True):
+    
+    '''
+    input: Pass an unfiltered DF 
+    output: Selected entries that were considered by their authors to the calculation of PPs.
+    
+    Note: This is achieved taking advantage on the values in column df_unfiltered[`in_study_pole`]. Sero
+    valued entries were discarder and integers labels different poles within the same study.
+    '''    
+    
+    df_unfiltered['keep'] = np.nan    
+    df_unfiltered['keep'] = df_unfiltered.apply(lambda row: True if row.in_study_pole != 0 else row.keep, axis = 1)
+    df_filtered = df_unfiltered.loc[df_unfiltered['keep'] == True]
+      
+    # iterate through each study in order to recompute and store the paleomagnetic poles
+    df_pole_compilation = pd.DataFrame(data = None, columns = df_poles_original.columns)    
+    
+    
+    if by_study == True:
+        
+        # iterate through each study
+        for study, df_study in df_filtered.groupby('Study'):
+
+            ppole = ipmag.fisher_mean(dec = df_study['vgp_lon_SH'].tolist(), inc = df_study['vgp_lat_SH'].tolist()) # final paleopole
+            mean_site = ipmag.fisher_mean(dec = df_study['slon'].tolist(), inc = df_study['slat'].tolist())
+
+            if len(df_study) == 1: 
+                mean_site['inc'] = df_study['slat'].values[0]; mean_site['dec'] = df_study['slon'].values[0] 
+                ppole['inc'] = df_study['vgp_lat_SH'].values[0]; ppole['dec'] = df_study['vgp_lon_SH'].values[0]
+                ppole['n'] = df_study['n'].values[0]; ppole['k'] = df_study['k'].values[0]; ppole['alpha95'] = df_study['alpha95'].values[0]
+
+
+            df_pole_compilation = df_pole_compilation.append({'Study': study, 
+                                                              'slat': mean_site['inc'], 'slon': mean_site['dec'],
+                                                              'Plat': ppole['inc'], 'Plon': ppole['dec'],
+                                                              'N': ppole['n'], 'K': ppole['k'], 'A95': ppole['alpha95'],
+                                                              'min_age': df_study.min_age.min(), 'max_age': df_study.max_age.max(), 
+                                                              'mean_age': (df_study.max_age.max() + df_study.min_age.min()) / 2 },
+                                                              ignore_index = True)
+    else:
+        
+        for study, df_study in df_filtered.groupby('Study'):
+
+            # iterate through each study
+            for pole, df_pole in df_study.groupby('in_study_pole'):
+
+                ppole = ipmag.fisher_mean(dec = df_pole['vgp_lon_SH'].tolist(), inc = df_pole['vgp_lat_SH'].tolist()) # final paleopole
+                mean_site = ipmag.fisher_mean(dec = df_study['slon'].tolist(), inc = df_study['slat'].tolist())
+
+                if len(df_pole) == 1: 
+                    mean_site['inc'] = df_pole['slat'].values[0]; mean_site['dec'] = df_pole['slon'].values[0] 
+                    ppole['inc'] = df_pole['vgp_lat_SH'].values[0]; ppole['dec'] = df_pole['vgp_lon_SH'].values[0]
+                    ppole['n'] = df_pole['n'].values[0]; ppole['k'] = df_pole['k'].values[0]; ppole['alpha95'] = df_pole['alpha95'].values[0]
+
+
+                df_pole_compilation = df_pole_compilation.append({'Study': study, 'pole': pole, 
+                                                                  'slat': mean_site['inc'], 'slon': mean_site['dec'],
+                                                                  'Plat': ppole['inc'], 'Plon': ppole['dec'],
+                                                                  'N': ppole['n'], 'K': ppole['k'], 'A95': ppole['alpha95'],
+                                                                  'min_age': df_pole.min_age.min(), 'max_age': df_pole.max_age.max(), 
+                                                                  'mean_age': (df_pole.max_age.max() + df_pole.min_age.min()) / 2 }, 
+                                                                  ignore_index = True)
+
+    
+            
+            
+            
+    df_pole_compilation = df_pole_compilation[['Study','pole','N','K','A95','slat','slon','Plat','Plon','min_age','max_age','mean_age']]
+    return df_filtered, df_pole_compilation
 
 
 
+
+
+
+
+
+
+
+
+
+####################### BEFORE MEETING 
 
 def merge_all_files(current_path):
     '''
@@ -40,6 +178,7 @@ def merge_all_files(current_path):
             
             df_vgps_temp['rej_crit'] = [[int(float(j)) for j in str(i.rej_crit).split(';') if ~np.isnan(float(j))] for _,i in df_vgps_temp.iterrows()]
             df_vgps_temp['Study'] = df_files.name_xlsx[i]
+            df_poles_temp['Study'] = df_files.name_xlsx[i]
             
             if not df_vgps_temp.empty:
 
