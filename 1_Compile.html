@@ -1,0 +1,2042 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Figure 1 - Compile data notebook &#8212; Polar Wandering</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Polar Wandering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="book/intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main/v2/gh/PolarWandering/Young_CEED/main?urlpath=tree/1_Compile.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb/github/PolarWandering/Young_CEED/blob/main/1_Compile.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/PolarWandering/Young_CEED"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/1_Compile.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Figure 1 - Compile data notebook
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-study-files-in-order-to-generate-a-dataset-of-vgps">
+     Gather study files in order to generate a dataset of VGPs
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generate-an-unfiltered-dataset-of-vgps-i-e-including-sites-discarded-by-th-eoriginal-authors">
+       1. Generate an unfiltered dataset of VGPs (i.e. including sites discarded by th eoriginal authors)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#subselect-vgps-that-were-originally-taken-into-account-to-the-calculation-of-the-paleomagnetic-pole">
+       2. Subselect VGPs that were originally taken into account to the calculation of the paleomagnetic pole.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#study-locations-and-vgps-by-age">
+   Study locations and VGPs by age
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#age-distribution-of-vgps">
+     Age distribution of VGPs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recomputed-poles">
+   Recomputed poles
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Figure 1 - Compile data notebook</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Figure 1 - Compile data notebook
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-study-files-in-order-to-generate-a-dataset-of-vgps">
+     Gather study files in order to generate a dataset of VGPs
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generate-an-unfiltered-dataset-of-vgps-i-e-including-sites-discarded-by-th-eoriginal-authors">
+       1. Generate an unfiltered dataset of VGPs (i.e. including sites discarded by th eoriginal authors)
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#subselect-vgps-that-were-originally-taken-into-account-to-the-calculation-of-the-paleomagnetic-pole">
+       2. Subselect VGPs that were originally taken into account to the calculation of the paleomagnetic pole.
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#study-locations-and-vgps-by-age">
+   Study locations and VGPs by age
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#age-distribution-of-vgps">
+     Age distribution of VGPs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#recomputed-poles">
+   Recomputed poles
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="figure-1-compile-data-notebook">
+<h1>Figure 1 - Compile data notebook<a class="headerlink" href="#figure-1-compile-data-notebook" title="Permalink to this headline">#</a></h1>
+<p>This notebook iterates through each paleomagnetic record (datasheet) of the vgp database, extracts data which meet user-specified criteria, and appends them to a new dataframe for later processing (to generate an APWP).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pmagpy</span> <span class="kn">import</span> <span class="n">ipmag</span><span class="p">,</span> <span class="n">pmag</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
+
+<span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="n">get_files_in_directory</span>
+
+<span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="p">(</span><span class="n">generates_compilation</span><span class="p">,</span> <span class="n">split_datasheet</span><span class="p">,</span>
+                                        <span class="n">recalc_vgps</span><span class="p">,</span> <span class="n">go_reverse</span><span class="p">,</span>
+                                        <span class="n">get_alpha95</span><span class="p">,</span> <span class="n">get_k</span><span class="p">,</span>
+                                        <span class="n">get_ages</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="gather-study-files-in-order-to-generate-a-dataset-of-vgps">
+<h2>Gather study files in order to generate a dataset of VGPs<a class="headerlink" href="#gather-study-files-in-order-to-generate-a-dataset-of-vgps" title="Permalink to this headline">#</a></h2>
+<p>We retrieve all the spreadsheet files corresponding to different studies for which site level data are compiled.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">data_path_VGP</span> <span class="o">=</span> <span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/vgp_database&#39;</span>
+<span class="n">files_names</span> <span class="o">=</span> <span class="n">get_files_in_directory</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">)</span>
+<span class="n">xlsx_file_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files_names</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">)]</span>
+<span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">file</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files_names</span> <span class="k">if</span> <span class="n">file</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.xlsx&#39;</span><span class="p">)]</span>
+<span class="n">df_files</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;path&#39;</span><span class="p">:</span> <span class="n">paths</span><span class="p">,</span>  <span class="s1">&#39;name_xlsx&#39;</span><span class="p">:</span> <span class="n">xlsx_file_names</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generate-an-unfiltered-dataset-of-vgps-i-e-including-sites-discarded-by-th-eoriginal-authors">
+<h3>1. Generate an unfiltered dataset of VGPs (i.e. including sites discarded by th eoriginal authors)<a class="headerlink" href="#generate-an-unfiltered-dataset-of-vgps-i-e-including-sites-discarded-by-th-eoriginal-authors" title="Permalink to this headline">#</a></h3>
+<p>In order to gather all the directions in one DataFrame <code class="docutils literal notranslate"><span class="pre">df_vgp_unfiltered</span></code> we cycle over each file and proceed to populate the VGP DataFrame following the workflow outlined in Notebook <code class="docutils literal notranslate"><span class="pre">0_Preprocessing.ipynb</span></code>. All the reported paleomagnetic poles are gathered in <code class="docutils literal notranslate"><span class="pre">df_poles_original</span></code>.</p>
+<p><em>Note: the DataFrame includes Directions/VGPs originally discarded by the authors.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_files</span><span class="p">(</span><span class="n">df_files</span><span class="p">):</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">df_files</span><span class="o">.</span><span class="n">index</span><span class="p">):</span>   <span class="c1"># cycle over each file in database</span>
+
+        <span class="c1"># import data and assign to dataframes</span>
+        <span class="n">df_poles_temp</span><span class="p">,</span> <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">split_datasheet</span><span class="p">(</span><span class="n">df_files</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+
+        <span class="n">df_vgps_temp</span><span class="p">[</span><span class="s1">&#39;rej_crit&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">rej_crit</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;;&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">j</span><span class="p">))]</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">df_vgps_temp</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()]</span>
+        <span class="n">df_vgps_temp</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">df_poles_temp</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_files</span><span class="o">.</span><span class="n">name_xlsx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="c1"># </span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">df_vgps_temp</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>
+
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>       
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">go_reverse</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>        
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_alpha95</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>        
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_k</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_ages</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">,</span> <span class="n">round_ceil</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+            <span class="n">df_vgps_temp</span><span class="p">[</span><span class="s1">&#39;age_uncertainty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_vgps_temp</span><span class="p">[</span><span class="s1">&#39;max_age&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">df_vgps_temp</span><span class="p">[</span><span class="s1">&#39;min_age&#39;</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="p">:</span> <span class="n">df_vgp_unfiltered</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_vgps_temp</span><span class="o">.</span><span class="n">columns</span><span class="p">);</span> <span class="n">df_poles_original</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">df_poles_temp</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+
+            <span class="c1"># parse data</span>
+            <span class="n">df_vgp_unfiltered</span> <span class="o">=</span> <span class="n">df_vgp_unfiltered</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">df_poles_original</span> <span class="o">=</span> <span class="n">df_poles_original</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_poles_temp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">df_vgp_unfiltered</span><span class="p">,</span> <span class="n">df_poles_original</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_vgp_unfiltered</span><span class="p">,</span> <span class="n">df_poles_original</span> <span class="o">=</span> <span class="n">merge_files</span><span class="p">(</span><span class="n">df_files</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 33/33 [00:46&lt;00:00,  1.40s/it]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="subselect-vgps-that-were-originally-taken-into-account-to-the-calculation-of-the-paleomagnetic-pole">
+<h3>2. Subselect VGPs that were originally taken into account to the calculation of the paleomagnetic pole.<a class="headerlink" href="#subselect-vgps-that-were-originally-taken-into-account-to-the-calculation-of-the-paleomagnetic-pole" title="Permalink to this headline">#</a></h3>
+<p><em>Note: the column <code class="docutils literal notranslate"><span class="pre">df_vgp_unfiltered['in_study_pole']</span></code> labels with <code class="docutils literal notranslate"><span class="pre">0</span></code> the VGPs that were not taken into account in the Paloemagnetic Pole.
+We can group the paleopoles within the same study with different numbers in the same column.</em></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">original_selection</span><span class="p">(</span><span class="n">df_unfiltered</span><span class="p">,</span> <span class="n">df_poles_original</span><span class="p">):</span>
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    input: Pass an unfiltered DF </span>
+<span class="sd">    output: Selected entries that were considered by their authors to the calculation of PPs.</span>
+<span class="sd">    </span>
+<span class="sd">    Note: This is achieved taking advantage on the values in column df_unfiltered[`in_study_pole`]. Sero</span>
+<span class="sd">    valued entries were discarder and integers labels different poles within the same study.</span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    
+    <span class="n">df_unfiltered</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>    
+    <span class="n">df_unfiltered</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_unfiltered</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="kc">True</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">in_study_pole</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">keep</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">df_filtered</span> <span class="o">=</span> <span class="n">df_unfiltered</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df_unfiltered</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="kc">True</span><span class="p">]</span>
+      
+    <span class="c1"># iterate through each study in order to recompute and store the paleomagnetic poles</span>
+    <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="n">df_poles_original</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>    
+    
+    <span class="k">for</span> <span class="n">study</span><span class="p">,</span> <span class="n">df_study</span> <span class="ow">in</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Study&#39;</span><span class="p">):</span>
+        
+        <span class="c1"># iterate through each study</span>
+        <span class="k">for</span> <span class="n">pole</span><span class="p">,</span> <span class="n">df_pole</span> <span class="ow">in</span> <span class="n">df_study</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">):</span>
+            
+            <span class="n">ppole</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span> <span class="c1"># final paleopole</span>
+            <span class="n">mean_site</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span> <span class="o">=</span> <span class="n">df_study</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">df_study</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_pole</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> 
+                <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
+                <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                
+            
+            <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;Study&#39;</span><span class="p">:</span> <span class="n">study</span><span class="p">,</span> <span class="s1">&#39;pole&#39;</span><span class="p">:</span> <span class="n">pole</span><span class="p">,</span> 
+                                                              <span class="s1">&#39;slat&#39;</span><span class="p">:</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="s1">&#39;slon&#39;</span><span class="p">:</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+                                                              <span class="s1">&#39;Plat&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="s1">&#39;Plon&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+                                                              <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span> <span class="s1">&#39;A95&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">],</span>
+                                                              <span class="s1">&#39;min_age&#39;</span><span class="p">:</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">min_age</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s1">&#39;max_age&#39;</span><span class="p">:</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">max_age</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> 
+                                                              <span class="s1">&#39;mean_age&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">df_pole</span><span class="o">.</span><span class="n">max_age</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">min_age</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">},</span> 
+                                                              <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>        
+    <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[[</span><span class="s1">&#39;Study&#39;</span><span class="p">,</span><span class="s1">&#39;pole&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span><span class="s1">&#39;Plat&#39;</span><span class="p">,</span><span class="s1">&#39;Plon&#39;</span><span class="p">,</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span><span class="s1">&#39;mean_age&#39;</span><span class="p">]]</span>
+    <span class="k">return</span> <span class="n">df_filtered</span><span class="p">,</span> <span class="n">df_pole_compilation</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="p">,</span> <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">original_selection</span><span class="p">(</span><span class="n">df_vgp_unfiltered</span><span class="p">,</span> <span class="n">df_poles_original</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="study-locations-and-vgps-by-age">
+<h1>Study locations and VGPs by age<a class="headerlink" href="#study-locations-and-vgps-by-age" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="n">proj1</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">LambertConformal</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">projection</span> <span class="o">=</span> <span class="n">proj1</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="o">-</span><span class="mi">135</span><span class="p">,</span> <span class="o">-</span><span class="mi">55</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">68</span><span class="p">],</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">())</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax1</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylabels_left</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Overview map of North America&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">slon</span><span class="p">,</span>
+    <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">mean_age</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overview of compiled VGPs&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax2</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylabels_left</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Overview of compiled VGPs&#39;</span><span class="p">)</span>
+<span class="n">s</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df_filtered</span><span class="o">.</span><span class="n">vgp_lon_SH</span><span class="p">,</span>
+    <span class="n">df_filtered</span><span class="o">.</span><span class="n">vgp_lat_SH</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="o">.</span><span class="n">mean_age</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.035</span><span class="p">)</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Age (My)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1_Compile_12_0.png" src="_images/1_Compile_12_0.png" />
+</div>
+</div>
+<section id="age-distribution-of-vgps">
+<h2>Age distribution of VGPs<a class="headerlink" href="#age-distribution-of-vgps" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age distribution of compiled VGPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of compiled VGPs&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1"># sns.distplot(df_filtered[&#39;mean_age&#39;], bins=100)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Age distribution of compiled VGPs&#39;}, xlabel=&#39;Mean Age&#39;, ylabel=&#39;Number of compiled VGPs&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/1_Compile_14_1.png" src="_images/1_Compile_14_1.png" />
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="recomputed-poles">
+<h1>Recomputed poles<a class="headerlink" href="#recomputed-poles" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation</span><span class="p">[</span><span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Study</th>
+      <th>pole</th>
+      <th>N</th>
+      <th>K</th>
+      <th>A95</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>Plat</th>
+      <th>Plon</th>
+      <th>min_age</th>
+      <th>max_age</th>
+      <th>mean_age</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Absaroka_volcanics</td>
+      <td>1</td>
+      <td>19</td>
+      <td>10.051542</td>
+      <td>11.140298</td>
+      <td>44.613899</td>
+      <td>250.051065</td>
+      <td>-83.364268</td>
+      <td>358.641493</td>
+      <td>48.0</td>
+      <td>49.0</td>
+      <td>48.5</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Beaver_River_intrusions</td>
+      <td>1</td>
+      <td>21</td>
+      <td>44.972756</td>
+      <td>4.792312</td>
+      <td>60.238151</td>
+      <td>234.652209</td>
+      <td>-79.313242</td>
+      <td>327.669841</td>
+      <td>40.5</td>
+      <td>43.5</td>
+      <td>42.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Bighorn_Basin_sediments</td>
+      <td>1</td>
+      <td>59</td>
+      <td>10.64057</td>
+      <td>5.954672</td>
+      <td>44.459816</td>
+      <td>251.809627</td>
+      <td>-81.549042</td>
+      <td>2.761738</td>
+      <td>52.54</td>
+      <td>59.237</td>
+      <td>55.8885</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Bishop_tuff</td>
+      <td>1</td>
+      <td>47.0</td>
+      <td>127.0</td>
+      <td>1.9</td>
+      <td>37.67</td>
+      <td>241.25</td>
+      <td>-80.164116</td>
+      <td>314.290252</td>
+      <td>0.7661</td>
+      <td>0.7679</td>
+      <td>0.767</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Bitterroot_Dome_intrusions</td>
+      <td>1</td>
+      <td>11</td>
+      <td>34.082686</td>
+      <td>7.93379</td>
+      <td>46.1908</td>
+      <td>245.543303</td>
+      <td>-72.178647</td>
+      <td>344.432968</td>
+      <td>46.4</td>
+      <td>55.5</td>
+      <td>50.95</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Central_Mexico_Plio-Pleistocene</td>
+      <td>1</td>
+      <td>13</td>
+      <td>61.071911</td>
+      <td>5.347242</td>
+      <td>19.551706</td>
+      <td>260.39884</td>
+      <td>-88.503095</td>
+      <td>154.996894</td>
+      <td>0.0</td>
+      <td>4.51</td>
+      <td>2.255</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Clear_Lake_volcanic_field</td>
+      <td>1</td>
+      <td>3</td>
+      <td>5.300917</td>
+      <td>59.96619</td>
+      <td>38.961941</td>
+      <td>237.332338</td>
+      <td>-84.889461</td>
+      <td>298.871431</td>
+      <td>0.84</td>
+      <td>1.37</td>
+      <td>1.105</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Coso_Range_volcanics</td>
+      <td>1</td>
+      <td>2</td>
+      <td>16.165811</td>
+      <td>66.822315</td>
+      <td>35.944511</td>
+      <td>242.221048</td>
+      <td>-73.775957</td>
+      <td>249.302652</td>
+      <td>0.83</td>
+      <td>1.31</td>
+      <td>1.07</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Dinan_Bay_lavas</td>
+      <td>1</td>
+      <td>13</td>
+      <td>18.744472</td>
+      <td>9.832138</td>
+      <td>53.649138</td>
+      <td>233.320816</td>
+      <td>-83.335839</td>
+      <td>324.273564</td>
+      <td>18.9</td>
+      <td>26.4</td>
+      <td>22.65</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>Eastern_Alkaline_Province</td>
+      <td>1</td>
+      <td>17</td>
+      <td>42.479588</td>
+      <td>5.536743</td>
+      <td>20.327289</td>
+      <td>262.723839</td>
+      <td>-88.340153</td>
+      <td>267.711248</td>
+      <td>1.5</td>
+      <td>14.97</td>
+      <td>8.235</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>Eastern_TMVB</td>
+      <td>1</td>
+      <td>12</td>
+      <td>41.498053</td>
+      <td>6.817589</td>
+      <td>19.870126</td>
+      <td>261.47979</td>
+      <td>-86.261559</td>
+      <td>296.937292</td>
+      <td>0.0</td>
+      <td>2.61</td>
+      <td>1.305</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>Latir_volcanic_field</td>
+      <td>1</td>
+      <td>48</td>
+      <td>5.806518</td>
+      <td>9.372501</td>
+      <td>36.797286</td>
+      <td>254.562507</td>
+      <td>-76.331436</td>
+      <td>5.316146</td>
+      <td>25.17</td>
+      <td>28.5</td>
+      <td>26.835</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>Long_Valley_Caldera_volcanics</td>
+      <td>1</td>
+      <td>20</td>
+      <td>19.849724</td>
+      <td>7.51279</td>
+      <td>37.66906</td>
+      <td>241.135848</td>
+      <td>-87.664063</td>
+      <td>11.142714</td>
+      <td>0.036</td>
+      <td>0.738</td>
+      <td>0.387</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>Mariscal_Mtn_intrusions</td>
+      <td>1</td>
+      <td>18</td>
+      <td>42.460473</td>
+      <td>5.366825</td>
+      <td>29.084778</td>
+      <td>256.813834</td>
+      <td>-79.969242</td>
+      <td>5.260914</td>
+      <td>34.14</td>
+      <td>46.7</td>
+      <td>40.42</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>Michoacan_Guanajuato_volcanic_field</td>
+      <td>1</td>
+      <td>8</td>
+      <td>31.322757</td>
+      <td>10.051793</td>
+      <td>19.278857</td>
+      <td>257.651623</td>
+      <td>-83.095837</td>
+      <td>42.690352</td>
+      <td>0.058</td>
+      <td>0.653</td>
+      <td>0.3555</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>Mistastin_Lake_impact</td>
+      <td>1</td>
+      <td>10</td>
+      <td>119.554561</td>
+      <td>4.436052</td>
+      <td>55.867008</td>
+      <td>296.613106</td>
+      <td>-85.527833</td>
+      <td>300.997894</td>
+      <td>34.6</td>
+      <td>38.6</td>
+      <td>36.6</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>Mogollon-Datil_volcanics</td>
+      <td>1</td>
+      <td>61</td>
+      <td>17.54263</td>
+      <td>4.469516</td>
+      <td>33.312892</td>
+      <td>252.22946</td>
+      <td>-81.946303</td>
+      <td>323.334539</td>
+      <td>21.0</td>
+      <td>44.0</td>
+      <td>32.5</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>Monterey_intrusions</td>
+      <td>1</td>
+      <td>6</td>
+      <td>31.998449</td>
+      <td>12.024477</td>
+      <td>38.377044</td>
+      <td>280.679485</td>
+      <td>-87.635483</td>
+      <td>226.193142</td>
+      <td>47</td>
+      <td>47.9</td>
+      <td>47.45</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>N_Montana_intrusions</td>
+      <td>1</td>
+      <td>95</td>
+      <td>17.619208</td>
+      <td>3.557327</td>
+      <td>47.859843</td>
+      <td>249.866366</td>
+      <td>-82.318756</td>
+      <td>358.457981</td>
+      <td>46.4</td>
+      <td>55.4</td>
+      <td>50.9</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>Ramsay_Island_lavas</td>
+      <td>1</td>
+      <td>37</td>
+      <td>18.102389</td>
+      <td>5.691059</td>
+      <td>52.555957</td>
+      <td>228.645082</td>
+      <td>-83.297224</td>
+      <td>299.217499</td>
+      <td>35.9</td>
+      <td>41.1</td>
+      <td>38.5</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>Rattlesnake_Hills_volcanics</td>
+      <td>1</td>
+      <td>18</td>
+      <td>13.847359</td>
+      <td>9.634617</td>
+      <td>42.794979</td>
+      <td>252.690527</td>
+      <td>-79.415317</td>
+      <td>326.075725</td>
+      <td>44.7</td>
+      <td>45.1</td>
+      <td>44.9</td>
+    </tr>
+    <tr>
+      <th>30</th>
+      <td>Robinson_Antincline_intrusions</td>
+      <td>1</td>
+      <td>16</td>
+      <td>25.350465</td>
+      <td>7.47087</td>
+      <td>46.2</td>
+      <td>249.5</td>
+      <td>-77.484696</td>
+      <td>329.753861</td>
+      <td>48.0</td>
+      <td>52.6</td>
+      <td>50.3</td>
+    </tr>
+    <tr>
+      <th>31</th>
+      <td>SW_USA_composite</td>
+      <td>1</td>
+      <td>70</td>
+      <td>19.599863</td>
+      <td>3.92857</td>
+      <td>37.189825</td>
+      <td>245.324041</td>
+      <td>-87.395003</td>
+      <td>342.960695</td>
+      <td>0.0</td>
+      <td>16.5</td>
+      <td>8.25</td>
+    </tr>
+    <tr>
+      <th>32</th>
+      <td>San_Luis_Hills_volcanics</td>
+      <td>1</td>
+      <td>23</td>
+      <td>13.982647</td>
+      <td>8.393792</td>
+      <td>37.167163</td>
+      <td>254.044728</td>
+      <td>-79.716194</td>
+      <td>349.461783</td>
+      <td>25.7</td>
+      <td>31.0</td>
+      <td>28.35</td>
+    </tr>
+    <tr>
+      <th>33</th>
+      <td>Sierra_de_Las_Cruces</td>
+      <td>1</td>
+      <td>25</td>
+      <td>39.085457</td>
+      <td>4.689496</td>
+      <td>19.466979</td>
+      <td>260.553954</td>
+      <td>-80.838128</td>
+      <td>336.59299</td>
+      <td>0.0</td>
+      <td>4.11</td>
+      <td>2.055</td>
+    </tr>
+    <tr>
+      <th>34</th>
+      <td>Snake_River_Plain</td>
+      <td>1</td>
+      <td>23</td>
+      <td>25.035633</td>
+      <td>6.171164</td>
+      <td>42.978649</td>
+      <td>246.353711</td>
+      <td>-86.874229</td>
+      <td>187.769496</td>
+      <td>0.028</td>
+      <td>6.0</td>
+      <td>3.014</td>
+    </tr>
+    <tr>
+      <th>35</th>
+      <td>Sonoma_volcanics</td>
+      <td>1</td>
+      <td>26</td>
+      <td>20.006308</td>
+      <td>6.499616</td>
+      <td>38.430155</td>
+      <td>237.573685</td>
+      <td>-80.322875</td>
+      <td>248.829844</td>
+      <td>2.5</td>
+      <td>8.17</td>
+      <td>5.335</td>
+    </tr>
+    <tr>
+      <th>36</th>
+      <td>Stoddard_Mountain_laccolith</td>
+      <td>1</td>
+      <td>19</td>
+      <td>56.544078</td>
+      <td>4.50215</td>
+      <td>37.517585</td>
+      <td>246.622478</td>
+      <td>-83.758551</td>
+      <td>333.572807</td>
+      <td>20.2</td>
+      <td>21.96</td>
+      <td>21.08</td>
+    </tr>
+    <tr>
+      <th>37</th>
+      <td>Tequila_volcanic_field</td>
+      <td>1</td>
+      <td>17</td>
+      <td>27.503551</td>
+      <td>6.925343</td>
+      <td>20.832864</td>
+      <td>256.178936</td>
+      <td>-85.421918</td>
+      <td>263.87237</td>
+      <td>0.079</td>
+      <td>1.448</td>
+      <td>0.7635</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>Valles_Caldera_volcanics</td>
+      <td>1</td>
+      <td>11</td>
+      <td>12.652025</td>
+      <td>13.354422</td>
+      <td>35.895497</td>
+      <td>253.436339</td>
+      <td>-87.135817</td>
+      <td>218.526712</td>
+      <td>0.05</td>
+      <td>3.74</td>
+      <td>1.895</td>
+    </tr>
+    <tr>
+      <th>39</th>
+      <td>Western_Central_TMVB</td>
+      <td>1</td>
+      <td>10</td>
+      <td>42.97413</td>
+      <td>7.452964</td>
+      <td>20.366391</td>
+      <td>257.543486</td>
+      <td>-86.738664</td>
+      <td>133.858048</td>
+      <td>0.0</td>
+      <td>2.58</td>
+      <td>1.29</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">projection</span> <span class="o">=</span> <span class="n">proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#ax.set_extent([-135, -55, 5, 68], ccrs.Geodetic())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overview of recomputed Poles&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylabels_left</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="c1"># ax.stock_img()</span>
+<span class="c1"># ax.set_global() </span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">Plon</span><span class="p">,</span>
+    <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">Plat</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">mean_age</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">pole</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="p">(</span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">Plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">Plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="n">i</span><span class="p">]),</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Age (My)&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>41
+</pre></div>
+</div>
+<img alt="_images/1_Compile_17_1.png" src="_images/1_Compile_17_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="c1"># ax.stock_img()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">],</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">],</span> 
+                 <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7f4cb66e90&gt;
+</pre></div>
+</div>
+<img alt="_images/1_Compile_18_1.png" src="_images/1_Compile_18_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plat_SH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">],</span> <span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">])</span>
+<span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plon_SH&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span> <span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,(</span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Plon&#39;</span><span class="p">])</span>          
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pole_rec</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[</span><span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Absaroka_volcanics&#39;</span><span class="p">]</span>
+<span class="n">pole_original</span> <span class="o">=</span> <span class="n">df_poles_original</span><span class="p">[</span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Absaroka_volcanics&#39;</span><span class="p">]</span>
+<span class="n">pole_original</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pole</th>
+      <th>name</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>N</th>
+      <th>dec</th>
+      <th>inc</th>
+      <th>k</th>
+      <th>alpha95</th>
+      <th>f_corr</th>
+      <th>Plat</th>
+      <th>Plon</th>
+      <th>K</th>
+      <th>A95</th>
+      <th>dp</th>
+      <th>dm</th>
+      <th>mean_age</th>
+      <th>min_age</th>
+      <th>2sig_min</th>
+      <th>max_age</th>
+      <th>2sig_max</th>
+      <th>uncer_dist</th>
+      <th>rock_typ_1</th>
+      <th>rock_typ_2</th>
+      <th>rock_typ_3</th>
+      <th>R1</th>
+      <th>R2a</th>
+      <th>R2b</th>
+      <th>R3</th>
+      <th>R4</th>
+      <th>R5a</th>
+      <th>R5b</th>
+      <th>R6</th>
+      <th>R7</th>
+      <th>pmag_ref</th>
+      <th>age_ref</th>
+      <th>pmag_comments</th>
+      <th>age_comments</th>
+      <th>Study</th>
+      <th>Unnamed: 38</th>
+      <th>Plat_SH</th>
+      <th>Plon_SH</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16</th>
+      <td>1.0</td>
+      <td>Absaroka volcanics pole 1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>19.0</td>
+      <td>349.9</td>
+      <td>61.8</td>
+      <td>14.7</td>
+      <td>8.4</td>
+      <td>NaN</td>
+      <td>83.5</td>
+      <td>177.4</td>
+      <td>10.2</td>
+      <td>10.1</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>Shive and Pruss (1977)</td>
+      <td>Harlan and Morgan (2010);</td>
+      <td>only AF demag appears to have been used (thus ...</td>
+      <td>NaN</td>
+      <td>Absaroka_volcanics</td>
+      <td>NaN</td>
+      <td>-83.5</td>
+      <td>357.4</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>2.0</td>
+      <td>Absaroka volcanics pole 2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>3.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>Re-calculated from Nyblade et al. (1986) [who ...</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>no mean direction / pole position calculated b...</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>Absaroka_volcanics</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>3.0</td>
+      <td>Absaroka volcanics pole 3</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>22.0</td>
+      <td>347.6</td>
+      <td>59.2</td>
+      <td>21.8</td>
+      <td>6.8</td>
+      <td>NaN</td>
+      <td>80.8</td>
+      <td>145.9</td>
+      <td>14.0</td>
+      <td>8.6</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>45.0</td>
+      <td>NaN</td>
+      <td>54.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>mixed</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>Harlan and Morgan (2010); but see age_comment</td>
+      <td>AF and thermal demagnetization; rock-magnetic ...</td>
+      <td>uniform age range estimated here is just a cru...</td>
+      <td>Absaroka_volcanics</td>
+      <td>NaN</td>
+      <td>-80.8</td>
+      <td>325.9</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>1+2+3</td>
+      <td>Absaroka volcanics grand mean pole</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>42.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>83.1</td>
+      <td>146.3</td>
+      <td>13.5</td>
+      <td>6.2</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>45.0</td>
+      <td>NaN</td>
+      <td>54.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>mixed</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>Harlan and Morgan (2010); but see age_comment</td>
+      <td>seems to have dismissed two VGPs from the stud...</td>
+      <td>uniform age range estimated here is just a cru...</td>
+      <td>Absaroka_volcanics</td>
+      <td>Harlan and Morgan (2010); Shive and Pruss (197...</td>
+      <td>-83.1</td>
+      <td>326.3</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+    
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="c1"># ax.stock_img()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_global</span><span class="p">()</span> 
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pole_rec</span><span class="p">[</span><span class="s1">&#39;Plon&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pole_rec</span><span class="p">[</span><span class="s1">&#39;Plat&#39;</span><span class="p">],</span> <span class="n">hue</span> <span class="o">=</span> <span class="n">pole_rec</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">],</span> 
+                 <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">pole_original</span><span class="p">[</span><span class="s1">&#39;Plon_SH&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span> <span class="n">pole_original</span><span class="p">[</span><span class="s1">&#39;Plat_SH&#39;</span><span class="p">],</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span>
+                 <span class="n">s</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">,</span> <span class="n">borderaxespad</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7f68f27ac0&gt;
+</pre></div>
+</div>
+<img alt="_images/1_Compile_21_1.png" src="_images/1_Compile_21_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation</span><span class="p">[</span><span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">df_filtered</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>fm./loc.</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>n</th>
+      <th>dec</th>
+      <th>inc</th>
+      <th>k</th>
+      <th>alpha95</th>
+      <th>f_corr</th>
+      <th>VGP_lat</th>
+      <th>VGP_lon</th>
+      <th>K</th>
+      <th>A95</th>
+      <th>dp</th>
+      <th>dm</th>
+      <th>mean_age</th>
+      <th>min_age</th>
+      <th>2sig_min</th>
+      <th>max_age</th>
+      <th>2sig_max</th>
+      <th>uncer_dist</th>
+      <th>rock_typ_1</th>
+      <th>rock_typ_2</th>
+      <th>rock_typ_3</th>
+      <th>demag</th>
+      <th>struc_cont</th>
+      <th>rot_area</th>
+      <th>polarity</th>
+      <th>strat_group</th>
+      <th>ordering</th>
+      <th>synch_unit</th>
+      <th>in_study_pole</th>
+      <th>rej_crit</th>
+      <th>pmag_ref</th>
+      <th>age_ref</th>
+      <th>pmag_comments</th>
+      <th>age_comments</th>
+      <th>Unnamed: 38</th>
+      <th>Study</th>
+      <th>VGP_lon_recalc</th>
+      <th>VGP_lat_recalc</th>
+      <th>dec_reverse</th>
+      <th>inc_reverse</th>
+      <th>vgp_lat_SH</th>
+      <th>vgp_lon_SH</th>
+      <th>age_uncertainty</th>
+      <th>keep</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>6.0</td>
+      <td>Sylvan Pass</td>
+      <td>44.3478</td>
+      <td>-111.0455</td>
+      <td>5.0</td>
+      <td>343.4</td>
+      <td>64.3</td>
+      <td>58.3</td>
+      <td>8.2</td>
+      <td>NaN</td>
+      <td>78.2</td>
+      <td>-186.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.5</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>AF</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>N</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>[]</td>
+      <td>Shive and Pruss (1977)</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>NaN</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>NaN</td>
+      <td>Absaroka_volcanics</td>
+      <td>173.300455</td>
+      <td>78.199980</td>
+      <td>-64.3</td>
+      <td>163.4</td>
+      <td>-78.199980</td>
+      <td>353.300455</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>8.0</td>
+      <td>Sylvan Pass</td>
+      <td>44.5500</td>
+      <td>-110.0500</td>
+      <td>5.0</td>
+      <td>121.8</td>
+      <td>-73.1</td>
+      <td>165.6</td>
+      <td>4.9</td>
+      <td>NaN</td>
+      <td>52.6</td>
+      <td>-156.7</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.5</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>AF</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>R</td>
+      <td>1.0</td>
+      <td>3.0</td>
+      <td>0.0</td>
+      <td>1</td>
+      <td>[]</td>
+      <td>Shive and Pruss (1977)</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>NaN</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>NaN</td>
+      <td>Absaroka_volcanics</td>
+      <td>23.328823</td>
+      <td>-52.611427</td>
+      <td>-73.1</td>
+      <td>121.8</td>
+      <td>-52.611427</td>
+      <td>23.328823</td>
+      <td>1.0</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">[(</span><span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;in_study_pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df_filtered</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Absaroka_volcanics&#39;</span><span class="p">)]</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">projection</span> <span class="o">=</span> <span class="n">proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+<span class="c1">#ax.set_extent([-135, -55, 5, 68], ccrs.Geodetic())</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Overview of compiled VGPs&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">BORDERS</span><span class="p">)</span>
+<span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">crs</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> <span class="n">draw_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">)</span>
+<span class="n">gl</span><span class="o">.</span><span class="n">ylabels_left</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">LAND</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+<span class="c1"># ax.stock_img()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_global</span><span class="p">()</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">df_filtered_</span><span class="o">.</span><span class="n">vgp_lon_SH</span><span class="p">,</span>
+    <span class="n">df_filtered_</span><span class="o">.</span><span class="n">vgp_lat_SH</span><span class="p">,</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">df_filtered_</span><span class="o">.</span><span class="n">mean_age</span><span class="p">,</span>
+    <span class="n">edgecolors</span><span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">marker</span> <span class="o">=</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">25</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
+    <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span>
+<span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Age (My)&quot;</span><span class="p">)</span>
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1_Compile_23_0.png" src="_images/1_Compile_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>name</th>
+      <th>fm./loc.</th>
+      <th>slat</th>
+      <th>slon</th>
+      <th>n</th>
+      <th>dec</th>
+      <th>inc</th>
+      <th>k</th>
+      <th>alpha95</th>
+      <th>f_corr</th>
+      <th>VGP_lat</th>
+      <th>VGP_lon</th>
+      <th>K</th>
+      <th>A95</th>
+      <th>dp</th>
+      <th>dm</th>
+      <th>mean_age</th>
+      <th>min_age</th>
+      <th>2sig_min</th>
+      <th>max_age</th>
+      <th>2sig_max</th>
+      <th>uncer_dist</th>
+      <th>rock_typ_1</th>
+      <th>rock_typ_2</th>
+      <th>rock_typ_3</th>
+      <th>demag</th>
+      <th>struc_cont</th>
+      <th>rot_area</th>
+      <th>polarity</th>
+      <th>strat_group</th>
+      <th>ordering</th>
+      <th>synch_unit</th>
+      <th>in_study_pole</th>
+      <th>rej_crit</th>
+      <th>pmag_ref</th>
+      <th>age_ref</th>
+      <th>pmag_comments</th>
+      <th>age_comments</th>
+      <th>Study</th>
+      <th>VGP_lon_recalc</th>
+      <th>VGP_lat_recalc</th>
+      <th>dec_reverse</th>
+      <th>inc_reverse</th>
+      <th>vgp_lat_SH</th>
+      <th>vgp_lon_SH</th>
+      <th>age_uncertainty</th>
+      <th>Unnamed: 38</th>
+      <th>keep</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>693</th>
+      <td>Lower Flow mean</td>
+      <td>Lower Flow</td>
+      <td>44.093705</td>
+      <td>-109.470235</td>
+      <td>20.0</td>
+      <td>175.5</td>
+      <td>-58.7</td>
+      <td>244.0</td>
+      <td>2.004094</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.5</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>TH</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>M6</td>
+      <td>2</td>
+      <td>[]</td>
+      <td>Nyblade et al. (1986)</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>NaN</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>Absaroka_volcanics</td>
+      <td>287.808703</td>
+      <td>-84.257954</td>
+      <td>-58.7</td>
+      <td>175.5</td>
+      <td>-84.257954</td>
+      <td>287.808703</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>721</th>
+      <td>Middle Flow mean</td>
+      <td>Middle Flow</td>
+      <td>44.13866</td>
+      <td>-109.347075</td>
+      <td>26.0</td>
+      <td>159.7</td>
+      <td>34.4</td>
+      <td>95.0</td>
+      <td>2.816953</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.5</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>TH</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>M7</td>
+      <td>2</td>
+      <td>[]</td>
+      <td>Nyblade et al. (1986)</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>NaN</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>Absaroka_volcanics</td>
+      <td>271.758635</td>
+      <td>-24.282326</td>
+      <td>-34.4</td>
+      <td>339.7</td>
+      <td>-24.282326</td>
+      <td>271.758635</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>728</th>
+      <td>Upper Flow mean</td>
+      <td>Upper Flow</td>
+      <td>44.107118</td>
+      <td>-109.501088</td>
+      <td>7.0</td>
+      <td>176.0</td>
+      <td>-59.4</td>
+      <td>266.0</td>
+      <td>3.244428</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>48.5</td>
+      <td>48.0</td>
+      <td>NaN</td>
+      <td>49.0</td>
+      <td>NaN</td>
+      <td>uniform</td>
+      <td>igneous</td>
+      <td>volcanic</td>
+      <td>basalt</td>
+      <td>TH</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>R</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>M8</td>
+      <td>2</td>
+      <td>[12]</td>
+      <td>Nyblade et al. (1986)</td>
+      <td>Harlan and Morgan (2010)</td>
+      <td>NaN</td>
+      <td>crude age range provided by Harlan and Morgan ...</td>
+      <td>Absaroka_volcanics</td>
+      <td>289.145433</td>
+      <td>-85.106864</td>
+      <td>-59.4</td>
+      <td>176.0</td>
+      <td>-85.106864</td>
+      <td>289.145433</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Young CEED Team<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
