@@ -9,7 +9,7 @@ import cartopy.crs as ccrs
 from cartopy.geodesic import Geodesic
 from shapely.geometry import Polygon
 
-from scripts.auxiliar import spherical2cartesian, shape, eigen_decomposition
+from vgptools.auxiliar import spherical2cartesian, shape, eigen_decomposition
 
 
 def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age):

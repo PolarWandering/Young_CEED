@@ -251,11 +251,13 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
 
     plt.colorbar(s, fraction=0.035).set_label("Age (My)")  
 
-def plot_APWP_RM_ensemble(df):
-    
+def plot_APWP_RM_ensemble(df, title):
+    '''
+    pass a df with the colection of bootstrapped means for each run.
+    '''
     df['plon_east'] = df.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
     fig, axes = plt.subplots(2, 1, sharex=True, figsize=(15,6))
-    fig.suptitle('Apparent Polar Wander Path', fontsize= 16, fontweight ='bold')
+    fig.suptitle(title, fontsize= 16, fontweight ='bold')
     axes[0].set_title('Latitude (°N)', fontsize=12)
     axes[1].set_title('Longitude (°E)', fontsize=12)
 

@@ -7,9 +7,15 @@ import pandas as pd
 def dfs_vgps_recomputed_poles(data_path_VGP, by_study = True):
     
     '''
-    input: Pass an unfiltered DF. If by_study == True there will by one pole for each "Study",
-    otherwise, for each study we evaluate if there is more than one pole for study and we return
-    in accordance.
+    From the path where all the datasheets live, this function returns two DataFrames, one for
+    all the VGPs that were considered by the original author and other DataFrame with the poles.
+    The later has to flavours, one approach considers a region or datasheet, as a unit, from which
+    a paleopole may be computed, the other approach considers if there are two paleopoles from
+    the same area as two single paleopoles within the same area/study.
+    
+    input: Pass a path where all the datasheets live. If by_study == True there will by one pole 
+    for each "Study",otherwise, for each study we evaluate if there is more than one pole for study 
+    and we return in accordance.
     output: Selected entries that were considered by their authors to the calculation of PPs.
     
     Note: This is achieved taking advantage on the values in column df_unfiltered[`in_study_pole`]. Zero
