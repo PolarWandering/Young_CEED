@@ -250,6 +250,61 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
     plt.tight_layout()
 
     plt.colorbar(s, fraction=0.035).set_label("Age (My)")  
+    
+def plot_VGPs_and_APWP(extent, df_vgps, df_apwp):
+    """
+    generates a side by side graphic showing the underlying VGPs along
+    with the Running Means path (in the right plot)
+    """
+    proj = ccrs.Orthographic(central_longitude=0.0, central_latitude=-90.0)
+    plt.figure(figsize=(12,10))
+
+    ax1 = plt.subplot(221, projection = proj)
+    ax1.patch.set_visible(False)
+    ax1.add_feature(cfeature.BORDERS)
+    ax1.add_feature(cfeature.LAND)
+    ax1.add_feature(cfeature.COASTLINE)
+    ax1.stock_img()
+    #ax1.set_extent(extent, crs = ccrs.PlateCarree())
+    gl = ax1.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
+                      linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
+    gl.ylabels_left = True
+
+    plt.title('Overview map of recompiled VGPs')
+    
+    for _, pole in df_vgps.iterrows():
+        plot_pole(pole.vgp_lat_SH, pole.vgp_lon_SH, pole.mean_age, df_vgps.mean_age.min(), df_vgps.mean_age.max(), ax1)
+    plt.tight_layout()
+
+
+    ax2 = plt.subplot(222, projection=proj)
+    ax2.set_title('Running Mean path on VGPs')
+    ax2.add_feature(cfeature.BORDERS)
+    gl = ax2.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
+                      linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
+    gl.ylabels_left = True
+    ax2.add_feature(cfeature.LAND)
+    ax2.add_feature(cfeature.COASTLINE)
+    ax2.stock_img()
+    ax2.set_extent(extent, crs = ccrs.PlateCarree())
+
+    for _, pole in df_apwp.iterrows():
+        plot_pole_A95(pole.plat, pole.plon, pole.A95, pole.age, df_apwp.age.min(), df_apwp.age.max(), ax2)
+
+    plt.plot(df_apwp["plon"], df_apwp["plat"], transform = ccrs.Geodetic(), linewidth=1.5, color = "black")
+    plt.tight_layout()
+    
+    s = plt.scatter(
+        df_apwp.plon,
+        df_apwp.plat,
+        c = df_apwp.age,
+        edgecolors= "black", marker = "o", s = 25,
+        cmap="viridis",
+        transform=ccrs.PlateCarree(),
+    )
+    plt.tight_layout()
+
+    plt.colorbar(s, fraction=0.035).set_label("Age (My)") 
 
 def plot_APWP_RM_ensemble(df, title):
     '''
