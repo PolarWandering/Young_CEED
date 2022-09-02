@@ -92,3 +92,97 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
     running_means.reset_index(drop=1, inplace=True)
     
     return running_means
+
+def get_pseudo_vgps(df):  
+    '''
+    takes a DF with paleomagnetic poles and respective statistics, it draws N randomly generated VGPs
+    following the pole location and kappa concentration parameter. In the present formulation we follow
+    a very conservative apporach for the assignaiton of ages to each VGP, it is taken at random between
+    the lower and upper bounds of the distribution of reported VGPs.
+    Note: column labels are presently hard-coded into this, if relevant.
+    '''
+    Study, age_bst, vgp_lat_bst, vgp_lon_bst = [], [], [], []
+
+    for index, row in df.iterrows():
+        
+        # we first generate N VGPs following with N the number of VGPs from the original pole.
+        directions_temp = ipmag.fishrot(k = row.K, n = row.N, dec = row.Plon, inc = row.Plat, di_block = False)
+        
+        vgp_lon_bst.append(directions_temp[0])
+        vgp_lat_bst.append(directions_temp[1])
+    
+        age_bst.append([np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)) for _ in range(row.N)])
+        Study.append([row.Study for _ in range(row.N)])
+    
+    vgp_lon_bst = [item for sublist in vgp_lon_bst for item in sublist]
+    vgp_lat_bst = [item for sublist in vgp_lat_bst for item in sublist] 
+    age_bst = [item for sublist in age_bst for item in sublist]
+    Study = [item for sublist in Study for item in sublist]
+    
+    dictionary = {
+                  'Study': Study,
+                  'Plat': vgp_lat_bst,    
+                  'Plon': vgp_lon_bst,
+                  'mean_age': age_bst
+                  }    
+    
+    pseudo_vgps = pd.DataFrame(dictionary)
+
+    return pseudo_vgps
+
+def get_vgps_sampling_direction(df):
+    '''
+    takes a DF with site information, it draws for each direction a random direction following the
+    kappa concentration parameter and mean direction. Then, it calculates from the random direction a given VGP
+    In the present formulation we follow a conservative approach for the assignaiton of ages to each direction/VGP, 
+    it is taken at random between the min_age and max_age of reported VGPs.
+    '''    
+    Study, age_bst, decs, incs, slat, slon = [], [], [], [], [], []
+    k_mean = df['k'].mean()
+    
+    for index, row in df.iterrows():        
+        # we first generate one random direction from the original entry.
+        kappa = k_mean if np.isnan(row.k) else row.k # if we don't have kappa, we take the mean of the reported ones       
+        directions_temp = ipmag.fishrot(k = kappa, n = 1, dec = row.dec, inc = row.inc, di_block = False)
+        
+        decs.append(directions_temp[0][0])
+        incs.append(directions_temp[1][0])
+        slat.append(row.slat)
+        slon.append(row.slon)
+        
+        age_bst.append(np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)))
+        Study.append(row.Study)
+        
+    dictionary = {
+                  'Study': Study,
+                  'age': age_bst,
+                  'dec': decs,    
+                  'inc': incs,
+                  'slat': slat,
+                  'slon': slon 
+                  }    
+    new_df = pd.DataFrame(dictionary)        
+    new_df['plon'] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[0], axis =1)
+    new_df['plat'] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[1], axis =1)
+    # transform to the southern hemisphere
+    new_df['plat'] = np.where(new_df['plat'] > 0, -new_df['plat'], new_df['plat'])
+    new_df['plon'] = np.where(new_df['plon'] > 0,(new_df['plon'] - 180.) % 360., new_df['plon'])             
+
+    return new_df
+
+def running_mean_VGPs_bootstrapped(df_vgps, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, n_bst = 100):
+    '''
+    takes a compilation of vgps and for each time window uses the bootstrap approach to construct empirical confidence bounds. 
+    '''
+
+    running_means_global = pd.DataFrame(columns=['run','N','k','A95','csd','foliation','lineation','collinearity','coplanarity'])
+
+    for i in range(n_bst):
+               
+        vgps_sample = df_vgps.sample(n = len(df_vgps), replace = True)
+        running_means_tmp = pd.DataFrame()
+        running_means_tmp = running_mean_APWP_shape(vgps_sample, 'vgp_lon_SH', 'vgp_lat_SH', 'mean_age', window_length, time_step, max_age, min_age)
+        running_means_tmp['run'] = float(i)
+        running_means_global = running_means_global.append(running_means_tmp, ignore_index=True)
+       
+    return running_means_global

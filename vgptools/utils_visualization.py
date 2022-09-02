@@ -22,10 +22,10 @@ def RM_stats(df, title, xlabel, ylabel):
     df['kappa_norm'] = df['k'] / df['k'].max()
     df['N_norm'] = df['N'] / df['N'].max()
 
-    dfm = df[['age', 'A95', 'n_studies', 'csd']].melt('age', var_name='type', value_name='vals')
+    dfm = df[['age', 'A95', 'n_studies', 'csd']].melt('age', var_name='type', value_name='value')
 
 
-    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['vals'], hue = dfm['type'], marker="o", ax=ax)
+    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['value'], hue = dfm['type'], marker="o", ax=ax)
     
     sns.lineplot(data  = df, x = df['age'], y = df['k'], marker="o",  ax=ax2, color= "r")
     ax2.yaxis.label.set_color('red')
