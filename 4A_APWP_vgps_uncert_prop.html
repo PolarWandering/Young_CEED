@@ -171,7 +171,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main/v2/gh/PolarWandering/Young_CEED/main?urlpath=tree/4*_APWP_vgps_uncert_prop.ipynb"
+        <a href="https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main/v2/gh/PolarWandering/Young_CEED/main?urlpath=tree/4A_APWP_vgps_uncert_prop.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -189,7 +189,7 @@ title="Launch on Binder"
       </li>
       
       <li>
-        <a href="https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb/github/PolarWandering/Young_CEED/blob/main/4*_APWP_vgps_uncert_prop.ipynb"
+        <a href="https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb/github/PolarWandering/Young_CEED/blob/main/4A_APWP_vgps_uncert_prop.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -245,7 +245,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/4*_APWP_vgps_uncert_prop.ipynb"
+        <a href="_sources/4A_APWP_vgps_uncert_prop.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -392,27 +392,6 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;name&#39;, &#39;fm./loc.&#39;, &#39;slat&#39;, &#39;slon&#39;, &#39;n&#39;, &#39;dec&#39;, &#39;inc&#39;, &#39;k&#39;, &#39;alpha95&#39;,
-       &#39;f_corr&#39;, &#39;VGP_lat&#39;, &#39;VGP_lon&#39;, &#39;K&#39;, &#39;A95&#39;, &#39;dp&#39;, &#39;dm&#39;, &#39;mean_age&#39;,
-       &#39;min_age&#39;, &#39;2sig_min&#39;, &#39;max_age&#39;, &#39;2sig_max&#39;, &#39;uncer_dist&#39;,
-       &#39;rock_typ_1&#39;, &#39;rock_typ_2&#39;, &#39;rock_typ_3&#39;, &#39;demag&#39;, &#39;struc_cont&#39;,
-       &#39;rot_area&#39;, &#39;polarity&#39;, &#39;strat_group&#39;, &#39;ordering&#39;, &#39;synch_unit&#39;,
-       &#39;in_study_pole&#39;, &#39;rej_crit&#39;, &#39;pmag_ref&#39;, &#39;age_ref&#39;, &#39;pmag_comments&#39;,
-       &#39;age_comments&#39;, &#39;Study&#39;, &#39;VGP_lon_recalc&#39;, &#39;VGP_lat_recalc&#39;,
-       &#39;dec_reverse&#39;, &#39;inc_reverse&#39;, &#39;vgp_lat_SH&#39;, &#39;vgp_lon_SH&#39;,
-       &#39;age_uncertainty&#39;, &#39;Unnamed: 38&#39;, &#39;keep&#39;],
-      dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="generate-a-new-dataframe-sampling-each-direction-from-a-fisher-distribution">
 <h2>Generate a new Dataframe sampling each direction from a Fisher distribution.<a class="headerlink" href="#generate-a-new-dataframe-sampling-each-direction-from-a-fisher-distribution" title="Permalink to this headline">#</a></h2>
@@ -441,6 +420,7 @@ title="Print to PDF"
         
         <span class="n">age_bst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">min_age</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">max_age</span><span class="p">)))</span>
         <span class="n">Study</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Study</span><span class="p">)</span>
+        
     <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span>
                   <span class="s1">&#39;Study&#39;</span><span class="p">:</span> <span class="n">Study</span><span class="p">,</span>
                   <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">age_bst</span><span class="p">,</span>
@@ -515,7 +495,7 @@ Wall time: 38.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4*_APWP_vgps_uncert_prop_11_0.png" src="_images/4*_APWP_vgps_uncert_prop_11_0.png" />
+<img alt="_images/4A_APWP_vgps_uncert_prop_10_0.png" src="_images/4A_APWP_vgps_uncert_prop_10_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
