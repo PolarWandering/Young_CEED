@@ -331,6 +331,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apwp-confidence-bounds">
+   APWP confidence bounds
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -379,6 +384,11 @@ title="Print to PDF"
    </li>
   </ul>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#apwp-confidence-bounds">
+   APWP confidence bounds
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -403,10 +413,10 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
-                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">)</span>                              
+                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>                              
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">RM_stats</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span>
 </pre></div>
 </div>
 </div>
@@ -444,7 +454,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
 <span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="n">RM_on_VGP</span> <span class="o">=</span> <span class="n">running_mean_APWP</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
-<span class="n">RM_on_VGP</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">RM_on_VGP</span>
 </pre></div>
 </div>
 </div>
@@ -511,13 +521,57 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>341.959534</td>
       <td>-82.115848</td>
     </tr>
+    <tr>
+      <th>3</th>
+      <td>30.0</td>
+      <td>359.0</td>
+      <td>7.0</td>
+      <td>12.400810</td>
+      <td>2.196629</td>
+      <td>23.001703</td>
+      <td>336.344662</td>
+      <td>-82.377411</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.0</td>
+      <td>304.0</td>
+      <td>9.0</td>
+      <td>16.589316</td>
+      <td>2.042163</td>
+      <td>19.887069</td>
+      <td>336.936345</td>
+      <td>-82.580048</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50.0</td>
+      <td>308.0</td>
+      <td>10.0</td>
+      <td>14.315533</td>
+      <td>2.195171</td>
+      <td>21.408255</td>
+      <td>352.288745</td>
+      <td>-82.359689</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60.0</td>
+      <td>182.0</td>
+      <td>4.0</td>
+      <td>13.002846</td>
+      <td>3.012739</td>
+      <td>22.462899</td>
+      <td>358.639803</td>
+      <td>-81.942511</td>
+    </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span>
 <span class="n">plot_VGPs_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">RM_on_VGP</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -534,7 +588,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;VGP age distribution&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of VGPs&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -559,6 +613,56 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="apwp-confidence-bounds">
+<h1>APWP confidence bounds<a class="headerlink" href="#apwp-confidence-bounds" title="Permalink to this headline">#</a></h1>
+<p>To generate confidence bounds on the APWP, we will sample with replacement the original dataset of VGPs a number of times in order to construct an ensemble of possible solutions that will allow us to construct empirical confidence bounds.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_mean_bootstrapped</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span> <span class="n">plon_label</span><span class="p">,</span> <span class="n">plat_label</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    takes a compilation of vgps and for each time window uses the bootstrap approach to construct empirical confidence bounds. </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">,</span><span class="s1">&#39;foliation&#39;</span><span class="p">,</span><span class="s1">&#39;lineation&#39;</span><span class="p">,</span><span class="s1">&#39;collinearity&#39;</span><span class="p">,</span><span class="s1">&#39;coplanarity&#39;</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bst</span><span class="p">):</span>
+               
+        <span class="n">vgps_sample</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">),</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">running_means_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+        <span class="n">running_means_tmp</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">vgps_sample</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
+        <span class="n">running_means_tmp</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">running_means_tmp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+       
+    <span class="k">return</span> <span class="n">running_means_global</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">df_ensemble</span> <span class="o">=</span> <span class="n">running_mean_bootstrapped</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 15.1 s, sys: 112 ms, total: 15.2 s
+Wall time: 15.2 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df_ensemble</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_APWP_vgp-based APWP_19_0.png" src="_images/4_APWP_vgp-based APWP_19_0.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
