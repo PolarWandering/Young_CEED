@@ -480,10 +480,10 @@ title="Print to PDF"
       <td>44.613899</td>
       <td>250.051065</td>
       <td>-81.917678</td>
-      <td>328.57593</td>
-      <td>45.0</td>
-      <td>54.0</td>
-      <td>49.5</td>
+      <td>328.575930</td>
+      <td>45.00</td>
+      <td>54.000</td>
+      <td>49.5000</td>
     </tr>
     <tr>
       <th>1</th>
@@ -496,16 +496,16 @@ title="Print to PDF"
       <td>234.652209</td>
       <td>-79.313242</td>
       <td>327.669841</td>
-      <td>40.5</td>
-      <td>43.5</td>
-      <td>42.0</td>
+      <td>40.50</td>
+      <td>43.500</td>
+      <td>42.0000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bighorn_Basin_sediments</td>
       <td>NaN</td>
       <td>59</td>
-      <td>10.64057</td>
+      <td>10.640570</td>
       <td>5.954672</td>
       <td>44.459816</td>
       <td>251.809627</td>
@@ -526,12 +526,17 @@ title="Print to PDF"
 <p>We first apply the running mean method with the same parameter as in Torsvik et al. 2012 - a window lenght of 20 Ma and a time-step of 10 Ma.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
-
-<span class="n">RM_classic_by_study</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_classic_by_study</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
 <span class="n">RM_classic_by_study</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -607,11 +612,12 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
 <span class="n">plot_poles_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="n">RM_classic_by_study</span><span class="p">)</span>
+<span class="c1">#plt.savefig(&#39;test.pdf&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_APWP_conventional_10_0.png" src="_images/2_APWP_conventional_10_0.png" />
+<img alt="_images/2_APWP_conventional_11_0.png" src="_images/2_APWP_conventional_11_0.png" />
 </div>
 </div>
 <section id="age-distribution-of-paleomagnetic-poles">
@@ -623,14 +629,12 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Paleomagentic Poles&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;test.pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Age distribution of Paleomagnetic Poles&#39;}, xlabel=&#39;Mean Age&#39;, ylabel=&#39;Number of Paleomagentic Poles&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/2_APWP_conventional_12_1.png" src="_images/2_APWP_conventional_12_1.png" />
+<img alt="_images/2_APWP_conventional_13_0.png" src="_images/2_APWP_conventional_13_0.png" />
 </div>
 </div>
 </section>
@@ -643,7 +647,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_APWP_conventional_14_0.png" src="_images/2_APWP_conventional_14_0.png" />
+<img alt="_images/2_APWP_conventional_15_0.png" src="_images/2_APWP_conventional_15_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -653,7 +657,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/2_APWP_conventional_15_0.png" src="_images/2_APWP_conventional_15_0.png" />
+<img alt="_images/2_APWP_conventional_16_0.png" src="_images/2_APWP_conventional_16_0.png" />
 </div>
 </div>
 </section>

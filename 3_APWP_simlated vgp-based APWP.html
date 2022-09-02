@@ -508,10 +508,10 @@ title="Print to PDF"
       <td>44.613899</td>
       <td>250.051065</td>
       <td>-81.917678</td>
-      <td>328.57593</td>
-      <td>45.0</td>
-      <td>54.0</td>
-      <td>49.5</td>
+      <td>328.575930</td>
+      <td>45.0000</td>
+      <td>54.0000</td>
+      <td>49.5000</td>
     </tr>
     <tr>
       <th>1</th>
@@ -524,23 +524,23 @@ title="Print to PDF"
       <td>234.652209</td>
       <td>-79.313242</td>
       <td>327.669841</td>
-      <td>40.5</td>
-      <td>43.5</td>
-      <td>42.0</td>
+      <td>40.5000</td>
+      <td>43.5000</td>
+      <td>42.0000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bighorn_Basin_sediments</td>
       <td>NaN</td>
       <td>59</td>
-      <td>10.64057</td>
+      <td>10.640570</td>
       <td>5.954672</td>
       <td>44.459816</td>
       <td>251.809627</td>
       <td>-81.549042</td>
       <td>2.761738</td>
-      <td>52.54</td>
-      <td>59.237</td>
+      <td>52.5400</td>
+      <td>59.2370</td>
       <td>55.8885</td>
     </tr>
     <tr>
@@ -548,15 +548,15 @@ title="Print to PDF"
       <td>Bishop_tuff</td>
       <td>NaN</td>
       <td>47</td>
-      <td>127.0</td>
-      <td>1.9</td>
-      <td>37.67</td>
-      <td>241.25</td>
+      <td>127.000000</td>
+      <td>1.900000</td>
+      <td>37.670000</td>
+      <td>241.250000</td>
       <td>-80.164116</td>
       <td>314.290252</td>
       <td>0.7661</td>
       <td>0.7679</td>
-      <td>0.767</td>
+      <td>0.7670</td>
     </tr>
     <tr>
       <th>4</th>
@@ -565,13 +565,13 @@ title="Print to PDF"
       <td>19</td>
       <td>7.231338</td>
       <td>13.418646</td>
-      <td>46.1908</td>
+      <td>46.190800</td>
       <td>245.543303</td>
       <td>-81.199091</td>
       <td>61.199579</td>
-      <td>46.4</td>
-      <td>55.5</td>
-      <td>50.95</td>
+      <td>46.4000</td>
+      <td>55.5000</td>
+      <td>50.9500</td>
     </tr>
   </tbody>
 </table>
@@ -635,8 +635,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 148 ms, sys: 2.29 ms, total: 150 ms
-Wall time: 149 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 186 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -667,23 +666,23 @@ Wall time: 149 ms
     <tr>
       <th>0</th>
       <td>Absaroka_volcanics</td>
-      <td>-79.035911</td>
-      <td>154.716614</td>
-      <td>49</td>
+      <td>-54.786479</td>
+      <td>340.412359</td>
+      <td>47</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Absaroka_volcanics</td>
-      <td>-80.968953</td>
-      <td>281.998146</td>
-      <td>49</td>
+      <td>-66.880554</td>
+      <td>2.052703</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Absaroka_volcanics</td>
-      <td>-48.113994</td>
-      <td>339.634401</td>
-      <td>53</td>
+      <td>-44.259481</td>
+      <td>149.336499</td>
+      <td>47</td>
     </tr>
   </tbody>
 </table>
@@ -695,10 +694,10 @@ Wall time: 149 ms
 <p>We first apply the running mean method with the same parameter as in Torsvik et al. 2012 - a window lenght of 20 Ma and a time-step of 10 Ma.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">18</span>
 <span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">max_age</span> <span class="o">=</span> <span class="mi">60</span>
-<span class="n">min_age</span> <span class="o">=</span> <span class="mi">5</span>
 
 <span class="n">RM_on_pseudoVGP</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
 <span class="n">RM_on_pseudoVGP</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -737,36 +736,36 @@ Wall time: 149 ms
   <tbody>
     <tr>
       <th>0</th>
-      <td>5.0</td>
-      <td>352.0</td>
+      <td>0.0</td>
+      <td>296.0</td>
       <td>15.0</td>
-      <td>23.440202</td>
-      <td>1.581314</td>
-      <td>16.730324</td>
-      <td>295.208001</td>
-      <td>-87.238042</td>
+      <td>23.629018</td>
+      <td>1.717900</td>
+      <td>16.663345</td>
+      <td>296.457672</td>
+      <td>-87.659260</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>15.0</td>
-      <td>260.0</td>
-      <td>11.0</td>
-      <td>12.133787</td>
-      <td>2.613971</td>
-      <td>23.253420</td>
-      <td>351.804631</td>
-      <td>-86.558168</td>
+      <td>10.0</td>
+      <td>292.0</td>
+      <td>13.0</td>
+      <td>16.059014</td>
+      <td>2.120281</td>
+      <td>20.212758</td>
+      <td>314.262574</td>
+      <td>-88.691856</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>25.0</td>
-      <td>287.0</td>
-      <td>10.0</td>
-      <td>10.290068</td>
-      <td>2.722930</td>
-      <td>25.250844</td>
-      <td>348.535417</td>
-      <td>-84.879781</td>
+      <td>20.0</td>
+      <td>247.0</td>
+      <td>8.0</td>
+      <td>11.462890</td>
+      <td>2.766920</td>
+      <td>23.924229</td>
+      <td>351.645534</td>
+      <td>-82.468320</td>
     </tr>
   </tbody>
 </table>
@@ -823,7 +822,7 @@ Wall time: 149 ms
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">df_parametric_means_collection</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;n_studies&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">,</span><span class="s1">&#39;Plon&#39;</span><span class="p">,</span><span class="s1">&#39;Plat&#39;</span><span class="p">])</span>
+<span class="n">df_parametric_means_collection</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;n_studies&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">])</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
     
@@ -838,11 +837,111 @@ Wall time: 149 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16 s, sys: 81.5 ms, total: 16.1 s
-Wall time: 16.1 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 20.3 s
 </pre></div>
 </div>
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>n_studies</th>
+      <th>k</th>
+      <th>A95</th>
+      <th>csd</th>
+      <th>age</th>
+      <th>N</th>
+      <th>plon</th>
+      <th>plat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>15.0</td>
+      <td>22.390913</td>
+      <td>1.693733</td>
+      <td>17.117846</td>
+      <td>0.0</td>
+      <td>322.0</td>
+      <td>285.141137</td>
+      <td>-87.506102</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>18.0</td>
+      <td>20.170074</td>
+      <td>1.584774</td>
+      <td>18.035628</td>
+      <td>10.0</td>
+      <td>410.0</td>
+      <td>291.318241</td>
+      <td>-87.144072</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>12.922841</td>
+      <td>2.516294</td>
+      <td>22.532325</td>
+      <td>20.0</td>
+      <td>262.0</td>
+      <td>332.967829</td>
+      <td>-82.861811</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>9.0</td>
+      <td>13.463903</td>
+      <td>2.201710</td>
+      <td>22.074940</td>
+      <td>30.0</td>
+      <td>327.0</td>
+      <td>340.617810</td>
+      <td>-81.656498</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>12.0</td>
+      <td>16.767129</td>
+      <td>1.894592</td>
+      <td>19.781338</td>
+      <td>40.0</td>
+      <td>349.0</td>
+      <td>341.255704</td>
+      <td>-81.789555</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -851,7 +950,7 @@ Wall time: 16.1 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_22_0.png" src="_images/3_APWP_simlated vgp-based APWP_22_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_23_0.png" src="_images/3_APWP_simlated vgp-based APWP_23_0.png" />
 </div>
 </div>
 </section>
