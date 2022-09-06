@@ -35,7 +35,7 @@ def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, t
             running_means.loc[age] = [age, mean['n'], number_studies, mean['k'],mean['alpha95'], mean['csd'], mean['dec'], mean['inc']]
     
     running_means.reset_index(drop=1, inplace=True)
-    
+    running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
     return running_means
 
 
@@ -88,7 +88,7 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
         if mean: # this just ensures that dict isn't empty
             running_means.loc[age] = [age, mean['n'], number_studies, mean['k'],mean['alpha95'], mean['csd'], mean['dec'], mean['inc'], 
                                       shapes[0], shapes[1], shapes[2], shapes[3]]
-    
+    running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
     running_means.reset_index(drop=1, inplace=True)
     
     return running_means
@@ -137,18 +137,20 @@ def get_vgps_sampling_direction(df):
     In the present formulation we follow a conservative approach for the assignaiton of ages to each direction/VGP, 
     it is taken at random between the min_age and max_age of reported VGPs.
     '''    
-    Study, age_bst, decs, incs, slat, slon = [], [], [], [], [], []
+    Study, age_bst, decs, incs, slat, slon, indexes = [], [], [], [], [], [], []
     k_mean = df['k'].mean()
     
     for index, row in df.iterrows():        
         # we first generate one random direction from the original entry.
         kappa = k_mean if np.isnan(row.k) else row.k # if we don't have kappa, we take the mean of the reported ones       
-        directions_temp = ipmag.fishrot(k = kappa, n = 1, dec = row.dec, inc = row.inc, di_block = False)
+        
+        directions_temp = ipmag.fishrot(k = kappa, n = 1, dec = row.dec_reverse, inc = row.inc_reverse, di_block = False)
         
         decs.append(directions_temp[0][0])
         incs.append(directions_temp[1][0])
         slat.append(row.slat)
         slon.append(row.slon)
+        indexes.append(index)
         
         age_bst.append(np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)))
         Study.append(row.Study)
@@ -164,9 +166,11 @@ def get_vgps_sampling_direction(df):
     new_df = pd.DataFrame(dictionary)        
     new_df['plon'] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[0], axis =1)
     new_df['plat'] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[1], axis =1)
-    # transform to the southern hemisphere
-    new_df['plat'] = np.where(new_df['plat'] > 0, -new_df['plat'], new_df['plat'])
-    new_df['plon'] = np.where(new_df['plon'] > 0,(new_df['plon'] - 180.) % 360., new_df['plon'])             
+    
+    #set longitude in [-180,180]
+    new_df['plon'] = new_df.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
+    
+    new_df.index = indexes
 
     return new_df
 
@@ -184,5 +188,26 @@ def running_mean_VGPs_bootstrapped(df_vgps, plon_label, plat_label, age_label, w
         running_means_tmp = running_mean_APWP_shape(vgps_sample, 'vgp_lon_SH', 'vgp_lat_SH', 'mean_age', window_length, time_step, max_age, min_age)
         running_means_tmp['run'] = float(i)
         running_means_global = running_means_global.append(running_means_tmp, ignore_index=True)
-       
+    running_means_global['plon'] = running_means_global.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)   
+    return running_means_global
+
+def running_mean_bootstrapping_direction(df_vgps, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, n_bst = 100):
+    '''
+    takes a compilation of vgps (df_vgps). The original direction is taken as PDF to generate a pseudo-Dataset 
+    that incorporates the uncertinty in the directional space and time. We apply this method a number $n_bst$ of times
+    to  generate $pseudo$-datasets. On each pseudo-dataset we run moving averages as usual.
+    '''
+
+    running_means_global = pd.DataFrame(columns=['run','N','k','A95','csd','foliation','lineation','collinearity','coplanarity'])
+
+    for i in range(n_bst):
+               
+        vgps_sample_ = df_vgps.sample(n = len(df_vgps), replace = True)
+        vgps_sample = get_vgps_sampling_direction(vgps_sample_)
+        running_means_tmp = pd.DataFrame()
+        running_means_tmp = running_mean_APWP_shape(vgps_sample, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age)
+        running_means_tmp['run'] = float(i)
+        running_means_global = running_means_global.append(running_means_tmp, ignore_index=True)
+    
+    running_means_global['plon'] = running_means_global.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
     return running_means_global

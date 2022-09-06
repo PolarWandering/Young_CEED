@@ -437,8 +437,8 @@ def go_reverse(df_vgps):
     Output: the original dataframe and a new series with directions and vgps reported in reverse polarity
     """
     
-    df_vgps['dec_reverse'] = np.where(df_vgps['inc'] > 0, -df_vgps['inc'], df_vgps['inc'])
-    df_vgps['inc_reverse'] = np.where(df_vgps['inc'] > 0,(df_vgps['dec'] - 180.) % 360., df_vgps['dec'])
+    df_vgps['inc_reverse'] = np.where(df_vgps['inc'] > 0, -df_vgps['inc'], df_vgps['inc'])
+    df_vgps['dec_reverse'] = np.where(df_vgps['inc'] > 0,(df_vgps['dec'] - 180.) % 360., df_vgps['dec'])
         
     df_vgps['vgp_lat_SH'] = np.where(df_vgps['VGP_lat_recalc'] > 0, -df_vgps['VGP_lat_recalc'], df_vgps['VGP_lat_recalc'])
     df_vgps['vgp_lon_SH'] = np.where(df_vgps['VGP_lat_recalc'] > 0,(df_vgps['VGP_lon_recalc'] - 180.) % 360., df_vgps['VGP_lon_recalc'])
