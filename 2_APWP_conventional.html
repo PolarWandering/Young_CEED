@@ -537,7 +537,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_classic_by_study</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
-<span class="n">RM_classic_by_study</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">RM_classic_by_study</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -579,7 +579,7 @@ title="Print to PDF"
       <td>157.806367</td>
       <td>3.053286</td>
       <td>6.447966</td>
-      <td>292.836413</td>
+      <td>-67.163587</td>
       <td>-87.015353</td>
     </tr>
     <tr>
@@ -590,7 +590,7 @@ title="Print to PDF"
       <td>157.806367</td>
       <td>3.053286</td>
       <td>6.447966</td>
-      <td>292.836413</td>
+      <td>-67.163587</td>
       <td>-87.015353</td>
     </tr>
     <tr>
@@ -601,8 +601,52 @@ title="Print to PDF"
       <td>694.396487</td>
       <td>3.489190</td>
       <td>3.073840</td>
-      <td>344.010800</td>
+      <td>-15.989200</td>
       <td>-81.836813</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>30.0</td>
+      <td>7.0</td>
+      <td>7.0</td>
+      <td>460.397603</td>
+      <td>2.816323</td>
+      <td>3.775013</td>
+      <td>-28.128989</td>
+      <td>-82.900850</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>40.0</td>
+      <td>8.0</td>
+      <td>8.0</td>
+      <td>254.364022</td>
+      <td>3.479776</td>
+      <td>5.078754</td>
+      <td>-28.898450</td>
+      <td>-83.239212</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>50.0</td>
+      <td>9.0</td>
+      <td>9.0</td>
+      <td>194.606888</td>
+      <td>3.699839</td>
+      <td>5.806386</td>
+      <td>-8.643348</td>
+      <td>-82.559940</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>60.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>163.963607</td>
+      <td>7.196709</td>
+      <td>6.325739</td>
+      <td>3.003732</td>
+      <td>-82.175571</td>
     </tr>
   </tbody>
 </table>
@@ -628,7 +672,7 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age distribution of Paleomagnetic Poles&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of Paleomagentic Poles&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">40</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
 <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;test.pdf&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
