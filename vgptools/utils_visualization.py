@@ -9,6 +9,7 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.geodesic import Geodesic
 from shapely.geometry import Polygon
+from vgptools.auxiliar import eigen_decomposition, spherical2cartesian, cartesian2spherical
 
 
 def RM_stats(df, title, xlabel, ylabel):
@@ -19,8 +20,8 @@ def RM_stats(df, title, xlabel, ylabel):
     plt.ylabel(ylabel)
     plt.xlabel(xlabel)
 
-    df['kappa_norm'] = df['k'] / df['k'].max()
-    df['N_norm'] = df['N'] / df['N'].max()
+#     df['kappa_norm'] = df['k'] / df['k'].max()
+#     df['N_norm'] = df['N'] / df['N'].max()
 
     dfm = df[['age', 'A95', 'n_studies', 'csd']].melt('age', var_name='type', value_name='value')
 
@@ -31,7 +32,7 @@ def RM_stats(df, title, xlabel, ylabel):
     ax2.yaxis.label.set_color('red')
     # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]], 
     #        labels=["kappa"])
-    plt.show()
+    
     
 def plot_pole_A95(Plat, Plon, A95, age, min_age, max_age, ax):
     """
@@ -187,12 +188,14 @@ def RM_APWP_lat_lon_A95 (df_apwp):
     axes[0].errorbar(df_apwp["age"].to_list(), df_apwp["plat"].to_list(), yerr=df_apwp["A95"].to_list(),zorder=1) #, fmt="o")
     axes[0].scatter(df_apwp["age"].to_list(), df_apwp["plat"].to_list(), edgecolors = "black",zorder=2)
     axes[0].set_ylabel(r'Latitude (°N)', fontweight ='bold')
+    # axes[0].set_ylabel(-90,-75)
     
     # plot longitude    
     axes[1].errorbar(df_apwp["age"].to_list(), df_apwp["plon_"].to_list(), yerr=df_apwp["A95"].to_list(),zorder=1)#, fmt="o")
     axes[1].scatter(df_apwp["age"].to_list(), df_apwp["plon_"].to_list(), edgecolors = "black",zorder=2)   
     axes[1].set_xlabel(r'Age (Ma)', fontweight ='bold')
     axes[1].set_ylabel(r'Longitude (°E)', fontweight ='bold')
+    
     
     del df_apwp["plon_"]
 
@@ -352,3 +355,48 @@ def plot_APWP_RM_ensemble(df, title):
     pltt1.plot(x_, mean_, '--', color="#ad3131",label="mean")
     
     df = df.drop(['plon_east'], axis=1)
+    
+class quantiles:
+    '''
+    class to generate quantiles.
+    note: input fro longitudes should live in [-180,180]
+    '''
+    
+    def __init__(self, df, xlabel, ylabel):        
+        self.X = df[xlabel].unique().transpose()        
+        self.Y = df.groupby(xlabel)[ylabel]
+        
+        self.q5 = self.Y.quantile(.05).to_numpy()
+        self.q16 = self.Y.quantile(.16).to_numpy()
+        self.q25 = self.Y.quantile(.25).to_numpy()
+        self.q50 = self.Y.quantile(.50).to_numpy()
+        self.q75 = self.Y.quantile(.75).to_numpy()
+        self.q84 = self.Y.quantile(.84).to_numpy()
+        self.q95 = self.Y.quantile(.95).to_numpy()
+        self.mean = self.Y.mean().to_numpy()
+    
+class PC:
+    
+    '''
+    Class to calculate PCs as a function of time from a time dependant ensemble of directions
+    '''
+    def __init__(self, df, xlabel, LatLabel, LonLabel):
+        
+        self.X = df[xlabel].unique().transpose()
+        self.df=df
+        self.xlabel=xlabel
+        self.LatLabel=LatLabel
+        self.LonLabel=LonLabel
+        self.groupby=df.groupby(xlabel)
+        
+    def PC(self):
+        lats, lons = [], []
+        for age, df_age in self.groupby:
+            array = np.array([spherical2cartesian([ np.radians(i[self.LonLabel]),np.radians(i[self.LatLabel])]) for _,i in df_age.iterrows()])
+            eigenValues, eigenVectors = eigen_decomposition(array)
+            lats.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[1])
+            lons.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[0])
+            
+#             print(np.degrees(cartesian2spherical(eigenVectors[:,0])), age, len(array))
+        
+        return [np.array(lons),np.array(lats)]
