@@ -416,7 +416,7 @@ title="Print to PDF"
                                <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>                              
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">plot_pole</span>
 </pre></div>
 </div>
 </div>
@@ -496,7 +496,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>23.294563</td>
       <td>1.704883</td>
       <td>16.782542</td>
-      <td>317.083230</td>
+      <td>-42.916770</td>
       <td>-87.945102</td>
     </tr>
     <tr>
@@ -507,7 +507,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>21.201852</td>
       <td>1.721511</td>
       <td>17.591307</td>
-      <td>327.300988</td>
+      <td>-32.699012</td>
       <td>-87.482422</td>
     </tr>
     <tr>
@@ -518,7 +518,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>10.117603</td>
       <td>3.239569</td>
       <td>25.465148</td>
-      <td>341.959534</td>
+      <td>-18.040466</td>
       <td>-82.115848</td>
     </tr>
     <tr>
@@ -529,7 +529,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>12.400810</td>
       <td>2.196629</td>
       <td>23.001703</td>
-      <td>336.344662</td>
+      <td>-23.655338</td>
       <td>-82.377411</td>
     </tr>
     <tr>
@@ -540,30 +540,30 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
       <td>16.589316</td>
       <td>2.042163</td>
       <td>19.887069</td>
-      <td>336.936345</td>
+      <td>-23.063655</td>
       <td>-82.580048</td>
     </tr>
     <tr>
       <th>5</th>
       <td>50.0</td>
-      <td>308.0</td>
+      <td>300.0</td>
       <td>10.0</td>
-      <td>14.315533</td>
-      <td>2.195171</td>
-      <td>21.408255</td>
-      <td>352.288745</td>
-      <td>-82.359689</td>
+      <td>15.595424</td>
+      <td>2.124634</td>
+      <td>20.510981</td>
+      <td>-11.679274</td>
+      <td>-81.701340</td>
     </tr>
     <tr>
       <th>6</th>
       <td>60.0</td>
-      <td>182.0</td>
+      <td>174.0</td>
       <td>4.0</td>
-      <td>13.002846</td>
-      <td>3.012739</td>
-      <td>22.462899</td>
-      <td>358.639803</td>
-      <td>-81.942511</td>
+      <td>14.853001</td>
+      <td>2.868671</td>
+      <td>21.017348</td>
+      <td>-8.153409</td>
+      <td>-80.873175</td>
     </tr>
   </tbody>
 </table>
@@ -633,7 +633,7 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
         <span class="n">running_means_tmp</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">vgps_sample</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
         <span class="n">running_means_tmp</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">running_means_tmp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-       
+    <span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">=</span><span class="n">running_means_global</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">-</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>    
     <span class="k">return</span> <span class="n">running_means_global</span>
 </pre></div>
 </div>
@@ -647,7 +647,16 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 30.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.3 s, sys: 123 ms, total: 16.4 s
+Wall time: 16.4 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_ensemble_quant_plat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">RM_ensemble_quant_plon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of longitude groupedby age for visualization purposes</span>
 </pre></div>
 </div>
 </div>
@@ -659,7 +668,37 @@ of the lower and upper bounds of the reported VGPs (<code class="docutils litera
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_APWP_vgp-based APWP_19_0.png" src="_images/4_APWP_vgp-based APWP_19_0.png" />
+<img alt="_images/4_APWP_vgp-based APWP_20_0.png" src="_images/4_APWP_vgp-based APWP_20_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">df_ensemble</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">plot_pole</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/4_APWP_vgp-based APWP_21_0.png" src="_images/4_APWP_vgp-based APWP_21_0.png" />
 </div>
 </div>
 </section>

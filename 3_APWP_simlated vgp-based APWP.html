@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Conventional pole-based APWP &#8212; Polar Wandering</title>
+    <title>\(pseudo\)-VGPs &#8212; Polar Wandering</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -304,7 +306,10 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Conventional pole-based APWP
+   <span class="math notranslate nohighlight">
+    \(pseudo\)
+   </span>
+   -VGPs
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -344,6 +349,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#apwp-confidence-bounds">
    APWP confidence bounds
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-path">
+     Example path
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -354,7 +366,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Conventional pole-based APWP</h1>
+                <h1>pseudo-VGPs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -366,7 +378,10 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
-   Conventional pole-based APWP
+   <span class="math notranslate nohighlight">
+    \(pseudo\)
+   </span>
+   -VGPs
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
@@ -406,6 +421,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#apwp-confidence-bounds">
    APWP confidence bounds
   </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#example-path">
+     Example path
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -417,8 +439,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="conventional-pole-based-apwp">
-<h1>Conventional pole-based APWP<a class="headerlink" href="#conventional-pole-based-apwp" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="pseudo-vgps">
+<h1><span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs<a class="headerlink" href="#pseudo-vgps" title="Permalink to this headline">#</a></h1>
 <p>APWP based on simulated VGPs (<em>pseudo</em>-VGPs) following the approach from Vaes et al. (2022)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -434,7 +456,7 @@ title="Print to PDF"
                                <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">)</span>                              
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">RM_stats</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">plot_pole</span>
 </pre></div>
 </div>
 </div>
@@ -508,10 +530,10 @@ title="Print to PDF"
       <td>44.613899</td>
       <td>250.051065</td>
       <td>-81.917678</td>
-      <td>328.575930</td>
-      <td>45.0000</td>
-      <td>54.0000</td>
-      <td>49.5000</td>
+      <td>328.57593</td>
+      <td>45.0</td>
+      <td>54.0</td>
+      <td>49.5</td>
     </tr>
     <tr>
       <th>1</th>
@@ -524,23 +546,23 @@ title="Print to PDF"
       <td>234.652209</td>
       <td>-79.313242</td>
       <td>327.669841</td>
-      <td>40.5000</td>
-      <td>43.5000</td>
-      <td>42.0000</td>
+      <td>40.5</td>
+      <td>43.5</td>
+      <td>42.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bighorn_Basin_sediments</td>
       <td>NaN</td>
       <td>59</td>
-      <td>10.640570</td>
+      <td>10.64057</td>
       <td>5.954672</td>
       <td>44.459816</td>
       <td>251.809627</td>
       <td>-81.549042</td>
       <td>2.761738</td>
-      <td>52.5400</td>
-      <td>59.2370</td>
+      <td>52.54</td>
+      <td>59.237</td>
       <td>55.8885</td>
     </tr>
     <tr>
@@ -548,30 +570,30 @@ title="Print to PDF"
       <td>Bishop_tuff</td>
       <td>NaN</td>
       <td>47</td>
-      <td>127.000000</td>
-      <td>1.900000</td>
-      <td>37.670000</td>
-      <td>241.250000</td>
+      <td>127.0</td>
+      <td>1.9</td>
+      <td>37.67</td>
+      <td>241.25</td>
       <td>-80.164116</td>
       <td>314.290252</td>
       <td>0.7661</td>
       <td>0.7679</td>
-      <td>0.7670</td>
+      <td>0.767</td>
     </tr>
     <tr>
       <th>4</th>
       <td>Bitterroot_Dome_intrusions</td>
       <td>NaN</td>
-      <td>19</td>
-      <td>7.231338</td>
-      <td>13.418646</td>
-      <td>46.190800</td>
-      <td>245.543303</td>
-      <td>-81.199091</td>
-      <td>61.199579</td>
-      <td>46.4000</td>
-      <td>55.5000</td>
-      <td>50.9500</td>
+      <td>11</td>
+      <td>34.082686</td>
+      <td>7.93379</td>
+      <td>46.373039</td>
+      <td>245.107637</td>
+      <td>-72.178647</td>
+      <td>344.432968</td>
+      <td>46.4</td>
+      <td>55.5</td>
+      <td>50.95</td>
     </tr>
   </tbody>
 </table>
@@ -635,7 +657,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 186 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 150 ms, sys: 4.86 ms, total: 155 ms
+Wall time: 153 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -666,23 +689,23 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <tr>
       <th>0</th>
       <td>Absaroka_volcanics</td>
-      <td>-54.786479</td>
-      <td>340.412359</td>
+      <td>-72.274290</td>
+      <td>51.940026</td>
       <td>47</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Absaroka_volcanics</td>
-      <td>-66.880554</td>
-      <td>2.052703</td>
-      <td>48</td>
+      <td>-63.239392</td>
+      <td>311.972469</td>
+      <td>46</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Absaroka_volcanics</td>
-      <td>-44.259481</td>
-      <td>149.336499</td>
-      <td>47</td>
+      <td>-66.451347</td>
+      <td>74.370993</td>
+      <td>49</td>
     </tr>
   </tbody>
 </table>
@@ -696,7 +719,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="n">RM_on_pseudoVGP</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
@@ -737,35 +760,35 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>296.0</td>
+      <td>317.0</td>
       <td>15.0</td>
-      <td>23.629018</td>
-      <td>1.717900</td>
-      <td>16.663345</td>
-      <td>296.457672</td>
-      <td>-87.659260</td>
+      <td>23.071921</td>
+      <td>1.680560</td>
+      <td>16.863322</td>
+      <td>-58.434496</td>
+      <td>-88.019599</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.0</td>
-      <td>292.0</td>
-      <td>13.0</td>
-      <td>16.059014</td>
-      <td>2.120281</td>
-      <td>20.212758</td>
-      <td>314.262574</td>
-      <td>-88.691856</td>
+      <td>411.0</td>
+      <td>18.0</td>
+      <td>18.831681</td>
+      <td>1.641161</td>
+      <td>18.665537</td>
+      <td>-42.274298</td>
+      <td>-86.846974</td>
     </tr>
     <tr>
       <th>2</th>
       <td>20.0</td>
-      <td>247.0</td>
-      <td>8.0</td>
-      <td>11.462890</td>
-      <td>2.766920</td>
-      <td>23.924229</td>
-      <td>351.645534</td>
-      <td>-82.468320</td>
+      <td>264.0</td>
+      <td>9.0</td>
+      <td>11.586950</td>
+      <td>2.660118</td>
+      <td>23.795808</td>
+      <td>-20.663376</td>
+      <td>-82.016385</td>
     </tr>
   </tbody>
 </table>
@@ -831,13 +854,22 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <span class="n">RM_APWP_parametric_temp</span> <span class="o">=</span> <span class="n">running_mean_APWP</span><span class="p">(</span><span class="n">pseudo_vgps_temp</span><span class="p">,</span> <span class="s1">&#39;Plon&#39;</span><span class="p">,</span> <span class="s1">&#39;Plat&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
     <span class="n">RM_APWP_parametric_temp</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
     <span class="n">df_parametric_means_collection</span> <span class="o">=</span> <span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RM_APWP_parametric_temp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    
-<span class="n">df_parametric_means_collection</span> <span class="o">=</span> <span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">-</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>    
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 20.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.8 s, sys: 86.9 ms, total: 16.9 s
+Wall time: 16.9 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_ensemble_quant_plat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">RM_ensemble_quant_plon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of longitude groupedby age for visualization purposes</span>
 </pre></div>
 </div>
 </div>
@@ -881,63 +913,63 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>0.0</td>
+      <td>0</td>
       <td>15.0</td>
-      <td>22.390913</td>
-      <td>1.693733</td>
-      <td>17.117846</td>
+      <td>24.440554</td>
+      <td>1.65184</td>
+      <td>16.38436</td>
       <td>0.0</td>
-      <td>322.0</td>
-      <td>285.141137</td>
-      <td>-87.506102</td>
+      <td>309.0</td>
+      <td>-52.813462</td>
+      <td>-87.069247</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0.0</td>
+      <td>0</td>
       <td>18.0</td>
-      <td>20.170074</td>
-      <td>1.584774</td>
-      <td>18.035628</td>
+      <td>18.941091</td>
+      <td>1.65443</td>
+      <td>18.611549</td>
       <td>10.0</td>
-      <td>410.0</td>
-      <td>291.318241</td>
-      <td>-87.144072</td>
+      <td>402.0</td>
+      <td>-25.143080</td>
+      <td>-86.453534</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0.0</td>
+      <td>0</td>
       <td>9.0</td>
-      <td>12.922841</td>
-      <td>2.516294</td>
-      <td>22.532325</td>
+      <td>10.37729</td>
+      <td>2.682206</td>
+      <td>25.144502</td>
       <td>20.0</td>
-      <td>262.0</td>
-      <td>332.967829</td>
-      <td>-82.861811</td>
+      <td>293.0</td>
+      <td>-23.136853</td>
+      <td>-81.320775</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0.0</td>
+      <td>0</td>
       <td>9.0</td>
-      <td>13.463903</td>
-      <td>2.201710</td>
-      <td>22.074940</td>
+      <td>12.589969</td>
+      <td>2.225823</td>
+      <td>22.828254</td>
       <td>30.0</td>
-      <td>327.0</td>
-      <td>340.617810</td>
-      <td>-81.656498</td>
+      <td>344.0</td>
+      <td>-32.469056</td>
+      <td>-81.445310</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0.0</td>
+      <td>0</td>
       <td>12.0</td>
-      <td>16.767129</td>
-      <td>1.894592</td>
-      <td>19.781338</td>
+      <td>18.506844</td>
+      <td>1.838108</td>
+      <td>18.828635</td>
       <td>40.0</td>
-      <td>349.0</td>
-      <td>341.255704</td>
-      <td>-81.789555</td>
+      <td>334.0</td>
+      <td>-20.190714</td>
+      <td>-82.562782</td>
     </tr>
   </tbody>
 </table>
@@ -950,9 +982,48 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_23_0.png" src="_images/3_APWP_simlated vgp-based APWP_23_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_24_0.png" src="_images/3_APWP_simlated vgp-based APWP_24_0.png" />
 </div>
 </div>
+<section id="example-path">
+<h2>Example path<a class="headerlink" href="#example-path" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+
+
+<span class="c1"># sns.scatterplot(x = RM_ensembl_quant_plon.mean, y =RM_ensemble_quant_plat.mean,</span>
+                
+<span class="c1">#                 transform = ccrs.PlateCarree())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">plot_pole</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/3_APWP_simlated vgp-based APWP_26_0.png" src="_images/3_APWP_simlated vgp-based APWP_26_0.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">

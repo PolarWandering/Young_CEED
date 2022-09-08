@@ -458,6 +458,7 @@ title="Print to PDF"
                                   <span class="n">running_mean_VGPs_bootstrapped</span><span class="p">,</span> <span class="n">running_mean_bootstrapping_direction</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -474,7 +475,7 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">dfs_vgps_recomputed_poles</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">,</span> <span class="n">by_study</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="c1"># takes as many as poles as are described for one are</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">dfs_vgps_recomputed_poles</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">,</span> <span class="n">by_study</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># takes as many as poles as are described for one are</span>
 </pre></div>
 </div>
 </div>
@@ -539,61 +540,61 @@ title="Print to PDF"
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>17.0</td>
-      <td>15.0</td>
-      <td>155.075584</td>
-      <td>2.873466</td>
-      <td>6.504491</td>
-      <td>-62.819531</td>
-      <td>-87.321010</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>135.172992</td>
+      <td>3.746692</td>
+      <td>6.966908</td>
+      <td>-77.850084</td>
+      <td>-86.746017</td>
       <td>RM_classic</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>10.0</td>
-      <td>18.0</td>
+      <td>5.0</td>
       <td>15.0</td>
-      <td>154.995795</td>
-      <td>2.785329</td>
-      <td>6.506165</td>
-      <td>-54.986373</td>
-      <td>-87.258735</td>
+      <td>15.0</td>
+      <td>157.806367</td>
+      <td>3.053286</td>
+      <td>6.447966</td>
+      <td>-67.163587</td>
+      <td>-87.015353</td>
       <td>RM_classic</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>20.0</td>
-      <td>7.0</td>
+      <td>10.0</td>
       <td>6.0</td>
-      <td>576.253052</td>
-      <td>2.516820</td>
-      <td>3.374259</td>
-      <td>-11.644529</td>
-      <td>-81.643535</td>
+      <td>6.0</td>
+      <td>227.312026</td>
+      <td>4.453474</td>
+      <td>5.372468</td>
+      <td>-79.156412</td>
+      <td>-88.237442</td>
       <td>RM_classic</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>30.0</td>
-      <td>10.0</td>
-      <td>7.0</td>
-      <td>352.037229</td>
-      <td>2.578271</td>
-      <td>4.317086</td>
-      <td>-27.417630</td>
-      <td>-82.908968</td>
+      <td>15.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>634.387048</td>
+      <td>3.650730</td>
+      <td>3.215939</td>
+      <td>-21.810052</td>
+      <td>-86.038002</td>
       <td>RM_classic</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>40.0</td>
-      <td>13.0</td>
-      <td>8.0</td>
-      <td>106.788061</td>
-      <td>4.029946</td>
-      <td>7.838332</td>
-      <td>-42.018275</td>
-      <td>-83.233935</td>
+      <td>20.0</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>614.606390</td>
+      <td>4.976959</td>
+      <td>3.267281</td>
+      <td>-18.481366</td>
+      <td>-82.522049</td>
       <td>RM_classic</td>
     </tr>
   </tbody>
@@ -622,7 +623,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 43.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 24.5 s, sys: 104 ms, total: 24.6 s
+Wall time: 24.6 s
 </pre></div>
 </div>
 </div>
@@ -676,51 +678,51 @@ title="Print to PDF"
       <th>0</th>
       <td>0</td>
       <td>15.0</td>
-      <td>26.233372</td>
-      <td>1.649395</td>
-      <td>15.814591</td>
+      <td>25.166251</td>
+      <td>1.703345</td>
+      <td>16.146402</td>
       <td>0.0</td>
-      <td>288.0</td>
-      <td>-52.061382</td>
-      <td>-87.012792</td>
-      <td>0.192505</td>
-      <td>0.612558</td>
-      <td>3.182042</td>
-      <td>0.805063</td>
+      <td>282.0</td>
+      <td>-20.395705</td>
+      <td>-86.811723</td>
+      <td>0.098303</td>
+      <td>0.540832</td>
+      <td>5.501684</td>
+      <td>0.639135</td>
       <td>RM_pseudoVGPs_ensemble</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
       <td>15.0</td>
-      <td>25.135517</td>
-      <td>1.570224</td>
-      <td>16.156270</td>
+      <td>24.695898</td>
+      <td>1.594399</td>
+      <td>16.299437</td>
       <td>5.0</td>
-      <td>332.0</td>
-      <td>-52.227812</td>
-      <td>-87.428145</td>
-      <td>0.109450</td>
-      <td>0.663111</td>
-      <td>6.058588</td>
-      <td>0.772561</td>
+      <td>328.0</td>
+      <td>-16.243970</td>
+      <td>-86.744727</td>
+      <td>0.062254</td>
+      <td>0.536100</td>
+      <td>8.611432</td>
+      <td>0.598355</td>
       <td>RM_pseudoVGPs_ensemble</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0</td>
       <td>10.0</td>
-      <td>20.266736</td>
-      <td>2.398044</td>
-      <td>17.992566</td>
+      <td>18.591607</td>
+      <td>2.332397</td>
+      <td>18.785664</td>
       <td>10.0</td>
-      <td>179.0</td>
-      <td>-44.866204</td>
-      <td>-89.245754</td>
-      <td>0.166305</td>
-      <td>0.759991</td>
-      <td>4.569873</td>
-      <td>0.926296</td>
+      <td>207.0</td>
+      <td>-3.015192</td>
+      <td>-87.193589</td>
+      <td>0.172906</td>
+      <td>0.371808</td>
+      <td>2.150347</td>
+      <td>0.544714</td>
       <td>RM_pseudoVGPs_ensemble</td>
     </tr>
   </tbody>
@@ -833,7 +835,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 23.2 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.4 s, sys: 82.2 ms, total: 10.5 s
+Wall time: 10.5 s
 </pre></div>
 </div>
 </div>
@@ -886,52 +889,52 @@ title="Print to PDF"
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>277.0</td>
-      <td>25.476250</td>
-      <td>1.707813</td>
-      <td>16.047865</td>
-      <td>0.274392</td>
-      <td>0.604237</td>
-      <td>2.202089</td>
-      <td>0.878629</td>
+      <td>291.0</td>
+      <td>23.109803</td>
+      <td>1.752895</td>
+      <td>16.849495</td>
+      <td>0.177638</td>
+      <td>0.718905</td>
+      <td>4.047023</td>
+      <td>0.896543</td>
       <td>0.0</td>
-      <td>15.0</td>
-      <td>-11.058120</td>
-      <td>-88.202812</td>
+      <td>14.0</td>
+      <td>-54.934468</td>
+      <td>-87.609392</td>
       <td>RM_bootstrapped_VGPs_ensemble</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0.0</td>
-      <td>300.0</td>
-      <td>24.647038</td>
-      <td>1.669220</td>
-      <td>16.315585</td>
-      <td>0.248307</td>
-      <td>0.583545</td>
-      <td>2.350097</td>
-      <td>0.831851</td>
+      <td>309.0</td>
+      <td>22.827044</td>
+      <td>1.711801</td>
+      <td>16.953532</td>
+      <td>0.185288</td>
+      <td>0.697438</td>
+      <td>3.764073</td>
+      <td>0.882726</td>
       <td>5.0</td>
-      <td>15.0</td>
-      <td>-14.741323</td>
-      <td>-87.888433</td>
+      <td>14.0</td>
+      <td>-52.950440</td>
+      <td>-87.724472</td>
       <td>RM_bootstrapped_VGPs_ensemble</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0.0</td>
-      <td>147.0</td>
-      <td>22.577002</td>
-      <td>2.502837</td>
-      <td>17.047154</td>
-      <td>0.155815</td>
-      <td>0.607372</td>
-      <td>3.898028</td>
-      <td>0.763188</td>
+      <td>159.0</td>
+      <td>20.444298</td>
+      <td>2.534087</td>
+      <td>17.914262</td>
+      <td>0.317275</td>
+      <td>0.656406</td>
+      <td>2.06889</td>
+      <td>0.973681</td>
       <td>10.0</td>
       <td>9.0</td>
-      <td>-28.615165</td>
-      <td>-86.780603</td>
+      <td>-58.550039</td>
+      <td>-88.768761</td>
       <td>RM_bootstrapped_VGPs_ensemble</td>
     </tr>
   </tbody>
@@ -952,7 +955,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 1min 15s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 42 s, sys: 229 ms, total: 42.3 s
+Wall time: 42.4 s
 </pre></div>
 </div>
 </div>
@@ -1005,52 +1009,52 @@ title="Print to PDF"
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>300.0</td>
-      <td>20.415441</td>
-      <td>1.842150</td>
-      <td>17.926918</td>
-      <td>0.045180</td>
-      <td>0.822073</td>
-      <td>18.195418</td>
-      <td>0.867253</td>
+      <td>269.0</td>
+      <td>21.202573</td>
+      <td>1.907676</td>
+      <td>17.591008</td>
+      <td>0.102961</td>
+      <td>0.707398</td>
+      <td>6.870577</td>
+      <td>0.810359</td>
       <td>0.0</td>
-      <td>15.0</td>
-      <td>-39.690852</td>
-      <td>-88.665666</td>
+      <td>13.0</td>
+      <td>-91.496388</td>
+      <td>-88.138779</td>
       <td>RM_DirErrorPropagated_ensemble</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0.0</td>
-      <td>313.0</td>
-      <td>20.107422</td>
-      <td>1.817779</td>
-      <td>18.063705</td>
-      <td>0.032786</td>
-      <td>0.848900</td>
-      <td>25.892175</td>
-      <td>0.881686</td>
+      <td>296.0</td>
+      <td>20.864482</td>
+      <td>1.833537</td>
+      <td>17.732959</td>
+      <td>0.056769</td>
+      <td>0.733728</td>
+      <td>12.924699</td>
+      <td>0.790497</td>
       <td>5.0</td>
-      <td>15.0</td>
-      <td>-39.026359</td>
-      <td>-88.308648</td>
+      <td>13.0</td>
+      <td>-84.905119</td>
+      <td>-87.792021</td>
       <td>RM_DirErrorPropagated_ensemble</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0.0</td>
-      <td>119.0</td>
-      <td>16.760245</td>
-      <td>3.258661</td>
-      <td>19.785400</td>
-      <td>0.212314</td>
-      <td>0.858123</td>
-      <td>4.041774</td>
-      <td>1.070437</td>
+      <td>130.0</td>
+      <td>16.422256</td>
+      <td>3.150041</td>
+      <td>19.987966</td>
+      <td>0.149163</td>
+      <td>0.581923</td>
+      <td>3.901257</td>
+      <td>0.731086</td>
       <td>10.0</td>
-      <td>9.0</td>
-      <td>-74.358137</td>
-      <td>-87.474701</td>
+      <td>10.0</td>
+      <td>-58.564149</td>
+      <td>-85.375445</td>
       <td>RM_DirErrorPropagated_ensemble</td>
     </tr>
   </tbody>
@@ -1109,20 +1113,20 @@ title="Print to PDF"
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>run</th>
+      <th>age</th>
+      <th>N</th>
       <th>n_studies</th>
       <th>k</th>
       <th>A95</th>
       <th>csd</th>
-      <th>age</th>
-      <th>N</th>
       <th>plon</th>
       <th>plat</th>
+      <th>method</th>
+      <th>run</th>
       <th>foliation</th>
       <th>lineation</th>
       <th>collinearity</th>
       <th>coplanarity</th>
-      <th>method</th>
       <th>Euler_angle</th>
       <th>Euler_lon</th>
       <th>Euler_lat</th>
@@ -1131,100 +1135,100 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0</th>
-      <td>0</td>
-      <td>15.0</td>
-      <td>26.233372</td>
-      <td>1.649395</td>
-      <td>15.814591</td>
       <td>0.0</td>
-      <td>288.0</td>
-      <td>-52.061382</td>
-      <td>-87.012792</td>
-      <td>0.192505</td>
-      <td>0.612558</td>
-      <td>3.182042</td>
-      <td>0.805063</td>
-      <td>RM_pseudoVGPs_ensemble</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>135.172992</td>
+      <td>3.746692</td>
+      <td>6.966908</td>
+      <td>-77.850084</td>
+      <td>-86.746017</td>
+      <td>RM_classic</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>0</td>
-      <td>15.0</td>
-      <td>25.135517</td>
-      <td>1.570224</td>
-      <td>16.156270</td>
       <td>5.0</td>
-      <td>332.0</td>
-      <td>-52.227812</td>
-      <td>-87.428145</td>
-      <td>0.109450</td>
-      <td>0.663111</td>
-      <td>6.058588</td>
-      <td>0.772561</td>
-      <td>RM_pseudoVGPs_ensemble</td>
+      <td>15.0</td>
+      <td>15.0</td>
+      <td>157.806367</td>
+      <td>3.053286</td>
+      <td>6.447966</td>
+      <td>-67.163587</td>
+      <td>-87.015353</td>
+      <td>RM_classic</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>0</td>
       <td>10.0</td>
-      <td>20.266736</td>
-      <td>2.398044</td>
-      <td>17.992566</td>
-      <td>10.0</td>
-      <td>179.0</td>
-      <td>-44.866204</td>
-      <td>-89.245754</td>
-      <td>0.166305</td>
-      <td>0.759991</td>
-      <td>4.569873</td>
-      <td>0.926296</td>
-      <td>RM_pseudoVGPs_ensemble</td>
+      <td>6.0</td>
+      <td>6.0</td>
+      <td>227.312026</td>
+      <td>4.453474</td>
+      <td>5.372468</td>
+      <td>-79.156412</td>
+      <td>-88.237442</td>
+      <td>RM_classic</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>9.0</td>
-      <td>20.694382</td>
-      <td>2.820718</td>
-      <td>17.805689</td>
       <td>15.0</td>
-      <td>127.0</td>
-      <td>-35.215024</td>
-      <td>-87.966947</td>
-      <td>0.025109</td>
-      <td>0.606016</td>
-      <td>24.135751</td>
-      <td>0.631125</td>
-      <td>RM_pseudoVGPs_ensemble</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>634.387048</td>
+      <td>3.65073</td>
+      <td>3.215939</td>
+      <td>-21.810052</td>
+      <td>-86.038002</td>
+      <td>RM_classic</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>0</td>
-      <td>8.0</td>
-      <td>12.281950</td>
-      <td>2.948453</td>
-      <td>23.112735</td>
       <td>20.0</td>
-      <td>202.0</td>
-      <td>-18.124475</td>
-      <td>-84.297479</td>
-      <td>0.046565</td>
-      <td>0.683108</td>
-      <td>14.669882</td>
-      <td>0.729673</td>
-      <td>RM_pseudoVGPs_ensemble</td>
+      <td>3.0</td>
+      <td>3.0</td>
+      <td>614.60639</td>
+      <td>4.976959</td>
+      <td>3.267281</td>
+      <td>-18.481366</td>
+      <td>-82.522049</td>
+      <td>RM_classic</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -1255,14 +1259,14 @@ title="Print to PDF"
 <span class="c1"># LATITUDE</span>
 <span class="c1"># axes[0].scatter(RM_ensemble_pseudoVGP[&#39;age&#39;],RM_ensemble_pseudoVGP[&#39;plat&#39;], s = 1, color = &#39;black&#39;, alpha = 0.2)</span>
 <span class="c1"># axes[0].fill_between(ensemble1_lat.X, ensemble1_lat.q5,ensemble1_lat.q95, color= &quot;#f9afaf&quot;, alpha=.20,label=&quot;Running mean on VGPs ensemble&quot;)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q25</span><span class="p">,</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#f98787&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#f98787&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">)</span>
 <span class="c1"># axes[0].plot(a.X, a.mean, &#39;--&#39;, color=&quot;#ad3131&quot;,label=&quot;mean&quot;)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d12a2a&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble1_lat</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#d12a2a&quot;</span><span class="p">)</span>
 
 <span class="c1"># axes[0].scatter(RM_ensemble_VGPs[&#39;age&#39;],RM_ensemble_VGPs[&#39;plat&#39;], s = 1, color = &#39;black&#39;, alpha = 0.2)</span>
 <span class="c1"># axes[0].fill_between(ensemble2_lat.X, ensemble2_lat.q5,ensemble2_lat.q95, color= &quot;#1CA0F9&quot;, alpha=.20,label=&quot;Running mean on $pseudo$-VGPs&quot;)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q25</span><span class="p">,</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#0E7DC9&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#0E7DC9&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">)</span>
 <span class="c1"># axes[0].plot(a.X, a.mean, &#39;--&#39;, color=&quot;#ad3131&quot;,label=&quot;mean&quot;)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#00497A&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lat</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#00497A&quot;</span><span class="p">)</span>
@@ -1280,7 +1284,7 @@ title="Print to PDF"
 
 <span class="c1"># axes[0].scatter(RM_ensemble_VGPs[&#39;age&#39;],RM_ensemble_VGPs[&#39;plat&#39;], s = 1, color = &#39;black&#39;, alpha = 0.2)</span>
 <span class="c1"># axes[1].fill_between(ensemble2_lon.X, ensemble2_lon.q5,ensemble2_lon.q95, color= &quot;#1CA0F9&quot;, alpha=.20)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q25</span><span class="p">,</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q75</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#0E7DC9&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;0.16-0.84 percentiles - Ensemble 2&quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#0E7DC9&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.20</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;0.16-0.84 percentiles - Ensemble 2&quot;</span><span class="p">)</span>
 <span class="c1"># axes[0].plot(a.X, a.mean, &#39;--&#39;, color=&quot;#ad3131&quot;,label=&quot;mean&quot;)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#00497A&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble2_lon</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span>  <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;#00497A&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>
@@ -1294,7 +1298,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1d17ee9d420&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa960385990&gt;
 </pre></div>
 </div>
 <img alt="_images/6_comparisons_28_1.png" src="_images/6_comparisons_28_1.png" />
@@ -1331,10 +1335,584 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1d100c37940&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa9816448e0&gt;
 </pre></div>
 </div>
 <img alt="_images/6_comparisons_30_1.png" src="_images/6_comparisons_30_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="n">eigen_decomposition</span>
+
+<span class="k">class</span> <span class="nc">PC</span><span class="p">:</span>
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class to calculate PCs as a function of time from a time dependant ensemble of directions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">LatLabel</span><span class="p">,</span> <span class="n">LonLabel</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">xlabel</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">=</span><span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LatLabel</span><span class="o">=</span><span class="n">LatLabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LonLabel</span><span class="o">=</span><span class="n">LonLabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">groupby</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">PC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">df_age</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">groupby</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">LonLabel</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">LatLabel</span><span class="p">])])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">df_age</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>
+            <span class="n">eigenValues</span><span class="p">,</span> <span class="n">eigenVectors</span> <span class="o">=</span> <span class="n">eigen_decomposition</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">eigenVectors</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])),</span> <span class="n">age</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lats</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lons</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PC</span><span class="p">(</span><span class="n">RM_32_boots_VGPs</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">PC</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-46.3064564944848  -87.80583010024577] 0.0 100
+[-45.99287362570681 -87.79225479127157] 5.0 100
+[-46.555978298539486 -87.12089346805396 ] 10.0 100
+[-14.546738466253293 -83.2370179747668  ] 15.0 100
+[ -6.746545347049646 -81.20699737267672 ] 20.0 100
+[-14.979753817424696 -81.18159064289767 ] 25.0 100
+[-20.37923441020529 -81.84927333668742] 30.0 100
+[-28.939941364587188 -82.01507871846776 ] 35.0 100
+[-30.275361470174   -82.81071225214758] 40.0 100
+[-19.2903882186058  -81.91365855198478] 45.0 100
+[-13.80619128200469 -81.17326763741802] 50.0 100
+[ -9.06152962544572 -81.17454717787477] 55.0 100
+[  3.770125755067685 -81.06840458712398 ] 60.0 100
+[ 64.39157657537075 -81.238280351309  ] 65.0 100
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[array([], dtype=float64), array([], dtype=float64)]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_33_propagation</span>
+<span class="n">RM_32_boots_VGPs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>N</th>
+      <th>k</th>
+      <th>A95</th>
+      <th>csd</th>
+      <th>foliation</th>
+      <th>lineation</th>
+      <th>collinearity</th>
+      <th>coplanarity</th>
+      <th>age</th>
+      <th>n_studies</th>
+      <th>plon</th>
+      <th>plat</th>
+      <th>method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>291.0</td>
+      <td>23.109803</td>
+      <td>1.752895</td>
+      <td>16.849495</td>
+      <td>0.177638</td>
+      <td>0.718905</td>
+      <td>4.047023</td>
+      <td>0.896543</td>
+      <td>0.0</td>
+      <td>14.0</td>
+      <td>-54.934468</td>
+      <td>-87.609392</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.0</td>
+      <td>309.0</td>
+      <td>22.827044</td>
+      <td>1.711801</td>
+      <td>16.953532</td>
+      <td>0.185288</td>
+      <td>0.697438</td>
+      <td>3.764073</td>
+      <td>0.882726</td>
+      <td>5.0</td>
+      <td>14.0</td>
+      <td>-52.950440</td>
+      <td>-87.724472</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>159.0</td>
+      <td>20.444298</td>
+      <td>2.534087</td>
+      <td>17.914262</td>
+      <td>0.317275</td>
+      <td>0.656406</td>
+      <td>2.06889</td>
+      <td>0.973681</td>
+      <td>10.0</td>
+      <td>9.0</td>
+      <td>-58.550039</td>
+      <td>-88.768761</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>63.0</td>
+      <td>14.973783</td>
+      <td>4.783091</td>
+      <td>20.932411</td>
+      <td>0.305627</td>
+      <td>0.340017</td>
+      <td>1.11252</td>
+      <td>0.645644</td>
+      <td>15.0</td>
+      <td>7.0</td>
+      <td>-25.077597</td>
+      <td>-83.128644</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>133.0</td>
+      <td>10.14031</td>
+      <td>4.044485</td>
+      <td>25.43662</td>
+      <td>0.23203</td>
+      <td>0.474333</td>
+      <td>2.044277</td>
+      <td>0.706363</td>
+      <td>20.0</td>
+      <td>7.0</td>
+      <td>-14.805770</td>
+      <td>-82.273687</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1395</th>
+      <td>99.0</td>
+      <td>291.0</td>
+      <td>18.234489</td>
+      <td>1.985383</td>
+      <td>18.968728</td>
+      <td>0.198377</td>
+      <td>0.435742</td>
+      <td>2.196537</td>
+      <td>0.634118</td>
+      <td>45.0</td>
+      <td>10.0</td>
+      <td>-16.130575</td>
+      <td>-81.572386</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1396</th>
+      <td>99.0</td>
+      <td>255.0</td>
+      <td>16.902633</td>
+      <td>2.208715</td>
+      <td>19.701887</td>
+      <td>0.127609</td>
+      <td>0.37349</td>
+      <td>2.926837</td>
+      <td>0.501099</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-13.953657</td>
+      <td>-80.667848</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1397</th>
+      <td>99.0</td>
+      <td>215.0</td>
+      <td>17.012987</td>
+      <td>2.398413</td>
+      <td>19.637886</td>
+      <td>0.0539</td>
+      <td>0.455666</td>
+      <td>8.453921</td>
+      <td>0.509566</td>
+      <td>55.0</td>
+      <td>5.0</td>
+      <td>-13.591928</td>
+      <td>-79.590728</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1398</th>
+      <td>99.0</td>
+      <td>45.0</td>
+      <td>13.921925</td>
+      <td>5.913888</td>
+      <td>21.708777</td>
+      <td>0.403687</td>
+      <td>0.186248</td>
+      <td>0.461367</td>
+      <td>0.589935</td>
+      <td>60.0</td>
+      <td>2.0</td>
+      <td>-5.495404</td>
+      <td>-77.852251</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1399</th>
+      <td>99.0</td>
+      <td>6.0</td>
+      <td>9.858276</td>
+      <td>22.447197</td>
+      <td>25.79791</td>
+      <td>0.365634</td>
+      <td>0.732986</td>
+      <td>2.004697</td>
+      <td>1.09862</td>
+      <td>65.0</td>
+      <td>1.0</td>
+      <td>-13.735739</td>
+      <td>-76.575618</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+  </tbody>
+</table>
+<p>1400 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plott</span> <span class="o">=</span> <span class="n">RM_32_boots_VGPs</span><span class="p">[</span><span class="n">RM_32_boots_VGPs</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">plott</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>run</th>
+      <th>N</th>
+      <th>k</th>
+      <th>A95</th>
+      <th>csd</th>
+      <th>foliation</th>
+      <th>lineation</th>
+      <th>collinearity</th>
+      <th>coplanarity</th>
+      <th>age</th>
+      <th>n_studies</th>
+      <th>plon</th>
+      <th>plat</th>
+      <th>method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>0.0</td>
+      <td>257.0</td>
+      <td>15.647113</td>
+      <td>2.292396</td>
+      <td>20.477074</td>
+      <td>0.142857</td>
+      <td>0.306057</td>
+      <td>2.142402</td>
+      <td>0.448914</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-8.204036</td>
+      <td>-80.323177</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>1.0</td>
+      <td>257.0</td>
+      <td>15.632259</td>
+      <td>2.293559</td>
+      <td>20.486801</td>
+      <td>0.057737</td>
+      <td>0.43953</td>
+      <td>7.612561</td>
+      <td>0.497267</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-6.207860</td>
+      <td>-80.506778</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>38</th>
+      <td>2.0</td>
+      <td>256.0</td>
+      <td>15.329877</td>
+      <td>2.322176</td>
+      <td>20.687865</td>
+      <td>0.194406</td>
+      <td>0.166482</td>
+      <td>0.85636</td>
+      <td>0.360888</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-5.358194</td>
+      <td>-81.288923</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>52</th>
+      <td>3.0</td>
+      <td>243.0</td>
+      <td>15.055848</td>
+      <td>2.406973</td>
+      <td>20.875285</td>
+      <td>0.309854</td>
+      <td>0.270558</td>
+      <td>0.873178</td>
+      <td>0.580412</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-11.176786</td>
+      <td>-81.662029</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>66</th>
+      <td>4.0</td>
+      <td>258.0</td>
+      <td>13.682645</td>
+      <td>2.458715</td>
+      <td>21.897775</td>
+      <td>0.05806</td>
+      <td>0.235331</td>
+      <td>4.053264</td>
+      <td>0.29339</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-11.830187</td>
+      <td>-81.052649</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1340</th>
+      <td>95.0</td>
+      <td>250.0</td>
+      <td>13.137497</td>
+      <td>2.553445</td>
+      <td>22.347488</td>
+      <td>0.339402</td>
+      <td>0.175731</td>
+      <td>0.517769</td>
+      <td>0.515133</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-15.350249</td>
+      <td>-81.583385</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1354</th>
+      <td>96.0</td>
+      <td>250.0</td>
+      <td>15.209434</td>
+      <td>2.359978</td>
+      <td>20.769617</td>
+      <td>0.144189</td>
+      <td>0.405191</td>
+      <td>2.810131</td>
+      <td>0.54938</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-21.215689</td>
+      <td>-80.234007</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1368</th>
+      <td>97.0</td>
+      <td>264.0</td>
+      <td>14.131683</td>
+      <td>2.388546</td>
+      <td>21.547063</td>
+      <td>0.179539</td>
+      <td>0.377469</td>
+      <td>2.102432</td>
+      <td>0.557008</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-15.622563</td>
+      <td>-81.743649</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1382</th>
+      <td>98.0</td>
+      <td>242.0</td>
+      <td>13.863378</td>
+      <td>2.521275</td>
+      <td>21.754569</td>
+      <td>0.062173</td>
+      <td>0.477211</td>
+      <td>7.675553</td>
+      <td>0.539384</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-9.473314</td>
+      <td>-79.582753</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+    <tr>
+      <th>1396</th>
+      <td>99.0</td>
+      <td>255.0</td>
+      <td>16.902633</td>
+      <td>2.208715</td>
+      <td>19.701887</td>
+      <td>0.127609</td>
+      <td>0.37349</td>
+      <td>2.926837</td>
+      <td>0.501099</td>
+      <td>50.0</td>
+      <td>8.0</td>
+      <td>-13.953657</td>
+      <td>-80.667848</td>
+      <td>RM_bootstrapped_VGPs_ensemble</td>
+    </tr>
+  </tbody>
+</table>
+<p>100 rows × 14 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">])])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">plott</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>
+<span class="n">eigenValues</span><span class="p">,</span> <span class="n">eigenVectors</span> <span class="o">=</span> <span class="n">eigen_decomposition</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">eigenVectors</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])),</span><span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-13.80619128200469 -81.17326763741802] 100
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
+<span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
+<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
+
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="c1"># sns.scatterplot(x = RM_ensembl_quant_plon.mean, y =RM_ensemble_quant_plat.mean,</span>
+                
+<span class="c1">#                 transform = ccrs.PlateCarree())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">plott</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">plott</span><span class="o">.</span><span class="n">plat</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/6_comparisons_36_0.png" src="_images/6_comparisons_36_0.png" />
 </div>
 </div>
 </section>
