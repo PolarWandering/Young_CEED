@@ -314,6 +314,11 @@ title="Print to PDF"
    Generate a new Dataframe sampling each direction from a Fisher distribution.
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean-path">
+   Mean path
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -343,6 +348,11 @@ title="Print to PDF"
    Generate a new Dataframe sampling each direction from a Fisher distribution.
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mean-path">
+   Mean path
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -370,7 +380,7 @@ title="Print to PDF"
                                <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>                              
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span><span class="n">plot_pole_A95</span><span class="p">,</span> <span class="n">plot_pole</span>
 </pre></div>
 </div>
 </div>
@@ -405,20 +415,24 @@ title="Print to PDF"
 <span class="sd">    In the present formulation we follow a conservative approach for the assignaiton of ages to each direction/VGP, </span>
 <span class="sd">    it is taken at random between the min_age and max_age of reported VGPs.</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
-    <span class="n">Study</span><span class="p">,</span> <span class="n">age_bst</span><span class="p">,</span> <span class="n">decs</span><span class="p">,</span> <span class="n">incs</span><span class="p">,</span> <span class="n">slat</span><span class="p">,</span> <span class="n">slon</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="n">Study</span><span class="p">,</span> <span class="n">age_bst</span><span class="p">,</span> <span class="n">decs</span><span class="p">,</span> <span class="n">incs</span><span class="p">,</span> <span class="n">slat</span><span class="p">,</span> <span class="n">slon</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">k_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
     
     <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>        
         <span class="c1"># we first generate one random direction from the original entry.</span>
         <span class="n">kappa</span> <span class="o">=</span> <span class="n">k_mean</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">k</span><span class="p">)</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">k</span> <span class="c1"># if we don&#39;t have kappa, we take the mean of the reported ones       </span>
-        <span class="n">directions_temp</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fishrot</span><span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">inc</span><span class="p">,</span> <span class="n">di_block</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">directions_temp</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fishrot</span><span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">dec_reverse</span><span class="p">,</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">inc_reverse</span><span class="p">,</span> <span class="n">di_block</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
         
         <span class="n">decs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">directions_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">incs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">directions_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
         <span class="n">slat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">slat</span><span class="p">)</span>
         <span class="n">slon</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">slon</span><span class="p">)</span>
+        <span class="n">indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         
+        <span class="c1"># make an if statement for normal oor uniform disttributions</span>
         <span class="n">age_bst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">min_age</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">max_age</span><span class="p">)))</span>
+        
         <span class="n">Study</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">Study</span><span class="p">)</span>
         
     <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span>
@@ -432,9 +446,11 @@ title="Print to PDF"
     <span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>        
     <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">inc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slon</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">dec</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">inc</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">slon</span><span class="p">)[</span><span class="mi">1</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="c1"># transform to the southern hemisphere</span>
-    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">],</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">])</span>
-    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mf">180.</span><span class="p">)</span> <span class="o">%</span> <span class="mf">360.</span><span class="p">,</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">])</span>             
+    
+    <span class="c1">#set longitude in [-180,180]</span>
+    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">-</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">new_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">indexes</span>
 
     <span class="k">return</span> <span class="n">new_df</span>
 </pre></div>
@@ -445,30 +461,36 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mi">5</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_mean_bootstrapped</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span> <span class="n">plon_label</span><span class="p">,</span> <span class="n">plat_label</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_mean_bootstrapping_direction</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span> <span class="n">plon_label</span><span class="p">,</span> <span class="n">plat_label</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    takes a compilation of vgps and for each time window uses the bootstrap approach to construct empirical confidence bounds. </span>
+<span class="sd">    takes a compilation of vgps (df_vgps). The original direction is taken as PDF to generate a pseudo-Dataset </span>
+<span class="sd">    that incorporates the uncertinty in the directional space and time. We apply this method a number $n_bst$ of times</span>
+<span class="sd">    to  generate $pseudo$-datasets. On each pseudo-dataset we run moving averages as usual.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">,</span><span class="s1">&#39;foliation&#39;</span><span class="p">,</span><span class="s1">&#39;lineation&#39;</span><span class="p">,</span><span class="s1">&#39;collinearity&#39;</span><span class="p">,</span><span class="s1">&#39;coplanarity&#39;</span><span class="p">])</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bst</span><span class="p">):</span>
                
-        <span class="n">vgps_sample_</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">),</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">vgps_sample_</span> <span class="o">=</span> <span class="n">df_vgps</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">),</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>        
         <span class="n">vgps_sample</span> <span class="o">=</span> <span class="n">get_vgps_sampling_direction</span><span class="p">(</span><span class="n">vgps_sample_</span><span class="p">)</span>
+        
+<span class="c1">#         vgps_sample = get_vgps_sampling_direction(df_vgps)</span>
+        
         <span class="n">running_means_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
         <span class="n">running_means_tmp</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">vgps_sample</span><span class="p">,</span> <span class="n">plon_label</span><span class="p">,</span> <span class="n">plat_label</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
         <span class="n">running_means_tmp</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
         <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">running_means_tmp</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-       
+    
+    <span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">-</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">running_means_global</span>
 </pre></div>
 </div>
@@ -477,19 +499,20 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">ensemble</span> <span class="o">=</span> <span class="n">running_mean_bootstrapped</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">,</span><span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">RM_ensemble</span> <span class="o">=</span> <span class="n">running_mean_bootstrapping_direction</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">,</span><span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 1min 4s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 41.6 s, sys: 130 ms, total: 41.7 s
+Wall time: 41.7 s
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">ensemble</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">RM_ensemble</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -499,151 +522,23 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### bootrstrap natulary pulls the younger ages towards the south because amplifies the sampling in the more dense areas</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_ensemble_quant_plat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">RM_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">RM_ensemble_quant_plon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">RM_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of longitude groupedby age for visualization purposes</span>
 </pre></div>
 </div>
 </div>
 </div>
+</section>
+<section id="mean-path">
+<h2>Mean path<a class="headerlink" href="#mean-path" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_</span> <span class="o">=</span> <span class="n">get_vgps_sampling_direction</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Study</th>
-      <th>age</th>
-      <th>dec</th>
-      <th>inc</th>
-      <th>slat</th>
-      <th>slon</th>
-      <th>plon</th>
-      <th>plat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>Absaroka_volcanics</td>
-      <td>48</td>
-      <td>340.160954</td>
-      <td>64.158779</td>
-      <td>44.3478</td>
-      <td>-111.0455</td>
-      <td>352.339296</td>
-      <td>-75.953228</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>Absaroka_volcanics</td>
-      <td>48</td>
-      <td>136.693518</td>
-      <td>-69.255594</td>
-      <td>44.5500</td>
-      <td>-110.0500</td>
-      <td>192.050008</td>
-      <td>-60.731281</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>Absaroka_volcanics</td>
-      <td>48</td>
-      <td>15.786053</td>
-      <td>57.800355</td>
-      <td>44.5500</td>
-      <td>-109.2000</td>
-      <td>182.677817</td>
-      <td>-76.727091</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">sample_</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="n">hue</span> <span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">multiple</span><span class="o">=</span><span class="s2">&quot;stack&quot;</span><span class="p">,</span><span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;age&#39;, ylabel=&#39;Count&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/4A_APWP_vgps_uncert_prop_14_1.png" src="_images/4A_APWP_vgps_uncert_prop_14_1.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">sample_</span><span class="p">[(</span><span class="n">sample_</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">50</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">sample_</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">30</span><span class="p">)]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="o">.</span><span class="n">columns</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;name&#39;, &#39;fm./loc.&#39;, &#39;slat&#39;, &#39;slon&#39;, &#39;n&#39;, &#39;dec&#39;, &#39;inc&#39;, &#39;k&#39;, &#39;alpha95&#39;,
-       &#39;f_corr&#39;, &#39;VGP_lat&#39;, &#39;VGP_lon&#39;, &#39;K&#39;, &#39;A95&#39;, &#39;dp&#39;, &#39;dm&#39;, &#39;mean_age&#39;,
-       &#39;min_age&#39;, &#39;2sig_min&#39;, &#39;max_age&#39;, &#39;2sig_max&#39;, &#39;uncer_dist&#39;,
-       &#39;rock_typ_1&#39;, &#39;rock_typ_2&#39;, &#39;rock_typ_3&#39;, &#39;demag&#39;, &#39;struc_cont&#39;,
-       &#39;rot_area&#39;, &#39;polarity&#39;, &#39;strat_group&#39;, &#39;ordering&#39;, &#39;synch_unit&#39;,
-       &#39;in_study_pole&#39;, &#39;rej_crit&#39;, &#39;pmag_ref&#39;, &#39;age_ref&#39;, &#39;pmag_comments&#39;,
-       &#39;age_comments&#39;, &#39;Unnamed: 38&#39;, &#39;Study&#39;, &#39;VGP_lon_recalc&#39;,
-       &#39;VGP_lat_recalc&#39;, &#39;dec_reverse&#39;, &#39;inc_reverse&#39;, &#39;vgp_lat_SH&#39;,
-       &#39;vgp_lon_SH&#39;, &#39;age_uncertainty&#39;, &#39;keep&#39;],
-      dtype=&#39;object&#39;)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">]</span>
-<span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">]</span>
-<span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span><span class="p">[</span><span class="s1">&#39;mean_age&#39;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##3 Original dataset</span>
-<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
 <span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
 <span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">df_filtered_vgps</span>
-
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
@@ -652,47 +547,15 @@ title="Print to PDF"
 <span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
 
+<span class="c1"># sns.scatterplot(x = RM_ensembl_quant_plon.mean, y =RM_ensemble_quant_plat.mean,</span>
+                
+<span class="c1">#                 transform = ccrs.PlateCarree())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">],</span>
-                <span class="n">hue</span> <span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-                <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
-                <span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
-
-<span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/4A_APWP_vgps_uncert_prop_18_0.png" src="_images/4A_APWP_vgps_uncert_prop_18_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">##3 Original dataset</span>
-<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
-<span class="kn">import</span> <span class="nn">cartopy.feature</span> <span class="k">as</span> <span class="nn">cfeature</span>
-<span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
-<span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">sample_</span>
-
-<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
-
-<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
-
-<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
-<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
-
-
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">],</span> <span class="n">y</span> <span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">],</span>
-                <span class="n">hue</span> <span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">],</span> <span class="n">sizes</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span>
-                <span class="n">palette</span><span class="o">=</span><span class="s2">&quot;viridis&quot;</span><span class="p">,</span>
-                <span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">plot_pole</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
 
 <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
@@ -701,7 +564,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4A_APWP_vgps_uncert_prop_19_0.png" src="_images/4A_APWP_vgps_uncert_prop_19_0.png" />
+<img alt="_images/4A_APWP_vgps_uncert_prop_13_0.png" src="_images/4A_APWP_vgps_uncert_prop_13_0.png" />
 </div>
 </div>
 </section>
