@@ -457,6 +457,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">RM_stats</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">plot_pole</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -530,10 +531,10 @@ title="Print to PDF"
       <td>44.613899</td>
       <td>250.051065</td>
       <td>-81.917678</td>
-      <td>328.57593</td>
-      <td>45.0</td>
-      <td>54.0</td>
-      <td>49.5</td>
+      <td>328.575930</td>
+      <td>45.0000</td>
+      <td>54.0000</td>
+      <td>49.5000</td>
     </tr>
     <tr>
       <th>1</th>
@@ -546,23 +547,23 @@ title="Print to PDF"
       <td>234.652209</td>
       <td>-79.313242</td>
       <td>327.669841</td>
-      <td>40.5</td>
-      <td>43.5</td>
-      <td>42.0</td>
+      <td>40.5000</td>
+      <td>43.5000</td>
+      <td>42.0000</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Bighorn_Basin_sediments</td>
       <td>NaN</td>
       <td>59</td>
-      <td>10.64057</td>
+      <td>10.640570</td>
       <td>5.954672</td>
       <td>44.459816</td>
       <td>251.809627</td>
       <td>-81.549042</td>
       <td>2.761738</td>
-      <td>52.54</td>
-      <td>59.237</td>
+      <td>52.5400</td>
+      <td>59.2370</td>
       <td>55.8885</td>
     </tr>
     <tr>
@@ -570,15 +571,15 @@ title="Print to PDF"
       <td>Bishop_tuff</td>
       <td>NaN</td>
       <td>47</td>
-      <td>127.0</td>
-      <td>1.9</td>
-      <td>37.67</td>
-      <td>241.25</td>
+      <td>127.000000</td>
+      <td>1.900000</td>
+      <td>37.670000</td>
+      <td>241.250000</td>
       <td>-80.164116</td>
       <td>314.290252</td>
       <td>0.7661</td>
       <td>0.7679</td>
-      <td>0.767</td>
+      <td>0.7670</td>
     </tr>
     <tr>
       <th>4</th>
@@ -586,14 +587,14 @@ title="Print to PDF"
       <td>NaN</td>
       <td>11</td>
       <td>34.082686</td>
-      <td>7.93379</td>
+      <td>7.933790</td>
       <td>46.373039</td>
       <td>245.107637</td>
       <td>-72.178647</td>
       <td>344.432968</td>
-      <td>46.4</td>
-      <td>55.5</td>
-      <td>50.95</td>
+      <td>46.4000</td>
+      <td>55.5000</td>
+      <td>50.9500</td>
     </tr>
   </tbody>
 </table>
@@ -657,8 +658,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 150 ms, sys: 4.86 ms, total: 155 ms
-Wall time: 153 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 262 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -689,23 +689,23 @@ Wall time: 153 ms
     <tr>
       <th>0</th>
       <td>Absaroka_volcanics</td>
-      <td>-72.274290</td>
-      <td>51.940026</td>
-      <td>47</td>
+      <td>-71.145475</td>
+      <td>47.291735</td>
+      <td>46</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Absaroka_volcanics</td>
-      <td>-63.239392</td>
-      <td>311.972469</td>
-      <td>46</td>
+      <td>-80.122658</td>
+      <td>119.574524</td>
+      <td>49</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Absaroka_volcanics</td>
-      <td>-66.451347</td>
-      <td>74.370993</td>
-      <td>49</td>
+      <td>-71.143363</td>
+      <td>77.138110</td>
+      <td>51</td>
     </tr>
   </tbody>
 </table>
@@ -760,35 +760,35 @@ Wall time: 153 ms
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>317.0</td>
+      <td>318.0</td>
       <td>15.0</td>
-      <td>23.071921</td>
-      <td>1.680560</td>
-      <td>16.863322</td>
-      <td>-58.434496</td>
-      <td>-88.019599</td>
+      <td>24.849888</td>
+      <td>1.614154</td>
+      <td>16.248856</td>
+      <td>-19.836930</td>
+      <td>-86.779270</td>
     </tr>
     <tr>
       <th>1</th>
       <td>10.0</td>
-      <td>411.0</td>
+      <td>420.0</td>
       <td>18.0</td>
-      <td>18.831681</td>
-      <td>1.641161</td>
-      <td>18.665537</td>
-      <td>-42.274298</td>
-      <td>-86.846974</td>
+      <td>17.802919</td>
+      <td>1.672374</td>
+      <td>19.197267</td>
+      <td>-23.851360</td>
+      <td>-86.135485</td>
     </tr>
     <tr>
       <th>2</th>
       <td>20.0</td>
-      <td>264.0</td>
+      <td>270.0</td>
       <td>9.0</td>
-      <td>11.586950</td>
-      <td>2.660118</td>
-      <td>23.795808</td>
-      <td>-20.663376</td>
-      <td>-82.016385</td>
+      <td>10.581072</td>
+      <td>2.764832</td>
+      <td>24.901195</td>
+      <td>-16.330463</td>
+      <td>-81.790537</td>
     </tr>
   </tbody>
 </table>
@@ -813,7 +813,7 @@ Wall time: 153 ms
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bootstrapped age distribution&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of $pseudo$-VGPs&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> 
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;.1&quot;</span><span class="p">)</span> 
 </pre></div>
 </div>
 </div>
@@ -829,7 +829,8 @@ Wall time: 153 ms
 <h2>Running Mean Statistics<a class="headerlink" href="#running-mean-statistics" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_stats</span><span class="p">(</span><span class="n">RM_on_pseudoVGP</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
+<span class="n">RM_stats</span><span class="p">(</span><span class="n">RM_on_pseudoVGP</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -860,8 +861,7 @@ Wall time: 153 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.8 s, sys: 86.9 ms, total: 16.9 s
-Wall time: 16.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 24 s
 </pre></div>
 </div>
 </div>
@@ -915,65 +915,110 @@ Wall time: 16.9 s
       <th>0</th>
       <td>0</td>
       <td>15.0</td>
-      <td>24.440554</td>
-      <td>1.65184</td>
-      <td>16.38436</td>
+      <td>24.766054</td>
+      <td>1.619559</td>
+      <td>16.276335</td>
       <td>0.0</td>
-      <td>309.0</td>
-      <td>-52.813462</td>
-      <td>-87.069247</td>
+      <td>317.0</td>
+      <td>-62.425862</td>
+      <td>-86.462324</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
       <td>18.0</td>
-      <td>18.941091</td>
-      <td>1.65443</td>
-      <td>18.611549</td>
+      <td>18.879412</td>
+      <td>1.657281</td>
+      <td>18.641927</td>
       <td>10.0</td>
       <td>402.0</td>
-      <td>-25.143080</td>
-      <td>-86.453534</td>
+      <td>-44.278781</td>
+      <td>-85.883248</td>
     </tr>
     <tr>
       <th>2</th>
       <td>0</td>
       <td>9.0</td>
-      <td>10.37729</td>
-      <td>2.682206</td>
-      <td>25.144502</td>
+      <td>11.214326</td>
+      <td>2.638755</td>
+      <td>24.187915</td>
       <td>20.0</td>
-      <td>293.0</td>
-      <td>-23.136853</td>
-      <td>-81.320775</td>
+      <td>278.0</td>
+      <td>-21.835180</td>
+      <td>-82.365879</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0</td>
       <td>9.0</td>
-      <td>12.589969</td>
-      <td>2.225823</td>
-      <td>22.828254</td>
+      <td>12.895137</td>
+      <td>2.226534</td>
+      <td>22.556517</td>
       <td>30.0</td>
-      <td>344.0</td>
-      <td>-32.469056</td>
-      <td>-81.445310</td>
+      <td>335.0</td>
+      <td>-22.572137</td>
+      <td>-83.119899</td>
     </tr>
     <tr>
       <th>4</th>
       <td>0</td>
       <td>12.0</td>
-      <td>18.506844</td>
-      <td>1.838108</td>
-      <td>18.828635</td>
+      <td>16.353418</td>
+      <td>1.999175</td>
+      <td>20.029991</td>
       <td>40.0</td>
-      <td>334.0</td>
-      <td>-20.190714</td>
-      <td>-82.562782</td>
+      <td>322.0</td>
+      <td>-19.421688</td>
+      <td>-83.977175</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">PC</span>
+
+<span class="k">def</span> <span class="nf">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">title</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    pass a df with the colection of bootstrapped means for each run.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">df</span><span class="p">[</span><span class="s1">&#39;plon_east&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">-</span> <span class="mi">360</span> <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span> <span class="o">&gt;</span> <span class="mi">180</span> <span class="k">else</span> <span class="n">row</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">ensemble_lat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+    <span class="n">ensemble_lon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon_east&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+    <span class="n">ensemble_PC</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon_east&quot;</span><span class="p">)</span> <span class="c1"># set principal component for each window</span>
+    
+    <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span> <span class="mi">18</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+
+    <span class="c1"># plot latitude</span>
+    <span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#C44D52&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.40</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">zorder</span> <span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+   
+
+    <span class="c1"># plot longitude</span>
+    <span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
+        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#C44D52&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.40</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span><span class="n">edgecolors</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span><span class="n">zorder</span> <span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+  
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;plon_east&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -982,7 +1027,7 @@ Wall time: 16.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_24_0.png" src="_images/3_APWP_simlated vgp-based APWP_24_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_25_0.png" src="_images/3_APWP_simlated vgp-based APWP_25_0.png" />
 </div>
 </div>
 <section id="example-path">
@@ -1020,7 +1065,7 @@ Wall time: 16.9 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_26_0.png" src="_images/3_APWP_simlated vgp-based APWP_26_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_27_0.png" src="_images/3_APWP_simlated vgp-based APWP_27_0.png" />
 </div>
 </div>
 </section>
