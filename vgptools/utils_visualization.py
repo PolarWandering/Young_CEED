@@ -16,23 +16,27 @@ def RM_stats(df, title, xlabel, ylabel):
       
     fig, ax = plt.subplots(figsize=(15,3))
     ax2 = ax.twinx()
-    plt.title(title)
-    plt.ylabel(ylabel)
-    plt.xlabel(xlabel)
+    plt.title(title, fontsize = 14)
+
 
 #     df['kappa_norm'] = df['k'] / df['k'].max()
 #     df['N_norm'] = df['N'] / df['N'].max()
-
-    dfm = df[['age', 'A95', 'n_studies', 'csd']].melt('age', var_name='type', value_name='value')
-
-
-    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['value'], hue = dfm['type'], marker="o", ax=ax)
+    df['Circular Standart Deviation']=df['csd']
+    df['Number of Studies']=df['n_studies']
     
-    sns.lineplot(data  = df, x = df['age'], y = df['k'], marker="o",  ax=ax2, color= "r")
-    ax2.yaxis.label.set_color('red')
+    dfm = df[['age', 'A95', 'Number of Studies', 'Circular Standart Deviation']].melt('age', var_name='Statistic', value_name='value')
+
+
+    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['value'], hue = dfm['Statistic'], marker="o", ax=ax)
+    
+    sns.lineplot(data  = df, x = df['age'], y = df['k'], marker="o",  ax=ax2, color= "#C44D52")
+    ax2.yaxis.label.set_color('#C44D52')
     # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]], 
     #        labels=["kappa"])
-    
+    ax.set_ylabel("Value", fontsize = 12)
+    ax2.set_ylabel("Kappa", fontsize = 13)
+    ax.set_xlabel("Mean age (Ma)", fontsize = 13)
+    plt.xlabel(xlabel, fontsize = 13)
     
 def plot_pole_A95(Plat, Plon, A95, age, min_age, max_age, ax):
     """
@@ -54,7 +58,7 @@ def plot_pole_A95(Plat, Plon, A95, age, min_age, max_age, ax):
                       crs=ccrs.PlateCarree().as_geodetic(), 
                       facecolor='none', 
                       edgecolor=cmap(norm(age)), 
-                      alpha=0.6, 
+                      alpha=0.8, 
                       linewidth=1.5)
     plt.scatter(x = Plon, y = Plat, color = cmap(norm(age)),
                 s=50, transform = ccrs.PlateCarree(), zorder=4,edgecolors='black', alpha = 0.7)
@@ -140,14 +144,13 @@ def plot_poles_and_APWP(extent, df_poles, df_apwp):
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
     gl.ylabels_left = True
 
-    plt.title('Overview map of Paleomagnetic Poles')
+    plt.title('Overview map of Paleomagnetic Poles', fontsize = 13)
     for _, pole in df_poles.iterrows():
         plot_pole_A95(pole.Plat, pole.Plon, pole.A95, pole.mean_age, df_poles.mean_age.min(), df_poles.mean_age.max(), ax1)
     plt.tight_layout()
 
-
     ax2 = plt.subplot(222, projection=proj)
-    ax2.set_title('Running Mean path on Paleomagnetic Poles')
+    ax2.set_title('Classic Running Means path on Paleomagnetic Poles', fontsize = 13)
     ax2.add_feature(cfeature.BORDERS)
     gl = ax2.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
@@ -173,7 +176,7 @@ def plot_poles_and_APWP(extent, df_poles, df_apwp):
     )
     plt.tight_layout()
 
-    plt.colorbar(s, fraction=0.035).set_label("Age (My)")    
+    plt.colorbar(s, fraction=0.035).set_label("Age (My)",fontsize=12)    
     
 def RM_APWP_lat_lon_A95 (df_apwp):
     
@@ -314,46 +317,37 @@ def plot_APWP_RM_ensemble(df, title):
     pass a df with the colection of bootstrapped means for each run.
     '''
     df['plon_east'] = df.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
+    
+    ensemble_lat = quantiles(df,"age","plat") # set quantiles of latitude groupedby age for visualization purposes
+    ensemble_lon = quantiles(df,"age","plon_east") # set quantiles of latitude groupedby age for visualization purposes
+    ensemble_PC = PC(df,"age","plat","plon_east") # set principal component for each window
+    
     fig, axes = plt.subplots(2, 1, sharex=True, figsize=(15,6))
-    fig.suptitle(title, fontsize= 16, fontweight ='bold')
-    axes[0].set_title('Latitude (°N)', fontsize=12)
-    axes[1].set_title('Longitude (°E)', fontsize=12)
+    fig.suptitle(title, fontsize= 18, fontweight ='bold')
+    axes[0].set_title('Latitude (°N)', fontsize=12, fontweight ='bold')
+    axes[1].set_title('Longitude (°E)', fontsize=12, fontweight ='bold')
+    axes[0].set_ylabel(r'Latitude (°N)', fontweight ='bold', fontsize = 12)
+    axes[1].set_ylabel(r'Longitude (°E)', fontweight ='bold', fontsize = 12)
 
     # plot latitude
-    pltt = sns.scatterplot(data=df, x="age", y="plat", ax = axes[0])
-    axes[0].set_ylabel(r'Latitude (°N)', fontweight ='bold')
-    # plot longitude
-    pltt1 = sns.scatterplot(data=df, x="age", y= df['plon_east'], ax = axes[1])
-    axes[1].set_ylabel(r'Longitude (°E)', fontweight ='bold')
-    axes[1].set_xlabel(r'Age (Ma)', fontweight ='bold')
-    
-    x = sorted(df['age'].unique())
-    Y = df.groupby('age')['plat']
-
-    q5 =  Y.quantile(.16).to_numpy() 
-    q25 = Y.quantile(.25).to_numpy()
-    q50 = Y.quantile(.50).to_numpy()
-    q75 = Y.quantile(.75).to_numpy() 
-    q95 = Y.quantile(.84).to_numpy() 
-    mean = Y.mean().to_numpy()
-    pltt.fill_between(x, q5,q95, color= "#71AFE2", alpha=.50,label="0.16-0.84 percentiles")
-    pltt.fill_between(x, q25,q75, color= "#1A52C1", alpha=.50,label="0.25-0.75 percentiles")
-    pltt.plot(x, mean, '--', color="#ad3131",label="mean")
+    for run, df_run in df.groupby('run'):
+        axes[0].plot(df_run.age.tolist(), df_run.plat.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2)
+    axes[0].fill_between(ensemble_lat.X, ensemble_lat.q16,ensemble_lat.q84, color= "#C44D52", alpha=.40, zorder =1)
+    axes[0].plot(ensemble_PC.X, ensemble_lat.q16,color="#590E0E", zorder =3, linewidth=0.2)
+    axes[0].plot(ensemble_PC.X, ensemble_lat.q84,color="#590E0E", zorder =3, linewidth=0.2)
+    axes[0].scatter(ensemble_PC.X, ensemble_PC.PC()[1],color="#590E0E",edgecolors='black',zorder =2)
+    axes[0].plot(ensemble_PC.X, ensemble_PC.PC()[1],color="#590E0E", zorder =3)
    
-    x_ = sorted(df['age'].unique())
-    Y_ = df.groupby('age')['plon_east']
 
-    q5_ =  Y_.quantile(.05).to_numpy() 
-    q25_ = Y_.quantile(.25).to_numpy()
-    q50_ = Y_.quantile(.50).to_numpy()
-    q75_ = Y_.quantile(.75).to_numpy() 
-    q95_ = Y_.quantile(.95).to_numpy() 
-    mean_ = Y_.mean().to_numpy()
-
-    pltt1.fill_between(x_, q5_,q95_, color= "#71AFE2", alpha=.50,label="0.16-0.84 percentiles")
-    pltt1.fill_between(x_, q25_,q75_, color= "#1A52C1", alpha=.50,label="0.25-0.75 percentiles")
-    pltt1.plot(x_, mean_, '--', color="#ad3131",label="mean")
-    
+    # plot longitude
+    for run, df_run in df.groupby('run'):
+        axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2)
+    axes[1].fill_between(ensemble_lon.X, ensemble_lon.q16,ensemble_lon.q84, color= "#C44D52", alpha=.40, zorder =1)
+    axes[1].plot(ensemble_PC.X, ensemble_lon.q16,color="#590E0E", zorder =3, linewidth=0.2)
+    axes[1].plot(ensemble_PC.X, ensemble_lon.q84,color="#590E0E", zorder =3, linewidth=0.2)
+    axes[1].scatter(ensemble_PC.X, ensemble_PC.PC()[0],color="#590E0E",edgecolors='black',zorder =2)
+    axes[1].plot(ensemble_PC.X, ensemble_PC.PC()[0],color="#590E0E", zorder =3)
+  
     df = df.drop(['plon_east'], axis=1)
     
 class quantiles:
