@@ -324,10 +324,12 @@ def plot_APWP_RM_ensemble(df, title):
     
     fig, axes = plt.subplots(2, 1, sharex=True, figsize=(15,6))
     fig.suptitle(title, fontsize= 18, fontweight ='bold')
-    axes[0].set_title('Latitude (°N)', fontsize=12, fontweight ='bold')
-    axes[1].set_title('Longitude (°E)', fontsize=12, fontweight ='bold')
+    # axes[0].set_title('Latitude (°N)', fontsize=12, fontweight ='bold')
+    # axes[1].set_title('Longitude (°E)', fontsize=12, fontweight ='bold')
     axes[0].set_ylabel(r'Latitude (°N)', fontweight ='bold', fontsize = 12)
     axes[1].set_ylabel(r'Longitude (°E)', fontweight ='bold', fontsize = 12)
+        
+    axes[1].set_xlabel(r'Age (Ma)', fontweight ='bold')
 
     # plot latitude
     for run, df_run in df.groupby('run'):
@@ -337,17 +339,19 @@ def plot_APWP_RM_ensemble(df, title):
     axes[0].plot(ensemble_PC.X, ensemble_lat.q84,color="#590E0E", zorder =3, linewidth=0.2)
     axes[0].scatter(ensemble_PC.X, ensemble_PC.PC()[1],color="#590E0E",edgecolors='black',zorder =2)
     axes[0].plot(ensemble_PC.X, ensemble_PC.PC()[1],color="#590E0E", zorder =3)
-   
 
     # plot longitude
     for run, df_run in df.groupby('run'):
         axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2)
-    axes[1].fill_between(ensemble_lon.X, ensemble_lon.q16,ensemble_lon.q84, color= "#C44D52", alpha=.40, zorder =1)
+    axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2, label = 'Ensemble')
+    axes[1].fill_between(ensemble_lon.X, ensemble_lon.q16,ensemble_lon.q84, color= "#C44D52", alpha=.40, zorder =1, label="Ensemble 0.16-0.84 percentiles ")
     axes[1].plot(ensemble_PC.X, ensemble_lon.q16,color="#590E0E", zorder =3, linewidth=0.2)
     axes[1].plot(ensemble_PC.X, ensemble_lon.q84,color="#590E0E", zorder =3, linewidth=0.2)
-    axes[1].scatter(ensemble_PC.X, ensemble_PC.PC()[0],color="#590E0E",edgecolors='black',zorder =2)
+    axes[1].scatter(ensemble_PC.X, ensemble_PC.PC()[0],color="#590E0E",edgecolors='black',zorder =2, label = 'Principal component of the age ensemble')
     axes[1].plot(ensemble_PC.X, ensemble_PC.PC()[0],color="#590E0E", zorder =3)
-  
+    
+    
+    plt.legend(loc="upper left")
     df = df.drop(['plon_east'], axis=1)
     
 class quantiles:
