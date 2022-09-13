@@ -358,6 +358,11 @@ title="Print to PDF"
    Comparisons plot
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-vs">
+   Visualizing vs
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -431,6 +436,11 @@ title="Print to PDF"
    Comparisons plot
   </a>
  </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualizing-vs">
+   Visualizing vs
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -454,7 +464,7 @@ title="Print to PDF"
 <span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
                                <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>                              
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
-<span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="p">(</span><span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span><span class="p">,</span> <span class="n">get_pseudo_vgps</span><span class="p">,</span> <span class="n">get_vgps_sampling_direction</span><span class="p">,</span> 
+<span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="p">(</span><span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span><span class="p">,</span> <span class="n">get_pseudo_vgps</span><span class="p">,</span>
                                   <span class="n">running_mean_VGPs_bootstrapped</span><span class="p">,</span> <span class="n">running_mean_bootstrapping_direction</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">PC</span>
@@ -506,100 +516,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>N</th>
-      <th>n_studies</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>method</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>12.0</td>
-      <td>12.0</td>
-      <td>135.172992</td>
-      <td>3.746692</td>
-      <td>6.966908</td>
-      <td>-77.850084</td>
-      <td>-86.746017</td>
-      <td>RM_classic</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5.0</td>
-      <td>15.0</td>
-      <td>15.0</td>
-      <td>157.806367</td>
-      <td>3.053286</td>
-      <td>6.447966</td>
-      <td>-67.163587</td>
-      <td>-87.015353</td>
-      <td>RM_classic</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>10.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>227.312026</td>
-      <td>4.453474</td>
-      <td>5.372468</td>
-      <td>-79.156412</td>
-      <td>-88.237442</td>
-      <td>RM_classic</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>15.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>634.387048</td>
-      <td>3.650730</td>
-      <td>3.215939</td>
-      <td>-21.810052</td>
-      <td>-86.038002</td>
-      <td>RM_classic</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>20.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>614.606390</td>
-      <td>4.976959</td>
-      <td>3.267281</td>
-      <td>-18.481366</td>
-      <td>-82.522049</td>
-      <td>RM_classic</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="running-means-ensemble-from-pseudo-vgps-approach-vaes-et-al-2022">
@@ -622,12 +538,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 25.2 s, sys: 124 ms, total: 25.3 s
-Wall time: 25.3 s
-</pre></div>
-</div>
-</div>
 </div>
 <p>Set quantiles</p>
 <div class="cell docutils container">
@@ -638,96 +548,6 @@ Wall time: 25.3 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>run</th>
-      <th>n_studies</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>age</th>
-      <th>N</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>foliation</th>
-      <th>lineation</th>
-      <th>collinearity</th>
-      <th>coplanarity</th>
-      <th>method</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>15.0</td>
-      <td>23.940365</td>
-      <td>1.754527</td>
-      <td>16.554636</td>
-      <td>0.0</td>
-      <td>280.0</td>
-      <td>-49.762211</td>
-      <td>-86.962600</td>
-      <td>0.120930</td>
-      <td>0.810995</td>
-      <td>6.706304</td>
-      <td>0.931926</td>
-      <td>RM_pseudoVGPs_ensemble</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>15.0</td>
-      <td>23.985074</td>
-      <td>1.618864</td>
-      <td>16.5392</td>
-      <td>5.0</td>
-      <td>328.0</td>
-      <td>-48.759449</td>
-      <td>-87.269952</td>
-      <td>0.095148</td>
-      <td>0.789994</td>
-      <td>8.302781</td>
-      <td>0.885142</td>
-      <td>RM_pseudoVGPs_ensemble</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>10.0</td>
-      <td>21.688459</td>
-      <td>2.257668</td>
-      <td>17.392847</td>
-      <td>10.0</td>
-      <td>188.0</td>
-      <td>-66.892796</td>
-      <td>-87.917587</td>
-      <td>0.147098</td>
-      <td>0.681468</td>
-      <td>4.632757</td>
-      <td>0.828566</td>
-      <td>RM_pseudoVGPs_ensemble</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -751,76 +571,6 @@ Wall time: 25.3 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>N</th>
-      <th>n_studies</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>method</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>283.0</td>
-      <td>15.0</td>
-      <td>23.737437</td>
-      <td>1.752923</td>
-      <td>16.625247</td>
-      <td>-45.869508</td>
-      <td>-88.098726</td>
-      <td>RM_classic_VGPs</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5.0</td>
-      <td>308.0</td>
-      <td>15.0</td>
-      <td>22.847346</td>
-      <td>1.713794</td>
-      <td>16.945998</td>
-      <td>-45.430085</td>
-      <td>-88.076649</td>
-      <td>RM_classic_VGPs</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>10.0</td>
-      <td>161.0</td>
-      <td>9.0</td>
-      <td>20.924372</td>
-      <td>2.487633</td>
-      <td>17.707563</td>
-      <td>-46.191588</td>
-      <td>-87.489859</td>
-      <td>RM_classic_VGPs</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="running-means-on-random-samples-with-replacement-from-the-original-dataset-to-generate-an-ensemble-of-possible-solution">
@@ -834,12 +584,6 @@ Wall time: 25.3 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 10.8 s, sys: 88.1 ms, total: 10.8 s
-Wall time: 10.9 s
-</pre></div>
-</div>
-</div>
 </div>
 <p>Set quantiles</p>
 <div class="cell docutils container">
@@ -850,96 +594,6 @@ Wall time: 10.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>run</th>
-      <th>N</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>foliation</th>
-      <th>lineation</th>
-      <th>collinearity</th>
-      <th>coplanarity</th>
-      <th>age</th>
-      <th>n_studies</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>method</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>289.0</td>
-      <td>24.001905</td>
-      <td>1.724536</td>
-      <td>16.5334</td>
-      <td>0.164651</td>
-      <td>0.701692</td>
-      <td>4.261689</td>
-      <td>0.866343</td>
-      <td>0.0</td>
-      <td>15.0</td>
-      <td>-29.498420</td>
-      <td>-87.091687</td>
-      <td>RM_bootstrapped_VGPs_ensemble</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.0</td>
-      <td>329.0</td>
-      <td>21.895409</td>
-      <td>1.695284</td>
-      <td>17.310455</td>
-      <td>0.142403</td>
-      <td>0.655401</td>
-      <td>4.602424</td>
-      <td>0.797805</td>
-      <td>5.0</td>
-      <td>15.0</td>
-      <td>-22.696254</td>
-      <td>-87.272722</td>
-      <td>RM_bootstrapped_VGPs_ensemble</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.0</td>
-      <td>181.0</td>
-      <td>21.243465</td>
-      <td>2.326417</td>
-      <td>17.574069</td>
-      <td>0.145077</td>
-      <td>0.782163</td>
-      <td>5.391363</td>
-      <td>0.92724</td>
-      <td>10.0</td>
-      <td>9.0</td>
-      <td>-17.422625</td>
-      <td>-86.865561</td>
-      <td>RM_bootstrapped_VGPs_ensemble</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section id="propation-of-directional-error-towards-the-vgp-level">
@@ -954,12 +608,6 @@ Wall time: 10.9 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 42 s, sys: 176 ms, total: 42.2 s
-Wall time: 42.2 s
-</pre></div>
-</div>
-</div>
 </div>
 <p>Set quantiles</p>
 <div class="cell docutils container">
@@ -970,96 +618,6 @@ Wall time: 42.2 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>run</th>
-      <th>N</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>foliation</th>
-      <th>lineation</th>
-      <th>collinearity</th>
-      <th>coplanarity</th>
-      <th>age</th>
-      <th>n_studies</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>method</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>278.0</td>
-      <td>19.378865</td>
-      <td>1.967259</td>
-      <td>18.400128</td>
-      <td>0.063724</td>
-      <td>0.603386</td>
-      <td>9.468712</td>
-      <td>0.66711</td>
-      <td>0.0</td>
-      <td>15.0</td>
-      <td>-71.455981</td>
-      <td>-88.685595</td>
-      <td>RM_DirErrorPropagated_ensemble</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0.0</td>
-      <td>291.0</td>
-      <td>19.68846</td>
-      <td>1.906595</td>
-      <td>18.254887</td>
-      <td>0.038787</td>
-      <td>0.620924</td>
-      <td>16.008752</td>
-      <td>0.65971</td>
-      <td>5.0</td>
-      <td>15.0</td>
-      <td>-70.237272</td>
-      <td>-88.712996</td>
-      <td>RM_DirErrorPropagated_ensemble</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.0</td>
-      <td>118.0</td>
-      <td>12.853794</td>
-      <td>3.773364</td>
-      <td>22.592764</td>
-      <td>0.249205</td>
-      <td>0.527671</td>
-      <td>2.117417</td>
-      <td>0.776877</td>
-      <td>10.0</td>
-      <td>9.0</td>
-      <td>-35.168259</td>
-      <td>-87.359963</td>
-      <td>RM_DirErrorPropagated_ensemble</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 </section>
@@ -1094,148 +652,6 @@ Wall time: 42.2 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>age</th>
-      <th>N</th>
-      <th>n_studies</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>plon</th>
-      <th>plat</th>
-      <th>method</th>
-      <th>run</th>
-      <th>foliation</th>
-      <th>lineation</th>
-      <th>collinearity</th>
-      <th>coplanarity</th>
-      <th>Euler_angle</th>
-      <th>Euler_lon</th>
-      <th>Euler_lat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>12.0</td>
-      <td>12.0</td>
-      <td>135.172992</td>
-      <td>3.746692</td>
-      <td>6.966908</td>
-      <td>-77.850084</td>
-      <td>-86.746017</td>
-      <td>RM_classic</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>5.0</td>
-      <td>15.0</td>
-      <td>15.0</td>
-      <td>157.806367</td>
-      <td>3.053286</td>
-      <td>6.447966</td>
-      <td>-67.163587</td>
-      <td>-87.015353</td>
-      <td>RM_classic</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>10.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>227.312026</td>
-      <td>4.453474</td>
-      <td>5.372468</td>
-      <td>-79.156412</td>
-      <td>-88.237442</td>
-      <td>RM_classic</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>15.0</td>
-      <td>4.0</td>
-      <td>4.0</td>
-      <td>634.387048</td>
-      <td>3.65073</td>
-      <td>3.215939</td>
-      <td>-21.810052</td>
-      <td>-86.038002</td>
-      <td>RM_classic</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>20.0</td>
-      <td>3.0</td>
-      <td>3.0</td>
-      <td>614.60639</td>
-      <td>4.976959</td>
-      <td>3.267281</td>
-      <td>-18.481366</td>
-      <td>-82.522049</td>
-      <td>RM_classic</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="comparisons-plot">
@@ -1289,48 +705,10 @@ Wall time: 42.2 s
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>No artists with labels found to put in legend.  Note that artists whose label start with an underscore are ignored when legend() is called with no argument.
-</pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.collections.PathCollection at 0x7fac09b7e0e0&gt;
-</pre></div>
-</div>
-<img alt="_images/6_comparisons_28_2.png" src="_images/6_comparisons_28_2.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PC</span><span class="p">(</span><span class="n">df_method2</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-34.69917627950082 , -41.17022363446277 , -50.27159004846883 ,
-       -22.146749302424762,  -6.300843519219139,  -7.699628190197703,
-       -14.374288602366663, -20.260814943274063, -24.806260416402207,
-       -11.641959159266777,  -3.819232450035336,  -0.428470728612749,
-         5.13740341764271 , -42.25861832170029 ])
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">PC</span><span class="p">(</span><span class="n">df_method1</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-49.702357350916095, -48.59556133174454 , -34.41204762528058 ,
-       -15.026769398840683, -13.069829820946882, -14.948016092187274,
-       -21.358617532783263, -29.441753099930704, -27.761680564075476,
-       -20.243744784102876, -10.845642310156673,  -7.814260266558612,
-         0.411560284456102,   8.972190620871139])
-</pre></div>
-</div>
-</div>
-</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="visualizing-vs">
+<h1>Visualizing vs<a class="headerlink" href="#visualizing-vs" title="Permalink to this headline">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Comparing against plate models (M2016 and T&amp;C2017)&quot;</span>
@@ -1362,10 +740,10 @@ Wall time: 42.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fa7c9164310&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1ed5ac31960&gt;
 </pre></div>
 </div>
-<img alt="_images/6_comparisons_32_1.png" src="_images/6_comparisons_32_1.png" />
+<img alt="_images/6_comparisons_30_1.png" src="_images/6_comparisons_30_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1898,7 +1276,7 @@ Wall time: 42.2 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/6_comparisons_37_0.png" src="_images/6_comparisons_37_0.png" />
+<img alt="_images/6_comparisons_35_0.png" src="_images/6_comparisons_35_0.png" />
 </div>
 </div>
 </section>
