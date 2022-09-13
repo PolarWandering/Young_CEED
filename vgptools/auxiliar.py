@@ -54,6 +54,36 @@ def GCD_cartesian(cartesian1, cartesian2):
     
     return gcd
 
+def PD(ArrayXYZ):
+    
+    Eval, Evec = eigen_decomposition(ArrayXYZ)
+    mean = fisher_mean(ArrayXYZ)
+    
+    if GCD_cartesian(Evec[:,0], mean) < np.pi /3:
+        return Evec[:,0]
+    elif GCD_cartesian(Evec[:,0]*-1, mean)< np.pi /3:
+        return Evec[:,0] * -1
+    elif GCD_cartesian(Evec[:,1], mean)< np.pi /3:
+        return Evec[:,1]
+    elif GCD_cartesian(Evec[:,1]*-1, mean)< np.pi /3:
+        return Evec[:,1] *-1               
+    elif GCD_cartesian(Evec[:,2], mean)< np.pi /3:
+        return Evec[:,2]
+    elif GCD_cartesian(Evec[:,2]*-1, mean)< np.pi /3:
+        return Evec[:,2]*-1
+    
+def fisher_mean(ArrayXYZ):
+    
+    sumx = ArrayXYZ[:,0].sum()
+    sumy = ArrayXYZ[:,1].sum()
+    sumz = ArrayXYZ[:,2].sum()
+    
+    R = np.sqrt(sumx**2+sumy**2+sumz**2)
+
+    meanxyz = [sumx/R, sumy/R, sumz/R]
+    
+    return meanxyz
+
 
 def get_k(df_vgps): 
     df_vgps['k'] = np.where(df_vgps['k'].isna(), ((140./df_vgps['alpha95'])**2)/(df_vgps['n']), df_vgps['k'])
@@ -63,6 +93,8 @@ def get_k(df_vgps):
 def get_alpha95(df_vgps): 
     df_vgps['alpha95'] = np.where(df_vgps['alpha95'].isna(), 140.0/np.sqrt(df_vgps['n'] * df_vgps['k']),df_vgps['alpha95'])
     return df_vgps
+
+
 
 
 def print_pole_statistics(reported_pole, vgp_mean, vgp_mean_recomputed):
