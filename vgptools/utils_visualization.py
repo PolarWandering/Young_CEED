@@ -9,30 +9,24 @@ import cartopy.crs as ccrs
 import cartopy.feature as cfeature
 from cartopy.geodesic import Geodesic
 from shapely.geometry import Polygon
-from vgptools.auxiliar import eigen_decomposition, spherical2cartesian, cartesian2spherical
+from vgptools.auxiliar import eigen_decomposition, spherical2cartesian, cartesian2spherical, PD, GCD_cartesian
 
 
 def RM_stats(df, title, xlabel, ylabel):
       
-    fig, ax = plt.subplots(figsize=(15,3))
+    fig, ax = plt.subplots(figsize=(7,3))
     ax2 = ax.twinx()
     plt.title(title, fontsize = 14)
 
-
-#     df['kappa_norm'] = df['k'] / df['k'].max()
-#     df['N_norm'] = df['N'] / df['N'].max()
     df['Circular Standart Deviation']=df['csd']
     df['Number of Studies']=df['n_studies']
     
     dfm = df[['age', 'A95', 'Number of Studies', 'Circular Standart Deviation']].melt('age', var_name='Statistic', value_name='value')
 
-
-    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['value'], hue = dfm['Statistic'], marker="o", ax=ax)
-    
+    sns.lineplot(data  = dfm, x = dfm['age'], y = dfm['value'], hue = dfm['Statistic'], marker="o", ax=ax)    
     sns.lineplot(data  = df, x = df['age'], y = df['k'], marker="o",  ax=ax2, color= "#C44D52")
+    
     ax2.yaxis.label.set_color('#C44D52')
-    # ax2.legend(handles=[a.lines[0] for a in [ax,ax2]], 
-    #        labels=["kappa"])
     ax.set_ylabel("Value", fontsize = 12)
     ax2.set_ylabel("Kappa", fontsize = 13)
     ax.set_xlabel("Mean age (Ma)", fontsize = 13)
@@ -221,7 +215,7 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
     gl.ylabels_left = True
 
-    plt.title('Overview map of parametrically sampled VGPs ($pseudo$-VGPs)')
+    plt.title('Overview map of parametrically sampled VGPs (one realization)')
     
     for _, pole in df_vgps.iterrows():
         plot_pole(pole.Plat, pole.Plon, pole.mean_age, df_vgps.mean_age.min(), df_vgps.mean_age.max(), ax1)
@@ -229,7 +223,7 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
 
 
     ax2 = plt.subplot(222, projection=proj)
-    ax2.set_title('Running Mean path on $pseudo$-VGPs')
+    ax2.set_title('Running Mean path on $pseudo$-VGPs (one realization)')
     ax2.add_feature(cfeature.BORDERS)
     gl = ax2.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
@@ -343,7 +337,7 @@ def plot_APWP_RM_ensemble(df, title):
     # plot longitude
     for run, df_run in df.groupby('run'):
         axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2)
-    axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2, label = 'Ensemble')
+    axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2, label = 'Running Mean realization')
     axes[1].fill_between(ensemble_lon.X, ensemble_lon.q16,ensemble_lon.q84, color= "#C44D52", alpha=.40, zorder =1, label="Ensemble 0.16-0.84 percentiles ")
     axes[1].plot(ensemble_PC.X, ensemble_lon.q16,color="#590E0E", zorder =3, linewidth=0.2)
     axes[1].plot(ensemble_PC.X, ensemble_lon.q84,color="#590E0E", zorder =3, linewidth=0.2)
@@ -353,6 +347,7 @@ def plot_APWP_RM_ensemble(df, title):
     
     plt.legend(loc="upper left")
     df = df.drop(['plon_east'], axis=1)
+    
     
 class quantiles:
     '''
@@ -388,13 +383,25 @@ class PC:
         self.groupby=df.groupby(xlabel)
         
     def PC(self):
-        lats, lons = [], []
+        lats, lons, maxGCD95 = [], [], []
         for age, df_age in self.groupby:
             array = np.array([spherical2cartesian([ np.radians(i[self.LonLabel]),np.radians(i[self.LatLabel])]) for _,i in df_age.iterrows()])
-            eigenValues, eigenVectors = eigen_decomposition(array)
-            lats.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[1])
-            lons.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[0])
+            
+            PrinComp=PD(array)
+            gcds = [GCD_cartesian(array[i],PrinComp) for i,_ in enumerate(array)]
+            
+            maxGCD95.append(np.degrees(np.percentile(gcds, 5)))
+            lats.append(np.degrees(cartesian2spherical(PrinComp))[1])
+            lons.append(np.degrees(cartesian2spherical(PrinComp))[0])
+            
+            #eigenValues, eigenVectors = eigen_decomposition(array)
+            # lats.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[1])
+            # lons.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[0])
             
 #             print(np.degrees(cartesian2spherical(eigenVectors[:,0])), age, len(array))
         
-        return [np.array(lons),np.array(lats)]
+        # return [np.array(lons),np.array(lats)]
+        return [np.array(lons),np.array(lats),np.array(maxGCD95)]
+    
+    
+
