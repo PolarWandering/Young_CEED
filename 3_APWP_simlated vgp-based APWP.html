@@ -313,8 +313,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#generate-a-dataframe-for-both-the-vgps-and-the-recomputed-poles-by-study">
-     Generate a DataFrame for both, the VGPs and the recomputed poles by study
+    <a class="reference internal nav-link" href="#read-the-dataframes-containing-the-vgps-and-the-recomputed-poles-by-study">
+     Read the DataFrames containing the VGPs and the recomputed poles by study
     </a>
    </li>
   </ul>
@@ -385,8 +385,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#generate-a-dataframe-for-both-the-vgps-and-the-recomputed-poles-by-study">
-     Generate a DataFrame for both, the VGPs and the recomputed poles by study
+    <a class="reference internal nav-link" href="#read-the-dataframes-containing-the-vgps-and-the-recomputed-poles-by-study">
+     Read the DataFrames containing the VGPs and the recomputed poles by study
     </a>
    </li>
   </ul>
@@ -453,7 +453,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
-                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">PD</span><span class="p">)</span>                              
+                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">PD</span><span class="p">)</span>                             
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">RM_stats</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span> <span class="n">plot_pole</span>
@@ -471,12 +471,20 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="generate-a-dataframe-for-both-the-vgps-and-the-recomputed-poles-by-study">
-<h2>Generate a DataFrame for both, the VGPs and the recomputed poles by study<a class="headerlink" href="#generate-a-dataframe-for-both-the-vgps-and-the-recomputed-poles-by-study" title="Permalink to this headline">#</a></h2>
+<section id="read-the-dataframes-containing-the-vgps-and-the-recomputed-poles-by-study">
+<h2>Read the DataFrames containing the VGPs and the recomputed poles by study<a class="headerlink" href="#read-the-dataframes-containing-the-vgps-and-the-recomputed-poles-by-study" title="Permalink to this headline">#</a></h2>
 <p>In doing so, we calculate a pole for each study taking into account all the vgps within the same area/study</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">df_pole_compilation_by_study</span> <span class="o">=</span> <span class="n">dfs_vgps_recomputed_poles</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">,</span> <span class="n">by_study</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_filtered_vgps, df_pole_compilation_by_study = dfs_vgps_recomputed_poles(data_path_VGP, by_study = True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+<span class="n">df_pole_compilation_by_study</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_pole_compilation_by_study.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -648,12 +656,12 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 <span class="n">df_pseudo_vgps</span> <span class="o">=</span> <span class="n">get_pseudo_vgps</span><span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">)</span>
-<span class="n">df_pseudo_vgps</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">df_pseudo_vgps</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 196 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 221 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -684,72 +692,23 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <tr>
       <th>0</th>
       <td>Absaroka_volcanics</td>
-      <td>-71.145475</td>
-      <td>47.291735</td>
-      <td>46</td>
+      <td>-73.456340</td>
+      <td>229.805190</td>
+      <td>47</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Absaroka_volcanics</td>
-      <td>-80.122658</td>
-      <td>119.574524</td>
-      <td>49</td>
+      <td>-80.231295</td>
+      <td>77.289768</td>
+      <td>48</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Absaroka_volcanics</td>
-      <td>-71.143363</td>
-      <td>77.138110</td>
-      <td>51</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>Absaroka_volcanics</td>
-      <td>-61.016404</td>
-      <td>358.038331</td>
-      <td>53</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>Absaroka_volcanics</td>
-      <td>-84.441800</td>
-      <td>294.251956</td>
-      <td>47</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>Absaroka_volcanics</td>
-      <td>-85.898651</td>
-      <td>117.533946</td>
-      <td>48</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>Absaroka_volcanics</td>
-      <td>-64.148116</td>
-      <td>347.602872</td>
-      <td>45</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>Absaroka_volcanics</td>
-      <td>-42.519676</td>
-      <td>301.321079</td>
-      <td>45</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>Absaroka_volcanics</td>
-      <td>-36.031887</td>
-      <td>23.452990</td>
-      <td>51</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>Absaroka_volcanics</td>
-      <td>-71.312507</td>
-      <td>357.352364</td>
-      <td>45</td>
+      <td>-84.678254</td>
+      <td>340.279438</td>
+      <td>49</td>
     </tr>
   </tbody>
 </table>
@@ -761,7 +720,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <p>We first apply the running mean method with the same parameter as in Torsvik et al. 2012 - a window lenght of 20 Ma and a time-step of 10 Ma.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">5</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
 <span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
 <span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
@@ -803,36 +762,36 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
   <tbody>
     <tr>
       <th>0</th>
-      <td>5.0</td>
-      <td>352.0</td>
+      <td>0.0</td>
+      <td>323.0</td>
       <td>15.0</td>
-      <td>23.913110</td>
-      <td>1.564911</td>
-      <td>16.564067</td>
-      <td>-20.697835</td>
-      <td>-86.956991</td>
+      <td>22.585848</td>
+      <td>1.683444</td>
+      <td>17.043815</td>
+      <td>-31.164109</td>
+      <td>-87.176258</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>15.0</td>
-      <td>268.0</td>
-      <td>11.0</td>
-      <td>12.656341</td>
-      <td>2.516085</td>
-      <td>22.768317</td>
-      <td>-18.909190</td>
-      <td>-84.474739</td>
+      <td>10.0</td>
+      <td>407.0</td>
+      <td>18.0</td>
+      <td>18.240845</td>
+      <td>1.677254</td>
+      <td>18.965423</td>
+      <td>-21.447676</td>
+      <td>-86.753439</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>25.0</td>
-      <td>298.0</td>
-      <td>10.0</td>
-      <td>10.553767</td>
-      <td>2.634825</td>
-      <td>24.933386</td>
-      <td>-21.005842</td>
-      <td>-81.377176</td>
+      <td>20.0</td>
+      <td>272.0</td>
+      <td>9.0</td>
+      <td>11.336441</td>
+      <td>2.652052</td>
+      <td>24.057287</td>
+      <td>-15.895265</td>
+      <td>-81.781682</td>
     </tr>
   </tbody>
 </table>
@@ -842,33 +801,30 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">]</span>
 <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">RM_on_pseudoVGP</span><span class="p">)</span>
-<span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_AB_.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/3/3_AB.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_14_0.png" src="_images/3_APWP_simlated vgp-based APWP_14_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_15_0.png" src="_images/3_APWP_simlated vgp-based APWP_15_0.png" />
 </div>
 </div>
 <section id="bootstrapped-age-distribution">
 <h2>Bootstrapped age distribution<a class="headerlink" href="#bootstrapped-age-distribution" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bootstrapped age distribution&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;# of Paleomagentic Poles&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age (Ma)&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;.1&quot;</span><span class="p">)</span> 
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;.1&quot;</span><span class="p">)</span>
 <span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_C.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Bootstrapped age distribution&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;# of Paleomagentic Poles&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/3_APWP_simlated vgp-based APWP_16_1.png" src="_images/3_APWP_simlated vgp-based APWP_16_1.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_17_0.png" src="_images/3_APWP_simlated vgp-based APWP_17_0.png" />
 </div>
 </div>
 </section>
@@ -883,7 +839,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_18_0.png" src="_images/3_APWP_simlated vgp-based APWP_18_0.png" />
+<img alt="_images/3_APWP_simlated vgp-based APWP_19_0.png" src="_images/3_APWP_simlated vgp-based APWP_19_0.png" />
 </div>
 </div>
 </section>
@@ -909,7 +865,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 22.3 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 22 s
 </pre></div>
 </div>
 </div>
@@ -924,108 +880,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>run</th>
-      <th>n_studies</th>
-      <th>k</th>
-      <th>A95</th>
-      <th>csd</th>
-      <th>age</th>
-      <th>N</th>
-      <th>plon</th>
-      <th>plat</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>0</td>
-      <td>15.0</td>
-      <td>22.898153</td>
-      <td>1.605351</td>
-      <td>16.927187</td>
-      <td>5.0</td>
-      <td>350.0</td>
-      <td>-52.643160</td>
-      <td>-86.573226</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>0</td>
-      <td>11.0</td>
-      <td>12.705072</td>
-      <td>2.469496</td>
-      <td>22.724611</td>
-      <td>15.0</td>
-      <td>277.0</td>
-      <td>-30.653802</td>
-      <td>-83.806275</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0</td>
-      <td>10.0</td>
-      <td>11.435511</td>
-      <td>2.578219</td>
-      <td>23.952852</td>
-      <td>25.0</td>
-      <td>285.0</td>
-      <td>-18.074360</td>
-      <td>-81.430294</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0</td>
-      <td>10.0</td>
-      <td>14.133780</td>
-      <td>2.175112</td>
-      <td>21.545464</td>
-      <td>35.0</td>
-      <td>318.0</td>
-      <td>-16.854731</td>
-      <td>-83.478617</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>12.0</td>
-      <td>15.067741</td>
-      <td>1.889693</td>
-      <td>20.867045</td>
-      <td>45.0</td>
-      <td>393.0</td>
-      <td>-21.017382</td>
-      <td>-83.610352</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Composite Running Mean APWP (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
 <span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_E.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
