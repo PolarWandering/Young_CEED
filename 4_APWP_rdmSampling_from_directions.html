@@ -378,7 +378,7 @@ title="Print to PDF"
 <span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
 <span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
                                <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">)</span>                              
-<span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span> 
 <span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span>
 <span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span><span class="n">plot_pole_A95</span><span class="p">,</span> <span class="n">plot_pole</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -398,7 +398,15 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">df_pole_compilation_by_study</span> <span class="o">=</span> <span class="n">dfs_vgps_recomputed_poles</span><span class="p">(</span><span class="n">data_path_VGP</span><span class="p">,</span> <span class="n">by_study</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_filtered_vgps, df_pole_compilation_by_study = dfs_vgps_recomputed_poles(data_path_VGP, by_study = True)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered_vgps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+<span class="n">df_pole_compilation_by_study</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_pole_compilation_by_study.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -411,9 +419,10 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_vgps_sampling_from_direction</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    takes a DF with site information, it draws for each direction a random direction following the</span>
-<span class="sd">    kappa concentration parameter and mean direction. Then, it calculates from the random direction a given VGP</span>
-<span class="sd">    For the assignaiton of ages to each direction/VGP, it is taken at random either uniform or normal distributions.</span>
+<span class="sd">    takes a DF with site information, it draws for each direction a random direction following the kappa </span>
+<span class="sd">    concentration parameter and mean direction. Then, it calculates from the random direction a given VGP</span>
+<span class="sd">    For the assignaiton of ages to each direction/VGP, it is taken at random either uniform or normal </span>
+<span class="sd">    distributions.</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     <span class="n">Study</span><span class="p">,</span> <span class="n">age_bst</span><span class="p">,</span> <span class="n">decs</span><span class="p">,</span> <span class="n">incs</span><span class="p">,</span> <span class="n">slat</span><span class="p">,</span> <span class="n">slon</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
     <span class="n">k_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
@@ -463,8 +472,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">10</span>
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mi">2</span>
 </pre></div>
 </div>
 </div>
@@ -506,7 +515,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 1min 10s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 2min 26s
 </pre></div>
 </div>
 </div>
@@ -518,7 +527,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_APWP_rdmSampling_from_directions_10_0.png" src="_images/4_APWP_rdmSampling_from_directions_10_0.png" />
+<img alt="_images/4_APWP_rdmSampling_from_directions_11_0.png" src="_images/4_APWP_rdmSampling_from_directions_11_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -566,7 +575,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/4_APWP_rdmSampling_from_directions_13_0.png" src="_images/4_APWP_rdmSampling_from_directions_13_0.png" />
+<img alt="_images/4_APWP_rdmSampling_from_directions_14_0.png" src="_images/4_APWP_rdmSampling_from_directions_14_0.png" />
 </div>
 </div>
 </section>
