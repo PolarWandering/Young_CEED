@@ -322,6 +322,11 @@ title="Print to PDF"
        2. Subselect VGPs that were originally taken into account to the calculation of the paleomagnetic pole.
       </a>
      </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-a-csv-to-read-in-the-following-notebooks">
+       Create a csv to read in the following notebooks
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -375,6 +380,11 @@ title="Print to PDF"
      <li class="toc-h3 nav-item toc-entry">
       <a class="reference internal nav-link" href="#subselect-vgps-that-were-originally-taken-into-account-to-the-calculation-of-the-paleomagnetic-pole">
        2. Subselect VGPs that were originally taken into account to the calculation of the paleomagnetic pole.
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#create-a-csv-to-read-in-the-following-notebooks">
+       Create a csv to read in the following notebooks
       </a>
      </li>
     </ul>
@@ -491,7 +501,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 31/31 [00:55&lt;00:00,  1.78s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 31/31 [00:43&lt;00:00,  1.39s/it]
 </pre></div>
 </div>
 </div>
@@ -555,6 +565,16 @@ We can group the paleopoles within the same study with different numbers in the 
 </div>
 </div>
 </section>
+<section id="create-a-csv-to-read-in-the-following-notebooks">
+<h3>Create a csv to read in the following notebooks<a class="headerlink" href="#create-a-csv-to-read-in-the-following-notebooks" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="study-locations-and-vgps-by-age">
@@ -578,7 +598,7 @@ We can group the paleopoles within the same study with different numbers in the 
 <span class="n">ax1</span><span class="o">.</span><span class="n">stock_img</span><span class="p">()</span>
 
 
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Overview map of North America&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Overview map of North America and study locations&#39;</span><span class="p">)</span>
 <span class="n">s</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
     <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">slon</span><span class="p">,</span>
     <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">slat</span><span class="p">,</span>
@@ -612,19 +632,20 @@ We can group the paleopoles within the same study with different numbers in the 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">)</span>
-<span class="c1">#plt.savefig(current_path + &#39;/figures/1/1_AB.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/1/1_AB.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_Compile_12_0.png" src="_images/1_Compile_12_0.png" />
+<img alt="_images/1_Compile_14_0.png" src="_images/1_Compile_14_0.png" />
 </div>
 </div>
 <section id="age-distribution-of-vgps">
 <h2>Age distribution of VGPs<a class="headerlink" href="#age-distribution-of-vgps" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Age distribution of compiled VGPs&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of compiled VGPs&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age (Ma)&#39;</span><span class="p">)</span>
@@ -634,7 +655,10 @@ We can group the paleopoles within the same study with different numbers in the 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_Compile_14_0.png" src="_images/1_Compile_14_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Age distribution of compiled VGPs&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;Number of compiled VGPs&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/1_Compile_16_1.png" src="_images/1_Compile_16_1.png" />
 </div>
 </div>
 </section>
