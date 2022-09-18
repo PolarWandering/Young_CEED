@@ -432,7 +432,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation_by_study</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation_by_study</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_pole_compilation_by_study.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">df_pole_compilation_by_study</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="c1">#</span>
 </pre></div>
 </div>
 </div>
@@ -645,7 +646,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span>
 <span class="n">plot_poles_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_pole_compilation_by_study</span><span class="p">,</span> <span class="n">RM_classic_by_study</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/2/2_AB.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="c1"># plt.savefig(current_path + &#39;/figures/2/2_AB.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
@@ -682,23 +683,12 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
 <span class="n">RM_stats</span><span class="p">(</span><span class="n">RM_classic_by_study</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (Age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/2/2_D.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="c1"># plt.savefig(current_path + &#39;/figures/2/2_D.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <img alt="_images/2_APWP_conventional_15_0.png" src="_images/2_APWP_conventional_15_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RM_APWP_lat_lon_A95</span><span class="p">(</span><span class="n">RM_classic_by_study</span><span class="p">)</span>
-<span class="c1">#plt.savefig(current_path + &#39;/figures/2/2_E.pdf&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="_images/2_APWP_conventional_16_0.png" src="_images/2_APWP_conventional_16_0.png" />
 </div>
 </div>
 </section>
