@@ -9,7 +9,7 @@ import cartopy.crs as ccrs
 from cartopy.geodesic import Geodesic
 from shapely.geometry import Polygon
 
-from vgptools.auxiliar import spherical2cartesian, shape, eigen_decomposition
+from vgptools.auxiliar import spherical2cartesian, shape, eigen_decomposition, cartesian2spherical, GCD_cartesian
 
 
 def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age):
@@ -89,6 +89,15 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
             running_means.loc[age] = [age, mean['n'], number_studies, mean['k'],mean['alpha95'], mean['csd'], mean['dec'], mean['inc'], 
                                       shapes[0], shapes[1], shapes[2], shapes[3]]
     running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
+    
+    
+    
+    running_means['PPcartesian'] = running_means.apply(lambda row: spherical2cartesian([np.radians(row['plat']),np.radians(row['plon'])]), axis = 1)
+    list_gcd = [GCD_cartesian(prev, curr) for prev, curr in zip(running_means['PPcartesian'].tolist(), running_means['PPcartesian'].tolist()[1:])]
+    running_means['GCD'] = np.insert(np.degrees(list_gcd),0,0)
+    running_means['APW_rate'] = np.where(running_means['age'] != 0,  running_means['GCD']/running_means['age'].diff(), 0) 
+    
+    running_means = running_means.drop(['PPcartesian'], axis=1)        
     running_means.reset_index(drop=1, inplace=True)
     
     return running_means
@@ -130,12 +139,11 @@ def get_pseudo_vgps(df):
 
     return pseudo_vgps
 
-def get_vgps_sampling_direction(df):
+def get_vgps_sampling_from_direction(df):
     '''
     takes a DF with site information, it draws for each direction a random direction following the
     kappa concentration parameter and mean direction. Then, it calculates from the random direction a given VGP
-    In the present formulation we follow a conservative approach for the assignaiton of ages to each direction/VGP, 
-    it is taken at random between the min_age and max_age of reported VGPs.
+    For the assignaiton of ages to each direction/VGP, it is taken at random either uniform or normal distributions.
     '''    
     Study, age_bst, decs, incs, slat, slon, indexes = [], [], [], [], [], [], []
     k_mean = df['k'].mean()
@@ -151,9 +159,14 @@ def get_vgps_sampling_direction(df):
         slat.append(row.slat)
         slon.append(row.slon)
         indexes.append(index)
-        
-        age_bst.append(np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)))
         Study.append(row.Study)
+        
+        # Assessing the uncertianty distribution
+        if row.uncer_dist == 'uniform':
+            age_bst.append(np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)))
+        else:
+            age_bst.append(np.random.normal(row.mean_age, (row.max_age - row.mean_age) / 2))
+        
         
     dictionary = {
                   'Study': Study,
@@ -203,7 +216,7 @@ def running_mean_bootstrapping_direction(df_vgps, plon_label, plat_label, age_la
     for i in range(n_bst):
                
         vgps_sample_ = df_vgps.sample(n = len(df_vgps), replace = True)
-        vgps_sample = get_vgps_sampling_direction(vgps_sample_)
+        vgps_sample = get_vgps_sampling_from_direction(vgps_sample_)
         running_means_tmp = pd.DataFrame()
         running_means_tmp = running_mean_APWP_shape(vgps_sample, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age)
         running_means_tmp['run'] = float(i)
