@@ -94,7 +94,19 @@ def get_alpha95(df_vgps):
     df_vgps['alpha95'] = np.where(df_vgps['alpha95'].isna(), 140.0/np.sqrt(df_vgps['n'] * df_vgps['k']),df_vgps['alpha95'])
     return df_vgps
 
-
+def get_angle(a, b, c):
+    
+    '''
+    calculates the angle between threu points (b is pivot) using the law of cosines.
+    '''
+    
+    s = GCD_cartesian(a, c)  # an angular distance between the first and last pole of a track
+    p1 = GCD_cartesian(a, b)     # is a distance between the rotation pole and the first pole of a track 
+    p2 = GCD_cartesian(c, b)    # is an angular distance between the rotation pole and the last pole of a track. 
+    
+    angle = np.arccos((np.cos(s) - np.cos(p1) * np.cos(p2)) / (np.sin(p1) * np.sin(p2)))
+    
+    return angle
 
 
 def print_pole_statistics(reported_pole, vgp_mean, vgp_mean_recomputed):
