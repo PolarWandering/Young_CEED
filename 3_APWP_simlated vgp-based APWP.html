@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>\(pseudo\)-VGPs &#8212; Polar Wandering</title>
+    <title>Running means on \(pseudo\)-VGPs &#8212; Polar Wandering</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -306,6 +306,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
+   Running means on
    <span class="math notranslate nohighlight">
     \(pseudo\)
    </span>
@@ -366,7 +367,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>pseudo-VGPs</h1>
+                <h1>Running means on pseudo-VGPs</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -378,6 +379,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h1 nav-item toc-entry">
   <a class="reference internal nav-link" href="#">
+   Running means on
    <span class="math notranslate nohighlight">
     \(pseudo\)
    </span>
@@ -439,8 +441,8 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="pseudo-vgps">
-<h1><span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs<a class="headerlink" href="#pseudo-vgps" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="running-means-on-pseudo-vgps">
+<h1>Running means on <span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs<a class="headerlink" href="#running-means-on-pseudo-vgps" title="Permalink to this headline">#</a></h1>
 <p>APWP based on simulated VGPs (<em>pseudo</em>-VGPs) following the approach from Vaes et al. (2022)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -661,7 +663,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 221 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 164 ms, sys: 4.11 ms, total: 168 ms
+Wall time: 169 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -692,23 +695,23 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <tr>
       <th>0</th>
       <td>Absaroka_volcanics</td>
-      <td>-73.456340</td>
-      <td>229.805190</td>
-      <td>47</td>
+      <td>-71.145475</td>
+      <td>47.291735</td>
+      <td>46</td>
     </tr>
     <tr>
       <th>1</th>
       <td>Absaroka_volcanics</td>
-      <td>-80.231295</td>
-      <td>77.289768</td>
-      <td>48</td>
+      <td>-80.122658</td>
+      <td>119.574524</td>
+      <td>49</td>
     </tr>
     <tr>
       <th>2</th>
       <td>Absaroka_volcanics</td>
-      <td>-84.678254</td>
-      <td>340.279438</td>
-      <td>49</td>
+      <td>-71.143363</td>
+      <td>77.138110</td>
+      <td>51</td>
     </tr>
   </tbody>
 </table>
@@ -722,8 +725,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">23</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mi">2</span>
 
 <span class="n">RM_on_pseudoVGP</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
 <span class="n">RM_on_pseudoVGP</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -763,35 +766,35 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>323.0</td>
+      <td>325.0</td>
       <td>15.0</td>
-      <td>22.585848</td>
-      <td>1.683444</td>
-      <td>17.043815</td>
-      <td>-31.164109</td>
-      <td>-87.176258</td>
+      <td>24.779937</td>
+      <td>1.598942</td>
+      <td>16.271775</td>
+      <td>-18.977469</td>
+      <td>-86.779018</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>10.0</td>
-      <td>407.0</td>
-      <td>18.0</td>
-      <td>18.240845</td>
-      <td>1.677254</td>
-      <td>18.965423</td>
-      <td>-21.447676</td>
-      <td>-86.753439</td>
+      <td>2.0</td>
+      <td>335.0</td>
+      <td>15.0</td>
+      <td>24.156930</td>
+      <td>1.595831</td>
+      <td>16.480263</td>
+      <td>-19.396566</td>
+      <td>-86.731014</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>20.0</td>
-      <td>272.0</td>
-      <td>9.0</td>
-      <td>11.336441</td>
-      <td>2.652052</td>
-      <td>24.057287</td>
-      <td>-15.895265</td>
-      <td>-81.781682</td>
+      <td>4.0</td>
+      <td>352.0</td>
+      <td>15.0</td>
+      <td>23.913110</td>
+      <td>1.564911</td>
+      <td>16.564067</td>
+      <td>-20.697835</td>
+      <td>-86.956991</td>
     </tr>
   </tbody>
 </table>
@@ -801,7 +804,7 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">]</span>
 <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">RM_on_pseudoVGP</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/3/3_AB.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_AB.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
@@ -824,7 +827,10 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_APWP_simlated vgp-based APWP_17_0.png" src="_images/3_APWP_simlated vgp-based APWP_17_0.png" />
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Bootstrapped age distribution&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;# of Paleomagentic Poles&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/3_APWP_simlated vgp-based APWP_17_1.png" src="_images/3_APWP_simlated vgp-based APWP_17_1.png" />
 </div>
 </div>
 </section>
@@ -854,7 +860,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
     
-    <span class="n">pseudo_vgps_temp</span> <span class="o">=</span> <span class="n">get_pseudo_vgps</span><span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">)</span>
+    <span class="n">df_pole_compilation_by_study_</span><span class="o">=</span><span class="n">df_pole_compilation_by_study</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df_pole_compilation_by_study</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+    <span class="n">pseudo_vgps_temp</span> <span class="o">=</span> <span class="n">get_pseudo_vgps</span><span class="p">(</span><span class="n">df_pole_compilation_by_study_</span><span class="p">)</span>
     <span class="n">RM_APWP_parametric_temp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
     <span class="n">RM_APWP_parametric_temp</span> <span class="o">=</span> <span class="n">running_mean_APWP</span><span class="p">(</span><span class="n">pseudo_vgps_temp</span><span class="p">,</span> <span class="s1">&#39;Plon&#39;</span><span class="p">,</span> <span class="s1">&#39;Plat&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
     <span class="n">RM_APWP_parametric_temp</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
@@ -865,7 +872,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 22 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 20.6 s, sys: 139 ms, total: 20.7 s
+Wall time: 20.7 s
 </pre></div>
 </div>
 </div>
@@ -927,6 +935,10 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 <img alt="_images/3_APWP_simlated vgp-based APWP_26_0.png" src="_images/3_APWP_simlated vgp-based APWP_26_0.png" />
 </div>
 </div>
+<p>For each <span class="math notranslate nohighlight">\(PP_i\)</span>:</p>
+<ul class="simple">
+<li><p>Draw <span class="math notranslate nohighlight">\(n_i\)</span> <span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs from <span class="math notranslate nohighlight">\(\text{Fisher}(\mu, \kappa_\text{secular})\)</span></p></li>
+</ul>
 </section>
 </section>
 
