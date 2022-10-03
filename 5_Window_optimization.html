@@ -407,7 +407,7 @@ title="Print to PDF"
 </div>
 <section id="running-means-changing-both-window-lenght-and-step-size">
 <h3>2. Running means changing both, window lenght and step size<a class="headerlink" href="#running-means-changing-both-window-lenght-and-step-size" title="Permalink to this headline">#</a></h3>
-<p>In this experiment, and for a given realization <span class="math notranslate nohighlight">\(r\)</span> (with a given window <span class="math notranslate nohighlight">\(W_r\)</span> and step size <span class="math notranslate nohighlight">\(S_r\)</span>), with <span class="math notranslate nohighlight">\(R=W*S\)</span>, we proceed with the following steps:</p>
+<p>In this experiment, and for a given realization <span class="math notranslate nohighlight">\(r\)</span> (with a given window <span class="math notranslate nohighlight">\(W_r\)</span> and step size <span class="math notranslate nohighlight">\(S_r\)</span>) we proceed with the following steps:</p>
 <ol class="simple">
 <li><p>Generate a bootstrap sample <span class="math notranslate nohighlight">\(X_b\)</span> from the compiled dataset of VGPs <span class="math notranslate nohighlight">\(X\)</span> (<span class="math notranslate nohighlight">\(N=989\)</span>).</p></li>
 <li><p>For each entry <span class="math notranslate nohighlight">\(i\)</span> in the bootstrapped sample <span class="math notranslate nohighlight">\(X_b\)</span>, take a direction <span class="math notranslate nohighlight">\(\hat \mu_i\)</span> at random from <span class="math notranslate nohighlight">\(\text{Fisher}(\mu_i, \kappa_i)\)</span> and an age <span class="math notranslate nohighlight">\(\hat t\)</span> from <span class="math notranslate nohighlight">\(N(t_i, \sigma_i)\)</span> or <span class="math notranslate nohighlight">\(U(t_{max}, t_{max})\)</span>. Calculate a <span class="math notranslate nohighlight">\(VGP_i\)</span> for each <span class="math notranslate nohighlight">\(i\)</span>. This approach allows us to fully propagate the directional uncertainty (fisher distributed due to white random noise) towards the VGP/Pole space.</p></li>
@@ -420,7 +420,7 @@ title="Print to PDF"
 
 <span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">steps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">]</span> 
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">]</span> <span class="c1">#[2,5,10] </span>
 <span class="n">window_lengths</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="n">df_ensemble</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -438,7 +438,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 21min 42s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 9min 36s, sys: 2.67 s, total: 9min 39s
+Wall time: 9min 39s
 </pre></div>
 </div>
 </div>
@@ -446,6 +447,22 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_ensemble</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">&gt;</span><span class="mi">10</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">60</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Index([&#39;age&#39;, &#39;N&#39;, &#39;n_studies&#39;, &#39;k&#39;, &#39;A95&#39;, &#39;csd&#39;, &#39;plon&#39;, &#39;plat&#39;, &#39;foliation&#39;,
+       &#39;lineation&#39;, &#39;collinearity&#39;, &#39;coplanarity&#39;, &#39;GCD&#39;, &#39;APW_rate&#39;, &#39;angle&#39;,
+       &#39;run&#39;, &#39;window&#39;, &#39;time_step&#39;],
+      dtype=&#39;object&#39;)
 </pre></div>
 </div>
 </div>
@@ -464,14 +481,252 @@ title="Print to PDF"
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;lineation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;collinearity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;angle&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;APW_rate&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;angle&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;APW_rate&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_9_1.png" src="_images/5_Window_optimization_9_1.png" />
+<img alt="_images/5_Window_optimization_10_1.png" src="_images/5_Window_optimization_10_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">window</span><span class="p">,</span> <span class="n">df_window</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">df_step</span> <span class="ow">in</span> <span class="n">df_window</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time_step&#39;</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">df_age</span> <span class="ow">in</span> <span class="n">df_step</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">):</span>
+            
+            <span class="n">ArrayXYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">])])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">df_age</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>            
+            <span class="n">shapes</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
+            <span class="n">PrinComp</span><span class="o">=</span><span class="n">PD</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
+            
+            <span class="n">mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span><span class="o">=</span><span class="n">df_age</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span><span class="o">=</span><span class="n">df_age</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+            
+            <span class="n">PC_lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">PrinComp</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span><span class="c1">#mean[&#39;inc&#39;] #</span>
+            <span class="n">PC_lon</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">PrinComp</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="c1">#mean[&#39;dec&#39;] #</span>
+            
+            <span class="n">newrow</span> <span class="o">=</span> <span class="p">[</span><span class="n">window</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="n">age</span><span class="p">,</span> <span class="n">PC_lat</span><span class="p">,</span> <span class="n">PC_lon</span><span class="p">,</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;csd&#39;</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]]</span>
+            
+            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">array</span><span class="p">,</span> <span class="n">newrow</span><span class="p">])</span>
+            
+<span class="n">pole_mean_shapes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="s1">&#39;time_step&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;plat_PC&#39;</span><span class="p">,</span> <span class="s1">&#39;plon_PC&#39;</span><span class="p">,</span> <span class="s1">&#39;foliation&#39;</span><span class="p">,</span> 
+                                                  <span class="s1">&#39;lineation&#39;</span><span class="p">,</span> <span class="s1">&#39;collinearity&#39;</span><span class="p">,</span> <span class="s1">&#39;coplanarity&#39;</span><span class="p">,</span> <span class="s1">&#39;csd&#39;</span><span class="p">,</span> <span class="s1">&#39;kappa&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1.54 s, sys: 12.2 ms, total: 1.55 s
+Wall time: 1.55 s
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pole_mean_shapes</span><span class="p">[(</span><span class="n">pole_mean_shapes</span><span class="p">[</span><span class="s1">&#39;time_step&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">2</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="c1"># x = pole_mean_shapes.copy()</span>
+<span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>window</th>
+      <th>time_step</th>
+      <th>n</th>
+      <th>age</th>
+      <th>plat_PC</th>
+      <th>plon_PC</th>
+      <th>foliation</th>
+      <th>lineation</th>
+      <th>collinearity</th>
+      <th>coplanarity</th>
+      <th>csd</th>
+      <th>kappa</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>97.0</td>
+      <td>12.0</td>
+      <td>99.313232</td>
+      <td>-53.806829</td>
+      <td>3.920970</td>
+      <td>0.492555</td>
+      <td>0.125621</td>
+      <td>4.413525</td>
+      <td>12.535143</td>
+      <td>41.755284</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>60.0</td>
+      <td>14.0</td>
+      <td>-70.150429</td>
+      <td>-41.105661</td>
+      <td>2.532278</td>
+      <td>2.129866</td>
+      <td>0.841087</td>
+      <td>4.662144</td>
+      <td>10.247396</td>
+      <td>62.480279</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>64.0</td>
+      <td>16.0</td>
+      <td>-81.488693</td>
+      <td>35.601714</td>
+      <td>3.443355</td>
+      <td>3.584221</td>
+      <td>1.040909</td>
+      <td>7.027576</td>
+      <td>3.833920</td>
+      <td>446.358620</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>100.0</td>
+      <td>18.0</td>
+      <td>-76.632518</td>
+      <td>4.048398</td>
+      <td>3.095735</td>
+      <td>2.649825</td>
+      <td>0.855960</td>
+      <td>5.745560</td>
+      <td>5.057147</td>
+      <td>256.542226</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>100.0</td>
+      <td>20.0</td>
+      <td>-81.444150</td>
+      <td>-6.700793</td>
+      <td>3.350065</td>
+      <td>3.153605</td>
+      <td>0.941356</td>
+      <td>6.503669</td>
+      <td>2.844292</td>
+      <td>811.001389</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;csd&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># axes[0,0].set_yscale(&#39;log&#39;)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foliation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Elongation (log scale)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;lineation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;collinearity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;coplanarity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plat_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="o">-</span><span class="mi">75</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plon_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Latitude (°N)&#39;)
+</pre></div>
+</div>
+<img alt="_images/5_Window_optimization_13_1.png" src="_images/5_Window_optimization_13_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foliation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Elongation (log scale)&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Age (Ma)&#39;</span><span class="p">,</span>  <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plat_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Age (Ma)&#39;</span><span class="p">,</span>  <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">88</span><span class="p">,</span><span class="o">-</span><span class="mi">78</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plon_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">,</span>  <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Age (Ma)&#39;</span><span class="p">,</span>  <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/5/5a.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/5_Window_optimization_14_0.png" src="_images/5_Window_optimization_14_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;csd&quot;</span><span class="p">,</span>  <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># axes[0,0].set_yscale(&#39;log&#39;)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foliation&quot;</span><span class="p">,</span>  <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;lineation&quot;</span><span class="p">,</span>  <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;collinearity&quot;</span><span class="p">,</span>  <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="c1"># axes[1,1].set_yscale(&#39;log&#39;)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;coplanarity&quot;</span><span class="p">,</span>  <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plat_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="o">-</span><span class="mi">75</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plon_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;age&#39;, ylabel=&#39;plon_PC&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/5_Window_optimization_15_1.png" src="_images/5_Window_optimization_15_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -521,293 +776,120 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th>0</th>
-      <td>0.0</td>
-      <td>156.0</td>
-      <td>12.0</td>
-      <td>24.184808</td>
-      <td>2.343134</td>
-      <td>16.470762</td>
-      <td>-19.799777</td>
-      <td>-88.045313</td>
-      <td>0.154926</td>
-      <td>0.662134</td>
-      <td>4.273870</td>
-      <td>0.817060</td>
-      <td>NaN</td>
-      <td>NaN</td>
-      <td>NaN</td>
+      <th>6</th>
+      <td>18.0</td>
+      <td>19.0</td>
+      <td>1.0</td>
+      <td>26.253656</td>
+      <td>6.675198</td>
+      <td>15.808480</td>
+      <td>-15.482214</td>
+      <td>-70.701775</td>
+      <td>1.546420+0.000000j</td>
+      <td>2.784026+0.000000j</td>
+      <td>1.800304+0.000000j</td>
+      <td>4.330446+0.000000j</td>
+      <td>13.972743</td>
+      <td>1.746593</td>
+      <td>48.061739</td>
       <td>0</td>
       <td>5</td>
       <td>2</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>2.0</td>
-      <td>247.0</td>
-      <td>13.0</td>
-      <td>23.521441</td>
-      <td>1.886022</td>
-      <td>16.701407</td>
-      <td>-13.302606</td>
-      <td>-87.503773</td>
-      <td>0.117479</td>
-      <td>0.804152</td>
-      <td>6.845093</td>
-      <td>0.921631</td>
-      <td>0.596583</td>
-      <td>0.298291</td>
-      <td>19.434171</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>4.0</td>
-      <td>148.0</td>
-      <td>9.0</td>
-      <td>23.222454</td>
-      <td>2.457797</td>
-      <td>16.808578</td>
-      <td>-35.956568</td>
-      <td>-88.168531</td>
-      <td>0.234192</td>
-      <td>0.998896</td>
-      <td>4.265292</td>
-      <td>1.233088</td>
-      <td>1.070995</td>
-      <td>0.535498</td>
-      <td>140.208260</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>6.0</td>
-      <td>57.0</td>
-      <td>8.0</td>
-      <td>16.899341</td>
-      <td>4.720408</td>
-      <td>19.703807</td>
-      <td>-166.119207</td>
-      <td>-88.287092</td>
-      <td>0.380759</td>
-      <td>1.240205</td>
-      <td>3.257193</td>
-      <td>1.620964</td>
-      <td>3.214717</td>
-      <td>1.607359</td>
-      <td>13.755813</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>8.0</td>
-      <td>35.0</td>
-      <td>6.0</td>
-      <td>16.761624</td>
-      <td>6.102437</td>
-      <td>19.784586</td>
-      <td>-38.152078</td>
-      <td>-84.958979</td>
-      <td>0.402923</td>
-      <td>0.918249</td>
-      <td>2.278967</td>
-      <td>1.321172</td>
-      <td>6.242248</td>
-      <td>3.121124</td>
-      <td>126.180174</td>
-      <td>0</td>
-      <td>5</td>
-      <td>2</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">12</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">window</span><span class="p">,</span> <span class="n">df_window</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;window&#39;</span><span class="p">):</span>
-    <span class="k">for</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">df_step</span> <span class="ow">in</span> <span class="n">df_window</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;time_step&#39;</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">df_age</span> <span class="ow">in</span> <span class="n">df_step</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">):</span>
-            
-            <span class="n">ArrayXYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">i</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">df_age</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>            
-            <span class="n">shapes</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
-            <span class="n">PrinComp</span><span class="o">=</span><span class="n">PD</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
-            
-            <span class="n">mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span><span class="o">=</span><span class="n">df_age</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span><span class="o">=</span><span class="n">df_age</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
-            
-            <span class="n">PC_lat</span> <span class="o">=</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span> <span class="c1">#np.degrees(cartesian2spherical(PrinComp))[1]</span>
-            <span class="n">PC_lon</span> <span class="o">=</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span> <span class="c1">#np.degrees(cartesian2spherical(PrinComp))[0]</span>
-            
-            <span class="n">newrow</span> <span class="o">=</span> <span class="p">[</span><span class="n">window</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="n">age</span><span class="p">,</span> <span class="n">PC_lat</span><span class="p">,</span> <span class="n">PC_lon</span><span class="p">,</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;csd&#39;</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]]</span>
-            
-            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">array</span><span class="p">,</span> <span class="n">newrow</span><span class="p">])</span>
-            
-<span class="n">pole_mean_shapes</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;window&#39;</span><span class="p">,</span> <span class="s1">&#39;time_step&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;plat_PC&#39;</span><span class="p">,</span> <span class="s1">&#39;plon_PC&#39;</span><span class="p">,</span> <span class="s1">&#39;foliation&#39;</span><span class="p">,</span> 
-                                                  <span class="s1">&#39;lineation&#39;</span><span class="p">,</span> <span class="s1">&#39;collinearity&#39;</span><span class="p">,</span> <span class="s1">&#39;coplanarity&#39;</span><span class="p">,</span> <span class="s1">&#39;csd&#39;</span><span class="p">,</span> <span class="s1">&#39;kappa&#39;</span><span class="p">])</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Wall time: 5.49 s
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">pole_mean_shapes</span><span class="p">[(</span><span class="n">pole_mean_shapes</span><span class="p">[</span><span class="s1">&#39;time_step&#39;</span><span class="p">]</span> <span class="o">==</span><span class="mi">5</span><span class="p">)]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="c1"># x = pole_mean_shapes.copy()</span>
-<span class="n">x</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>window</th>
-      <th>time_step</th>
-      <th>age</th>
-      <th>plat_PC</th>
-      <th>plon_PC</th>
-      <th>foliation</th>
-      <th>lineation</th>
-      <th>collinearity</th>
-      <th>coplanarity</th>
-      <th>csd</th>
-      <th>kappa</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>31</th>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>0.0</td>
-      <td>-88.505704</td>
-      <td>317.818921</td>
-      <td>0.004047</td>
-      <td>0.361871</td>
-      <td>89.411265</td>
-      <td>0.365919</td>
-      <td>1.351357</td>
-      <td>3592.772523</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>-87.610300</td>
-      <td>312.149725</td>
-      <td>0.090995</td>
-      <td>0.725960</td>
-      <td>7.978020</td>
-      <td>0.816955</td>
-      <td>1.535017</td>
-      <td>2784.477781</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>10.0</td>
-      <td>-87.921034</td>
-      <td>315.813438</td>
-      <td>0.247266</td>
-      <td>0.671758</td>
-      <td>2.716746</td>
-      <td>0.919023</td>
-      <td>4.233106</td>
-      <td>366.143865</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>5.0</td>
-      <td>5.0</td>
-      <td>15.0</td>
-      <td>-76.034247</td>
-      <td>340.076537</td>
-      <td>0.703594</td>
-      <td>0.281223</td>
-      <td>0.399695</td>
-      <td>0.984818</td>
-      <td>9.659046</td>
-      <td>70.323679</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>5.0</td>
-      <td>5.0</td>
+      <th>7</th>
       <td>20.0</td>
-      <td>-81.629886</td>
-      <td>352.591995</td>
-      <td>0.200312</td>
-      <td>0.481655</td>
-      <td>2.404521</td>
-      <td>0.681967</td>
-      <td>2.844292</td>
-      <td>811.001389</td>
+      <td>35.0</td>
+      <td>3.0</td>
+      <td>27.406053</td>
+      <td>4.715500</td>
+      <td>15.472546</td>
+      <td>-4.699138</td>
+      <td>-76.933025</td>
+      <td>1.047517+0.000000j</td>
+      <td>2.908995+0.000000j</td>
+      <td>2.777038+0.000000j</td>
+      <td>3.956512+0.000000j</td>
+      <td>6.892739</td>
+      <td>3.446369</td>
+      <td>90.790933</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>22.0</td>
+      <td>53.0</td>
+      <td>4.0</td>
+      <td>32.921327</td>
+      <td>3.458863</td>
+      <td>14.117128</td>
+      <td>-12.096200</td>
+      <td>-77.801417</td>
+      <td>0.282816+0.000000j</td>
+      <td>3.353801+0.000000j</td>
+      <td>11.858597+0.000000j</td>
+      <td>3.636617+0.000000j</td>
+      <td>1.834317</td>
+      <td>0.917158</td>
+      <td>118.241539</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>24.0</td>
+      <td>54.0</td>
+      <td>4.0</td>
+      <td>13.613963</td>
+      <td>5.448506</td>
+      <td>21.952942</td>
+      <td>-14.450138</td>
+      <td>-82.564542</td>
+      <td>1.171134+0.000000j</td>
+      <td>2.174705+0.000000j</td>
+      <td>1.856923+0.000000j</td>
+      <td>3.345839+0.000000j</td>
+      <td>4.779020</td>
+      <td>2.389510</td>
+      <td>172.709104</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>26.0</td>
+      <td>93.0</td>
+      <td>3.0</td>
+      <td>8.46406</td>
+      <td>5.364771</td>
+      <td>27.841694</td>
+      <td>-14.071619</td>
+      <td>-84.227446</td>
+      <td>1.224529+0.000000j</td>
+      <td>1.636354+0.000000j</td>
+      <td>1.336313+0.000000j</td>
+      <td>2.860883+0.000000j</td>
+      <td>1.663464</td>
+      <td>0.831732</td>
+      <td>7.866605</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
-
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;csd&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foliation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;lineation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;collinearity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;coplanarity&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plat_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;plon_PC&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;age&#39;, ylabel=&#39;plon_PC&#39;&gt;
-</pre></div>
-</div>
-<img alt="_images/5_Window_optimization_13_1.png" src="_images/5_Window_optimization_13_1.png" />
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
 
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;csd&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="c1"># axes[0,0].set_yscale(&#39;log&#39;)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;foliation&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
@@ -821,19 +903,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">~</span>\<span class="n">AppData</span>\<span class="n">Local</span>\<span class="n">Temp</span><span class="o">/</span><span class="n">ipykernel_578296</span><span class="o">/</span><span class="mf">1854668468.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">18</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> 
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;csd&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;time_step&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;x&#39; is not defined
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;plon_PC&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_14_1.png" src="_images/5_Window_optimization_14_1.png" />
+<img alt="_images/5_Window_optimization_18_1.png" src="_images/5_Window_optimization_18_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -846,7 +919,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;csd&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_15_1.png" src="_images/5_Window_optimization_15_1.png" />
+<img alt="_images/5_Window_optimization_19_1.png" src="_images/5_Window_optimization_19_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -866,7 +939,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.0, 0.7)
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_16_1.png" src="_images/5_Window_optimization_16_1.png" />
+<img alt="_images/5_Window_optimization_20_1.png" src="_images/5_Window_optimization_20_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -885,7 +958,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;csd&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_17_1.png" src="_images/5_Window_optimization_17_1.png" />
+<img alt="_images/5_Window_optimization_21_1.png" src="_images/5_Window_optimization_21_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -904,7 +977,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;angle&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_18_1.png" src="_images/5_Window_optimization_18_1.png" />
+<img alt="_images/5_Window_optimization_22_1.png" src="_images/5_Window_optimization_22_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -933,7 +1006,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window&#39;, ylabel=&#39;angle&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_20_1.png" src="_images/5_Window_optimization_20_1.png" />
+<img alt="_images/5_Window_optimization_24_1.png" src="_images/5_Window_optimization_24_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -948,7 +1021,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;age&#39;, ylabel=&#39;APW_rate&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_21_1.png" src="_images/5_Window_optimization_21_1.png" />
+<img alt="_images/5_Window_optimization_25_1.png" src="_images/5_Window_optimization_25_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -996,7 +1069,7 @@ title="Print to PDF"
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IllegalArgumentException: Points of LinearRing do not form a closed linestring
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_2.png" src="_images/5_Window_optimization_22_2.png" />
+<img alt="_images/5_Window_optimization_26_2.png" src="_images/5_Window_optimization_26_2.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 7 Ma.
 </pre></div>
 </div>
@@ -1005,164 +1078,164 @@ IllegalArgumentException: Points of LinearRing do not form a closed linestring
 IllegalArgumentException: Points of LinearRing do not form a closed linestring
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_5.png" src="_images/5_Window_optimization_22_5.png" />
+<img alt="_images/5_Window_optimization_26_5.png" src="_images/5_Window_optimization_26_5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 9 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_7.png" src="_images/5_Window_optimization_22_7.png" />
+<img alt="_images/5_Window_optimization_26_7.png" src="_images/5_Window_optimization_26_7.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 11 Ma.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IllegalArgumentException: Points of LinearRing do not form a closed linestring
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_10.png" src="_images/5_Window_optimization_22_10.png" />
+<img alt="_images/5_Window_optimization_26_10.png" src="_images/5_Window_optimization_26_10.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 13 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_12.png" src="_images/5_Window_optimization_22_12.png" />
+<img alt="_images/5_Window_optimization_26_12.png" src="_images/5_Window_optimization_26_12.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 15 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_14.png" src="_images/5_Window_optimization_22_14.png" />
+<img alt="_images/5_Window_optimization_26_14.png" src="_images/5_Window_optimization_26_14.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 17 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_16.png" src="_images/5_Window_optimization_22_16.png" />
+<img alt="_images/5_Window_optimization_26_16.png" src="_images/5_Window_optimization_26_16.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 19 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_18.png" src="_images/5_Window_optimization_22_18.png" />
+<img alt="_images/5_Window_optimization_26_18.png" src="_images/5_Window_optimization_26_18.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 21 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_20.png" src="_images/5_Window_optimization_22_20.png" />
+<img alt="_images/5_Window_optimization_26_20.png" src="_images/5_Window_optimization_26_20.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 23 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_22.png" src="_images/5_Window_optimization_22_22.png" />
+<img alt="_images/5_Window_optimization_26_22.png" src="_images/5_Window_optimization_26_22.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 25 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_24.png" src="_images/5_Window_optimization_22_24.png" />
+<img alt="_images/5_Window_optimization_26_24.png" src="_images/5_Window_optimization_26_24.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 27 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_26.png" src="_images/5_Window_optimization_22_26.png" />
+<img alt="_images/5_Window_optimization_26_26.png" src="_images/5_Window_optimization_26_26.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 2 Ma, Window lenght: 29 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_28.png" src="_images/5_Window_optimization_22_28.png" />
+<img alt="_images/5_Window_optimization_26_28.png" src="_images/5_Window_optimization_26_28.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 5 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_30.png" src="_images/5_Window_optimization_22_30.png" />
+<img alt="_images/5_Window_optimization_26_30.png" src="_images/5_Window_optimization_26_30.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 7 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_32.png" src="_images/5_Window_optimization_22_32.png" />
+<img alt="_images/5_Window_optimization_26_32.png" src="_images/5_Window_optimization_26_32.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 9 Ma.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IllegalArgumentException: Points of LinearRing do not form a closed linestring
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_35.png" src="_images/5_Window_optimization_22_35.png" />
+<img alt="_images/5_Window_optimization_26_35.png" src="_images/5_Window_optimization_26_35.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 11 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_37.png" src="_images/5_Window_optimization_22_37.png" />
+<img alt="_images/5_Window_optimization_26_37.png" src="_images/5_Window_optimization_26_37.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 13 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_39.png" src="_images/5_Window_optimization_22_39.png" />
+<img alt="_images/5_Window_optimization_26_39.png" src="_images/5_Window_optimization_26_39.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 15 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_41.png" src="_images/5_Window_optimization_22_41.png" />
+<img alt="_images/5_Window_optimization_26_41.png" src="_images/5_Window_optimization_26_41.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 17 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_43.png" src="_images/5_Window_optimization_22_43.png" />
+<img alt="_images/5_Window_optimization_26_43.png" src="_images/5_Window_optimization_26_43.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 19 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_45.png" src="_images/5_Window_optimization_22_45.png" />
+<img alt="_images/5_Window_optimization_26_45.png" src="_images/5_Window_optimization_26_45.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 21 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_47.png" src="_images/5_Window_optimization_22_47.png" />
+<img alt="_images/5_Window_optimization_26_47.png" src="_images/5_Window_optimization_26_47.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 23 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_49.png" src="_images/5_Window_optimization_22_49.png" />
+<img alt="_images/5_Window_optimization_26_49.png" src="_images/5_Window_optimization_26_49.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 25 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_51.png" src="_images/5_Window_optimization_22_51.png" />
+<img alt="_images/5_Window_optimization_26_51.png" src="_images/5_Window_optimization_26_51.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 27 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_53.png" src="_images/5_Window_optimization_22_53.png" />
+<img alt="_images/5_Window_optimization_26_53.png" src="_images/5_Window_optimization_26_53.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 5 Ma, Window lenght: 29 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_55.png" src="_images/5_Window_optimization_22_55.png" />
+<img alt="_images/5_Window_optimization_26_55.png" src="_images/5_Window_optimization_26_55.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 5 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_57.png" src="_images/5_Window_optimization_22_57.png" />
+<img alt="_images/5_Window_optimization_26_57.png" src="_images/5_Window_optimization_26_57.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 7 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_59.png" src="_images/5_Window_optimization_22_59.png" />
+<img alt="_images/5_Window_optimization_26_59.png" src="_images/5_Window_optimization_26_59.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 9 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_61.png" src="_images/5_Window_optimization_22_61.png" />
+<img alt="_images/5_Window_optimization_26_61.png" src="_images/5_Window_optimization_26_61.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 11 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_63.png" src="_images/5_Window_optimization_22_63.png" />
+<img alt="_images/5_Window_optimization_26_63.png" src="_images/5_Window_optimization_26_63.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 13 Ma.
 </pre></div>
 </div>
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>IllegalArgumentException: Points of LinearRing do not form a closed linestring
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_66.png" src="_images/5_Window_optimization_22_66.png" />
+<img alt="_images/5_Window_optimization_26_66.png" src="_images/5_Window_optimization_26_66.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 15 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_68.png" src="_images/5_Window_optimization_22_68.png" />
+<img alt="_images/5_Window_optimization_26_68.png" src="_images/5_Window_optimization_26_68.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 17 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_70.png" src="_images/5_Window_optimization_22_70.png" />
+<img alt="_images/5_Window_optimization_26_70.png" src="_images/5_Window_optimization_26_70.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 19 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_72.png" src="_images/5_Window_optimization_22_72.png" />
+<img alt="_images/5_Window_optimization_26_72.png" src="_images/5_Window_optimization_26_72.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 21 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_74.png" src="_images/5_Window_optimization_22_74.png" />
+<img alt="_images/5_Window_optimization_26_74.png" src="_images/5_Window_optimization_26_74.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 23 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_76.png" src="_images/5_Window_optimization_22_76.png" />
+<img alt="_images/5_Window_optimization_26_76.png" src="_images/5_Window_optimization_26_76.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 25 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_78.png" src="_images/5_Window_optimization_22_78.png" />
+<img alt="_images/5_Window_optimization_26_78.png" src="_images/5_Window_optimization_26_78.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 27 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_80.png" src="_images/5_Window_optimization_22_80.png" />
+<img alt="_images/5_Window_optimization_26_80.png" src="_images/5_Window_optimization_26_80.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Time Step: 10 Ma, Window lenght: 29 Ma.
 </pre></div>
 </div>
-<img alt="_images/5_Window_optimization_22_82.png" src="_images/5_Window_optimization_22_82.png" />
+<img alt="_images/5_Window_optimization_26_82.png" src="_images/5_Window_optimization_26_82.png" />
 </div>
 </div>
 <div class="cell docutils container">
