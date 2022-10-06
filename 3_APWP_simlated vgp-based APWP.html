@@ -663,8 +663,8 @@ the lower and upper bounds of the distribution of reported VGPs.</p>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 164 ms, sys: 4.11 ms, total: 168 ms
-Wall time: 169 ms
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 161 ms, sys: 4.34 ms, total: 165 ms
+Wall time: 163 ms
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -724,9 +724,9 @@ Wall time: 169 ms
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">max_age</span> <span class="o">=</span> <span class="mi">65</span>
-<span class="n">window_length</span> <span class="o">=</span> <span class="mi">23</span>
-<span class="n">time_step</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">60</span>
+<span class="n">window_length</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">time_step</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="n">RM_on_pseudoVGP</span> <span class="o">=</span> <span class="n">running_mean_APWP</span> <span class="p">(</span><span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="s2">&quot;Plon&quot;</span><span class="p">,</span> <span class="s2">&quot;Plat&quot;</span><span class="p">,</span> <span class="s2">&quot;mean_age&quot;</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
 <span class="n">RM_on_pseudoVGP</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -766,35 +766,35 @@ Wall time: 169 ms
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>325.0</td>
+      <td>318.0</td>
       <td>15.0</td>
-      <td>24.779937</td>
-      <td>1.598942</td>
-      <td>16.271775</td>
-      <td>-18.977469</td>
-      <td>-86.779018</td>
+      <td>24.849888</td>
+      <td>1.614154</td>
+      <td>16.248856</td>
+      <td>-19.836930</td>
+      <td>-86.779270</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>2.0</td>
-      <td>335.0</td>
-      <td>15.0</td>
-      <td>24.156930</td>
-      <td>1.595831</td>
-      <td>16.480263</td>
-      <td>-19.396566</td>
-      <td>-86.731014</td>
+      <td>10.0</td>
+      <td>420.0</td>
+      <td>18.0</td>
+      <td>17.802919</td>
+      <td>1.672374</td>
+      <td>19.197267</td>
+      <td>-23.851360</td>
+      <td>-86.135485</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4.0</td>
-      <td>352.0</td>
-      <td>15.0</td>
-      <td>23.913110</td>
-      <td>1.564911</td>
-      <td>16.564067</td>
-      <td>-20.697835</td>
-      <td>-86.956991</td>
+      <td>20.0</td>
+      <td>270.0</td>
+      <td>9.0</td>
+      <td>10.581072</td>
+      <td>2.764832</td>
+      <td>24.901195</td>
+      <td>-16.330463</td>
+      <td>-81.790537</td>
     </tr>
   </tbody>
 </table>
@@ -802,7 +802,7 @@ Wall time: 169 ms
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
 <span class="n">plot_pseudoVGPs_and_APWP</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">RM_on_pseudoVGP</span><span class="p">)</span>
 <span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_AB.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
@@ -818,7 +818,7 @@ Wall time: 169 ms
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Bootstrapped age distribution&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Ensemble pseudo-VGPs age distribution&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;# of Paleomagentic Poles&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age (Ma)&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_pseudo_vgps</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">60</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s2">&quot;.1&quot;</span><span class="p">)</span>
@@ -827,7 +827,7 @@ Wall time: 169 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Bootstrapped age distribution&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;# of Paleomagentic Poles&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Ensemble pseudo-VGPs age distribution&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;# of Paleomagentic Poles&#39;&gt;
 </pre></div>
 </div>
 <img alt="_images/3_APWP_simlated vgp-based APWP_17_1.png" src="_images/3_APWP_simlated vgp-based APWP_17_1.png" />
@@ -839,7 +839,7 @@ Wall time: 169 ms
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="s2">&quot;deep&quot;</span><span class="p">)</span>
-<span class="n">RM_stats</span><span class="p">(</span><span class="n">RM_on_pseudoVGP</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;kappa&quot;</span><span class="p">)</span>
+<span class="n">RM_stats</span><span class="p">(</span><span class="n">RM_on_pseudoVGP</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Running Mean Statistics (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;Age (Ma)&quot;</span><span class="p">,</span><span class="s2">&quot;kappa&quot;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
 <span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_D.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
@@ -872,8 +872,8 @@ Wall time: 169 ms
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 20.6 s, sys: 139 ms, total: 20.7 s
-Wall time: 20.7 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 16.1 s, sys: 96.5 ms, total: 16.2 s
+Wall time: 16.2 s
 </pre></div>
 </div>
 </div>
@@ -888,7 +888,7 @@ Wall time: 20.7 s
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Composite Running Mean APWP (age window = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, Time step = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot_APWP_RM_ensemble</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;Ensemble Moving average ($W$ = </span><span class="si">{</span><span class="n">window_length</span><span class="si">}</span><span class="s2"> Ma, $S$ = </span><span class="si">{</span><span class="n">time_step</span><span class="si">}</span><span class="s2"> Ma)&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 <span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_E.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
@@ -906,7 +906,7 @@ Wall time: 20.7 s
 <span class="kn">from</span> <span class="nn">cartopy.geodesic</span> <span class="kn">import</span> <span class="n">Geodesic</span>
 <span class="kn">from</span> <span class="nn">shapely.geometry</span> <span class="kn">import</span> <span class="n">Polygon</span>
 
-<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">,</span><span class="o">-</span><span class="mi">70</span><span class="p">]</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 
 <span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
@@ -920,6 +920,11 @@ Wall time: 20.7 s
 <span class="c1"># sns.scatterplot(x = RM_ensembl_quant_plon.mean, y =RM_ensemble_quant_plat.mean,</span>
                 
 <span class="c1">#                 transform = ccrs.PlateCarree())</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">df_parametric_means_collection</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span> 
+
+
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM_ensemble_quant_plat</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">RM_ensemble_quant_plon</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">df_parametric_means_collection</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
@@ -927,6 +932,7 @@ Wall time: 20.7 s
 
 <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">handles</span><span class="p">),</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">labels</span><span class="p">))</span>
+<span class="c1"># plt.savefig(current_path + &#39;/figures/3/3_F.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -935,9 +941,10 @@ Wall time: 20.7 s
 <img alt="_images/3_APWP_simlated vgp-based APWP_26_0.png" src="_images/3_APWP_simlated vgp-based APWP_26_0.png" />
 </div>
 </div>
-<p>For each <span class="math notranslate nohighlight">\(PP_i\)</span>:</p>
+<p>For each <span class="math notranslate nohighlight">\(X_i(\mu_i,n_i,t_i)\)</span>:</p>
 <ul class="simple">
-<li><p>Draw <span class="math notranslate nohighlight">\(n_i\)</span> <span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs from <span class="math notranslate nohighlight">\(\text{Fisher}(\mu, \kappa_\text{secular})\)</span></p></li>
+<li><p>Generate <span class="math notranslate nohighlight">\(n_i\)</span> <span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs (<span class="math notranslate nohighlight">\(X_i^*\)</span>) from the distribution <span class="math notranslate nohighlight">\(\text{Fisher}(\mu_i, \kappa_\text{i})\)</span>.</p></li>
+<li><p>Assing ages <span class="math notranslate nohighlight">\(t_i^*\)</span> by random draws from the <span class="math notranslate nohighlight">\(X_i\)</span> respective age dist.</p></li>
 </ul>
 </section>
 </section>
