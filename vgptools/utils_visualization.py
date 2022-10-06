@@ -12,9 +12,9 @@ from shapely.geometry import Polygon
 from vgptools.auxiliar import eigen_decomposition, spherical2cartesian, cartesian2spherical, PD, GCD_cartesian
 
 
-def RM_stats(df, title, xlabel, ylabel):
+def RM_stats(df, title, xlabel, ylabel, size=(7,3)):
       
-    fig, ax = plt.subplots(figsize=(7,3))
+    fig, ax = plt.subplots(figsize=size)
     ax2 = ax.twinx()
     plt.title(title, fontsize = 14)
 
@@ -55,7 +55,7 @@ def plot_pole_A95(Plat, Plon, A95, age, min_age, max_age, ax):
                       alpha=0.8, 
                       linewidth=1.5)
     plt.scatter(x = Plon, y = Plat, color = cmap(norm(age)),
-                s=50, transform = ccrs.PlateCarree(), zorder=4,edgecolors='black', alpha = 0.7)
+                s=50, transform = ccrs.PlateCarree(), zorder=4,edgecolors='black', alpha = 1)
     
 
 def plot_pole(Plat, Plon, age, min_age, max_age, ax):
@@ -69,13 +69,12 @@ def plot_pole(Plat, Plon, age, min_age, max_age, ax):
     ax.set_global() 
     ax.coastlines(linewidth=1, alpha=0.5)
     ax.gridlines(linewidth=1)
-
     """    
     cmap = mpl.cm.get_cmap('viridis')
     norm = mpl.colors.Normalize(min_age, max_age)
         
     plt.scatter(x = Plon, y = Plat, color = cmap(norm(age)),
-                s=50, transform = ccrs.PlateCarree(), zorder=4,edgecolors='black', alpha = 0.7)    
+                s=50, transform = ccrs.PlateCarree(), zorder=4,edgecolors='black', alpha = 1)    
     
     
 
@@ -140,7 +139,7 @@ def plot_poles_and_APWP(extent, df_poles, df_apwp):
 
     plt.title('Overview map of Paleomagnetic Poles', fontsize = 13)
     for _, pole in df_poles.iterrows():
-        plot_pole_A95(pole.Plat, pole.Plon, pole.A95, pole.mean_age, df_poles.mean_age.min(), df_poles.mean_age.max(), ax1)
+        plot_pole(pole.Plat, pole.Plon, pole.mean_age, df_poles.mean_age.min(), df_poles.mean_age.max(), ax1)
     plt.tight_layout()
 
     ax2 = plt.subplot(222, projection=proj)
@@ -215,7 +214,7 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
     gl.ylabels_left = True
 
-    plt.title('Overview map of parametrically sampled VGPs (one realization)')
+    plt.title('Parametrically sampled $pseudo$-VGPs (one realization)')
     
     for _, pole in df_vgps.iterrows():
         plot_pole(pole.Plat, pole.Plon, pole.mean_age, df_vgps.mean_age.min(), df_vgps.mean_age.max(), ax1)
@@ -223,7 +222,7 @@ def plot_pseudoVGPs_and_APWP(extent, df_vgps, df_apwp):
 
 
     ax2 = plt.subplot(222, projection=proj)
-    ax2.set_title('Running Mean path on $pseudo$-VGPs (one realization)')
+    ax2.set_title('Running averages on $pseudo$-VGPs (one realization)')
     ax2.add_feature(cfeature.BORDERS)
     gl = ax2.gridlines(crs=ccrs.PlateCarree(), draw_labels=False,
                       linewidth=0.8, color='gray', alpha=0.5, linestyle='-')
@@ -306,7 +305,7 @@ def plot_VGPs_and_APWP(extent, df_vgps, df_apwp):
 
     plt.colorbar(s, fraction=0.035).set_label("Age (My)") 
 
-def plot_APWP_RM_ensemble(df, title):
+def plot_APWP_RM_ensemble(df, title, size=(10,3)):
     '''
     pass a df with the colection of bootstrapped means for each run.
     '''
@@ -316,10 +315,8 @@ def plot_APWP_RM_ensemble(df, title):
     ensemble_lon = quantiles(df,"age","plon_east") # set quantiles of latitude groupedby age for visualization purposes
     ensemble_PC = PC(df,"age","plat","plon_east") # set principal component for each window
     
-    fig, axes = plt.subplots(2, 1, sharex=True, figsize=(15,6))
-    fig.suptitle(title, fontsize= 18, fontweight ='bold')
-    # axes[0].set_title('Latitude (°N)', fontsize=12, fontweight ='bold')
-    # axes[1].set_title('Longitude (°E)', fontsize=12, fontweight ='bold')
+    fig, axes = plt.subplots(2, 1, sharex=True, figsize=size)
+    fig.suptitle(title, fontsize= 14, fontweight ='bold')
     axes[0].set_ylabel(r'Latitude (°N)', fontweight ='bold', fontsize = 12)
     axes[1].set_ylabel(r'Longitude (°E)', fontweight ='bold', fontsize = 12)
         
@@ -337,7 +334,7 @@ def plot_APWP_RM_ensemble(df, title):
     # plot longitude
     for run, df_run in df.groupby('run'):
         axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2)
-    axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2, label = 'Running Mean realization')
+    axes[1].plot(df_run.age.tolist(), df_run.plon.tolist(), color="#4F4F4F", zorder =0, linewidth=0.2, label = 'Moving Average realization')
     axes[1].fill_between(ensemble_lon.X, ensemble_lon.q16,ensemble_lon.q84, color= "#C44D52", alpha=.40, zorder =1, label="Ensemble 0.16-0.84 percentiles ")
     axes[1].plot(ensemble_PC.X, ensemble_lon.q16,color="#590E0E", zorder =3, linewidth=0.2)
     axes[1].plot(ensemble_PC.X, ensemble_lon.q84,color="#590E0E", zorder =3, linewidth=0.2)
@@ -385,22 +382,17 @@ class PC:
     def PC(self):
         lats, lons, maxGCD95 = [], [], []
         for age, df_age in self.groupby:
-            array = np.array([spherical2cartesian([ np.radians(i[self.LonLabel]),np.radians(i[self.LatLabel])]) for _,i in df_age.iterrows()])
+            array = np.array([spherical2cartesian([ np.radians(i[self.LatLabel]),np.radians(i[self.LonLabel])]) for _,i in df_age.iterrows()])
             
             PrinComp=PD(array)
             gcds = [GCD_cartesian(array[i],PrinComp) for i,_ in enumerate(array)]
             
             maxGCD95.append(np.degrees(np.percentile(gcds, 5)))
-            lats.append(np.degrees(cartesian2spherical(PrinComp))[1])
-            lons.append(np.degrees(cartesian2spherical(PrinComp))[0])
-            
-            #eigenValues, eigenVectors = eigen_decomposition(array)
-            # lats.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[1])
-            # lons.append(np.degrees(cartesian2spherical(eigenVectors[:,0]))[0])
-            
-#             print(np.degrees(cartesian2spherical(eigenVectors[:,0])), age, len(array))
+            lats.append(np.degrees(cartesian2spherical(PrinComp))[0])
+            lons.append(np.degrees(cartesian2spherical(PrinComp))[1])
+                       
+        lats[0]=-90 # set the present day field in -90
         
-        # return [np.array(lons),np.array(lats)]
         return [np.array(lons),np.array(lats),np.array(maxGCD95)]
     
     

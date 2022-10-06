@@ -9,7 +9,7 @@ import cartopy.crs as ccrs
 from cartopy.geodesic import Geodesic
 from shapely.geometry import Polygon
 
-from vgptools.auxiliar import spherical2cartesian, shape, eigen_decomposition, cartesian2spherical, GCD_cartesian
+from vgptools.auxiliar import spherical2cartesian, shape, eigen_decomposition, cartesian2spherical, GCD_cartesian, get_angle, PD
 
 
 def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age):
@@ -79,26 +79,36 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
         number_studies = len(poles['Study'].unique())
         mean = ipmag.fisher_mean(dec=poles[plon_label].tolist(), inc=poles[plat_label].tolist())
         
-        ArrayXYZ = np.array([spherical2cartesian([i[plat_label], i[plon_label]]) for _,i in poles.iterrows()])        
+        ArrayXYZ = np.array([spherical2cartesian([np.radians(i[plat_label]), np.radians(i[plon_label])]) for _,i in poles.iterrows()])        
         if len(ArrayXYZ) > 3:
-            shapes = shape(ArrayXYZ)       
+            shapes = shape(ArrayXYZ)
+            PrinComp=PD(ArrayXYZ)
+            # mean['inc']=np.degrees(cartesian2spherical(PrinComp))[0]
+            # mean['dec']=np.degrees(cartesian2spherical(PrinComp))[1]
         else:
             shapes = [np.nan,np.nan,np.nan,np.nan]
         
         if mean: # this just ensures that dict isn't empty
             running_means.loc[age] = [age, mean['n'], number_studies, mean['k'],mean['alpha95'], mean['csd'], mean['dec'], mean['inc'], 
                                       shapes[0], shapes[1], shapes[2], shapes[3]]
-    running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
+    # Set longitudes in [-180, 180]
+    running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)   
     
-    
-    
+    # The following block calculates rate of polar wander (degrees per million years) 
     running_means['PPcartesian'] = running_means.apply(lambda row: spherical2cartesian([np.radians(row['plat']),np.radians(row['plon'])]), axis = 1)
-    list_gcd = [GCD_cartesian(prev, curr) for prev, curr in zip(running_means['PPcartesian'].tolist(), running_means['PPcartesian'].tolist()[1:])]
-    running_means['GCD'] = np.insert(np.degrees(list_gcd),0,0)
-    running_means['APW_rate'] = np.where(running_means['age'] != 0,  running_means['GCD']/running_means['age'].diff(), 0) 
-    
-    running_means = running_means.drop(['PPcartesian'], axis=1)        
+    running_means['PP_prev'] = running_means['PPcartesian'].shift(periods = 1)
+    running_means['PP_next'] =  running_means['PPcartesian'].shift(periods = -1)
+    running_means['GCD'] = running_means.apply(lambda row: np.degrees(GCD_cartesian(row['PP_prev'], row['PPcartesian'])), axis = 1)
+    running_means['APW_rate'] = running_means['GCD']/running_means['age'].diff()
+    # Calculate a 'kink' angle for each position of the path
+    running_means['angle'] = running_means.apply(lambda row: get_angle(row['PP_prev'], row['PPcartesian'], row['PP_next']), axis = 1)
+
+    running_means = running_means.drop(['PPcartesian', 'PP_prev', 'PP_next'], axis=1)      
     running_means.reset_index(drop=1, inplace=True)
+    
+    #set the present day field for the present
+    running_means['plat'] = np.where(running_means['age']==0, -90, running_means['plat'])
+    running_means['plon'] = np.where(running_means['age']==0, 0, running_means['plon'])
     
     return running_means
 
