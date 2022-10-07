@@ -36,6 +36,12 @@ def running_mean_APWP (data, plon_label, plat_label, age_label, window_length, t
     
     running_means.reset_index(drop=1, inplace=True)
     running_means['plon'] = running_means.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)
+    
+    #set the present day field for the present
+    running_means['plat'] = np.where(running_means['age']==0, -90, running_means['plat'])
+    running_means['plon'] = np.where(running_means['age']==0, 0, running_means['plon'])
+    running_means['A95'] = np.where(running_means['age']==0, 0, running_means['A95'])
+    
     return running_means
 
 
