@@ -76,7 +76,7 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
     
     mean_pole_ages = np.arange(min_age, max_age + time_step, time_step)
     
-    running_means = pd.DataFrame(columns=['age','N','n_studies','k','A95','csd','plon','plat', 'foliation','lineation','collinearity','coplanarity'])
+    running_means = pd.DataFrame(columns=['age','N','n_studies','k','A95','csd','plon','plat', 'foliation','lineation','collinearity','coplanarity','elong_dir'])
     
     for age in mean_pole_ages:
         window_min = age - (window_length / 2.)
@@ -89,6 +89,8 @@ def running_mean_APWP_shape(data, plon_label, plat_label, age_label, window_leng
         if len(ArrayXYZ) > 3:
             shapes = shape(ArrayXYZ)
             PrinComp=PD(ArrayXYZ)
+            eVal, eVec = eigen_decomposition(ArrayXYZ)
+            elong_dir = np.degrees(cartesian2spherical(eVal[:,1]))[1] # from T&K2004 (declination od the intermediate Evec)
             # mean['inc']=np.degrees(cartesian2spherical(PrinComp))[0]
             # mean['dec']=np.degrees(cartesian2spherical(PrinComp))[1]
         else:
@@ -203,22 +205,22 @@ def get_vgps_sampling_from_direction(df):
 
     return new_df
 
-def running_mean_VGPs_bootstrapped(df_vgps, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, n_bst = 100):
-    '''
-    takes a compilation of vgps and for each time window uses the bootstrap approach to construct empirical confidence bounds. 
-    '''
+# def running_mean_VGPs_bootstrapped(df_vgps, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, n_bst = 100):
+#     '''
+#     takes a compilation of vgps and for each time window uses the bootstrap approach to construct empirical confidence bounds. 
+#     '''
 
-    running_means_global = pd.DataFrame(columns=['run','N','k','A95','csd','foliation','lineation','collinearity','coplanarity'])
+#     running_means_global = pd.DataFrame(columns=['run','N','k','A95','csd','foliation','lineation','collinearity','coplanarity'])
 
-    for i in range(n_bst):
+#     for i in range(n_bst):
                
-        vgps_sample = df_vgps.sample(n = len(df_vgps), replace = True)
-        running_means_tmp = pd.DataFrame()
-        running_means_tmp = running_mean_APWP_shape(vgps_sample, 'vgp_lon_SH', 'vgp_lat_SH', 'mean_age', window_length, time_step, max_age, min_age)
-        running_means_tmp['run'] = float(i)
-        running_means_global = running_means_global.append(running_means_tmp, ignore_index=True)
-    running_means_global['plon'] = running_means_global.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)   
-    return running_means_global
+#         vgps_sample = df_vgps.sample(n = len(df_vgps), replace = True)
+#         running_means_tmp = pd.DataFrame()
+#         running_means_tmp = running_mean_APWP_shape(vgps_sample, 'vgp_lon_SH', 'vgp_lat_SH', 'mean_age', window_length, time_step, max_age, min_age)
+#         running_means_tmp['run'] = float(i)
+#         running_means_global = running_means_global.append(running_means_tmp, ignore_index=True)
+#     running_means_global['plon'] = running_means_global.apply(lambda row: row.plon - 360 if row.plon > 180 else row.plon, axis =1)   
+#     return running_means_global
 
 def running_mean_bootstrapping_direction(df_vgps, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age, n_bst = 100):
     '''
@@ -233,6 +235,7 @@ def running_mean_bootstrapping_direction(df_vgps, plon_label, plat_label, age_la
                
         vgps_sample_ = df_vgps.sample(n = len(df_vgps), replace = True)
         vgps_sample = get_vgps_sampling_from_direction(vgps_sample_)
+        
         running_means_tmp = pd.DataFrame()
         running_means_tmp = running_mean_APWP_shape(vgps_sample, plon_label, plat_label, age_label, window_length, time_step, max_age, min_age)
         running_means_tmp['run'] = float(i)
