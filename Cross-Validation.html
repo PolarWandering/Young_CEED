@@ -443,6 +443,61 @@ title="Print to PDF"
 <section id="the-following-block-iterates-through-ste-sizes-and-window-widths">
 <h2>The following block iterates through ste-sizes and window widths.<a class="headerlink" href="#the-following-block-iterates-through-ste-sizes-and-window-widths" title="Permalink to this headline">#</a></h2>
 <p>For each combination splits the dataset in train and test subgroiups and runs the MA on the. It calculates the difference between the mean position for each age and stores mean and standart deviation. Repeat this workflow for many (50) train and test sets.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">min_age</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max_age</span> <span class="o">=</span> <span class="mi">55</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># [2,5,10] </span>
+<span class="n">window_lengths</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># [5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] # np.arange(10,35,5)</span>
+
+<span class="n">df_ensemble</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;step_size&#39;</span><span class="p">,</span><span class="s1">&#39;window_lenght&#39;</span><span class="p">,</span><span class="s1">&#39;n_training&#39;</span><span class="p">,</span><span class="s1">&#39;mean_distance&#39;</span><span class="p">,</span><span class="s1">&#39;std_distance&#39;</span><span class="p">])</span>
+
+<span class="k">for</span> <span class="n">step</span> <span class="ow">in</span> <span class="n">steps</span><span class="p">:</span>
+    
+    <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">window_lengths</span><span class="p">:</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+
+            <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+
+            <span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df_filtered_vgps</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># 0.3      </span>
+
+            <span class="n">mean_distances</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">std_distances</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># train_ = get_vgps_sampling_from_direction(train)</span>
+            <span class="c1"># test_ = get_vgps_sampling_from_direction(test)</span>
+
+            <span class="n">RM_train_</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
+            <span class="n">RM_test_</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
+
+            <span class="n">distances</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">RM_train_</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">unique</span><span class="p">():</span>
+
+                <span class="n">df_train</span> <span class="o">=</span> <span class="n">RM_train_</span><span class="p">[</span><span class="n">RM_train_</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">t</span><span class="p">]</span>
+                <span class="n">df_test</span> <span class="o">=</span> <span class="n">RM_test_</span><span class="p">[</span><span class="n">RM_test_</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">==</span><span class="n">t</span><span class="p">]</span>
+
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">gcd</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">angle</span><span class="p">([</span><span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df_train</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span>
+                                     <span class="p">[</span><span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">df_test</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">iat</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+
+            <span class="n">mean_distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+            <span class="n">std_distances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+            
+            <span class="n">df_ensemble</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">df_ensemble</span><span class="p">)]</span> <span class="o">=</span> <span class="p">[</span><span class="n">step</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mean_distances</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">std_distances</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()]</span>
+
+<span class="n">df_ensemble</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="explore-the-outcome-for-one-ste-size">
 <h2>explore the outcome for one ste_size<a class="headerlink" href="#explore-the-outcome-for-one-ste-size" title="Permalink to this headline">#</a></h2>
@@ -453,6 +508,76 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>step_size</th>
+      <th>window_lenght</th>
+      <th>n_training</th>
+      <th>mean_distance</th>
+      <th>std_distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>4.749360</td>
+      <td>3.545239</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>3.884973</td>
+      <td>2.360916</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>3.870372</td>
+      <td>3.446418</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>3.569376</td>
+      <td>2.419408</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>3.901641</td>
+      <td>2.557182</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -495,7 +620,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Cross-Validation_7_0.png" src="_images/Cross-Validation_7_0.png" />
+<img alt="_images/Cross-Validation_8_0.png" src="_images/Cross-Validation_8_0.png" />
 </div>
 </div>
 </section>
@@ -543,11 +668,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Cross-Validation_9_0.png" src="_images/Cross-Validation_9_0.png" />
+<img alt="_images/Cross-Validation_10_0.png" src="_images/Cross-Validation_10_0.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/Cross-Validation_9_2.png" src="_images/Cross-Validation_9_2.png" />
+<img alt="_images/Cross-Validation_10_2.png" src="_images/Cross-Validation_10_2.png" />
 </div>
 </div>
 </section>
@@ -598,7 +723,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Cross-Validation_11_0.png" src="_images/Cross-Validation_11_0.png" />
+<img alt="_images/Cross-Validation_12_0.png" src="_images/Cross-Validation_12_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -617,7 +742,7 @@ title="Print to PDF"
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fadb0c32cb0&gt;]
 </pre></div>
 </div>
-<img alt="_images/Cross-Validation_12_1.png" src="_images/Cross-Validation_12_1.png" />
+<img alt="_images/Cross-Validation_13_1.png" src="_images/Cross-Validation_13_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -637,6 +762,48 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">kneed</span> <span class="kn">import</span> <span class="n">DataGenerator</span><span class="p">,</span> <span class="n">KneeLocator</span>
+
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">30</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">kneedle</span> <span class="o">=</span> <span class="n">KneeLocator</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> 
+                      <span class="n">interp_method</span><span class="o">=</span><span class="s2">&quot;polynomial&quot;</span><span class="p">,</span> <span class="n">polynomial_degree</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span> 
+                      <span class="n">curve</span><span class="o">=</span><span class="s2">&quot;convex&quot;</span><span class="p">,</span> <span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">kneedle</span><span class="o">.</span><span class="n">knee</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>20
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([4.015839576173946, 4.044460482826048, 4.018717391607216,
+       3.948027310403663, 3.84116199390489 , 3.70624794360368 ,
+       3.550766407796101, 3.381553381581512, 3.204799606862554,
+       3.026050572345152, 2.850206513538525, 2.681522412755168,
+       2.523607999110868, 2.379427748524698, 2.251300883719013,
+       2.140901374219457, 2.049257936354958, 1.976754033257731,
+       1.923127874863278, 1.887472417910384, 1.868235365941121,
+       1.86321916930085 , 1.869581025138212, 1.883832877405138,
+       1.901841416856844])
 </pre></div>
 </div>
 </div>
@@ -684,11 +851,11 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Cross-Validation_14_0.png" src="_images/Cross-Validation_14_0.png" />
+<img alt="_images/Cross-Validation_17_0.png" src="_images/Cross-Validation_17_0.png" />
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:ylabel=&#39;Count&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/Cross-Validation_14_2.png" src="_images/Cross-Validation_14_2.png" />
+<img alt="_images/Cross-Validation_17_2.png" src="_images/Cross-Validation_17_2.png" />
 </div>
 </div>
 <section id="second-excersise">
@@ -850,8 +1017,171 @@ Wall time: 44min 3s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window_lenght&#39;, ylabel=&#39;std_distance&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/Cross-Validation_17_1.png" src="_images/Cross-Validation_17_1.png" />
+<img alt="_images/Cross-Validation_20_1.png" src="_images/Cross-Validation_20_1.png" />
 </div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df_ensemble</span><span class="p">[</span><span class="n">df_ensemble</span><span class="p">[</span><span class="s1">&#39;step_size&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">7</span><span class="p">))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window_lenght&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mean_distance&quot;</span><span class="p">,</span>  
+             <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+             <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;GnBu_d&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window_lenght&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;mean_distance&quot;</span><span class="p">,</span>  
+             <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+             <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;GnBu_d&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window_lenght&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;std_distance&quot;</span><span class="p">,</span>
+             <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+             <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;GnBu_d&#39;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">lineplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;window_lenght&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;std_distance&quot;</span><span class="p">,</span>
+             <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> 
+             <span class="n">ax</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;GnBu_d&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;window_lenght&#39;, ylabel=&#39;std_distance&#39;&gt;
+</pre></div>
+</div>
+<img alt="_images/Cross-Validation_22_1.png" src="_images/Cross-Validation_22_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;mean_distance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">between</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">14.5</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>step_size</th>
+      <th>window_lenght</th>
+      <th>n_training</th>
+      <th>mean_distance</th>
+      <th>std_distance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2250</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>4.657225</td>
+      <td>2.905795</td>
+    </tr>
+    <tr>
+      <th>2251</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>1.0</td>
+      <td>5.732736</td>
+      <td>6.085922</td>
+    </tr>
+    <tr>
+      <th>2252</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>2.0</td>
+      <td>5.511360</td>
+      <td>6.098883</td>
+    </tr>
+    <tr>
+      <th>2253</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>3.0</td>
+      <td>3.561052</td>
+      <td>2.359034</td>
+    </tr>
+    <tr>
+      <th>2254</th>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>3.881417</td>
+      <td>2.544652</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>4493</th>
+      <td>2.0</td>
+      <td>49.0</td>
+      <td>43.0</td>
+      <td>2.197084</td>
+      <td>1.127821</td>
+    </tr>
+    <tr>
+      <th>4495</th>
+      <td>2.0</td>
+      <td>49.0</td>
+      <td>45.0</td>
+      <td>1.846569</td>
+      <td>0.714920</td>
+    </tr>
+    <tr>
+      <th>4496</th>
+      <td>2.0</td>
+      <td>49.0</td>
+      <td>46.0</td>
+      <td>2.282552</td>
+      <td>0.848668</td>
+    </tr>
+    <tr>
+      <th>4497</th>
+      <td>2.0</td>
+      <td>49.0</td>
+      <td>47.0</td>
+      <td>1.313469</td>
+      <td>0.622891</td>
+    </tr>
+    <tr>
+      <th>4499</th>
+      <td>2.0</td>
+      <td>49.0</td>
+      <td>49.0</td>
+      <td>2.031399</td>
+      <td>0.645558</td>
+    </tr>
+  </tbody>
+</table>
+<p>2154 rows × 5 columns</p>
+</div></div></div>
 </div>
 </section>
 </section>
