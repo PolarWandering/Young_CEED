@@ -441,7 +441,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_vgps_sampling_from_direction</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    takes a DF with site information, it draws for each direction a random direction following the kappa </span>
 <span class="sd">    concentration parameter and mean direction. Then, it calculates from the random direction a given VGP</span>
 <span class="sd">    For the assignaiton of ages to each direction/VGP, it is taken at random either uniform or normal </span>
@@ -504,7 +504,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">running_mean_bootstrapping_direction</span><span class="p">(</span><span class="n">df_vgps</span><span class="p">,</span> <span class="n">plon_label</span><span class="p">,</span> <span class="n">plat_label</span><span class="p">,</span> <span class="n">age_label</span><span class="p">,</span> <span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    takes a compilation of vgps (df_vgps). The original direction is taken as PDF to generate a pseudo-Dataset </span>
 <span class="sd">    that incorporates the uncertinty in the directional space and time. We apply this method a number $n_bst$ of times</span>
 <span class="sd">    to  generate $pseudo$-datasets. On each pseudo-dataset we run moving averages as usual.</span>
