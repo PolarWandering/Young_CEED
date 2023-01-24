@@ -323,8 +323,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#create-a-csv-to-read-in-the-following-notebooks">
-       Create a csv to read in the following notebooks
+      <a class="reference internal nav-link" href="#create-a-csv-with-the-compiled-dataframes">
+       Create a csv with the compiled DataFrames
       </a>
      </li>
     </ul>
@@ -383,8 +383,8 @@ title="Print to PDF"
       </a>
      </li>
      <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#create-a-csv-to-read-in-the-following-notebooks">
-       Create a csv to read in the following notebooks
+      <a class="reference internal nav-link" href="#create-a-csv-with-the-compiled-dataframes">
+       Create a csv with the compiled DataFrames
       </a>
      </li>
     </ul>
@@ -435,8 +435,8 @@ title="Print to PDF"
 
 <span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="p">(</span><span class="n">generates_compilation</span><span class="p">,</span> <span class="n">split_datasheet</span><span class="p">,</span>
                                         <span class="n">recalc_vgps</span><span class="p">,</span> <span class="n">go_reverse</span><span class="p">,</span>
-                                        <span class="n">get_alpha95</span><span class="p">,</span> <span class="n">get_k</span><span class="p">,</span>
-                                        <span class="n">get_ages</span><span class="p">)</span>
+                                        <span class="n">get_alpha95</span><span class="p">,</span> <span class="n">get_k</span><span class="p">,</span> <span class="n">get_ages</span><span class="p">)</span>
+                                       
 </pre></div>
 </div>
 </div>
@@ -501,7 +501,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|██████████████████████████████████████████████████████████████████████████████████| 31/31 [00:43&lt;00:00,  1.39s/it]
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100%|███████████████████████████████████████████| 31/31 [00:24&lt;00:00,  1.24it/s]
 </pre></div>
 </div>
 </div>
@@ -564,12 +564,24 @@ We can group the paleopoles within the same study with different numbers in the 
 </div>
 </div>
 </div>
-</section>
-<section id="create-a-csv-to-read-in-the-following-notebooks">
-<h3>Create a csv to read in the following notebooks<a class="headerlink" href="#create-a-csv-to-read-in-the-following-notebooks" title="Permalink to this headline">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 12)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-csv-with-the-compiled-dataframes">
+<h3>Create a csv with the compiled DataFrames<a class="headerlink" href="#create-a-csv-with-the-compiled-dataframes" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_filtered</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -637,7 +649,7 @@ We can group the paleopoles within the same study with different numbers in the 
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/1_Compile_14_0.png" src="_images/1_Compile_14_0.png" />
+<img alt="_images/1_Compile_15_0.png" src="_images/1_Compile_15_0.png" />
 </div>
 </div>
 <section id="age-distribution-of-vgps">
@@ -650,6 +662,10 @@ We can group the paleopoles within the same study with different numbers in the 
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of compiled VGPs&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Mean Age (Ma)&#39;</span><span class="p">)</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_filtered</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="n">legend</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+
+
+
+
 <span class="c1">#plt.savefig(current_path + &#39;/figures/1/1_C.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
@@ -658,7 +674,7 @@ We can group the paleopoles within the same study with different numbers in the 
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:title={&#39;center&#39;:&#39;Age distribution of compiled VGPs&#39;}, xlabel=&#39;Mean Age (Ma)&#39;, ylabel=&#39;Number of compiled VGPs&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/1_Compile_16_1.png" src="_images/1_Compile_16_1.png" />
+<img alt="_images/1_Compile_17_1.png" src="_images/1_Compile_17_1.png" />
 </div>
 </div>
 </section>
