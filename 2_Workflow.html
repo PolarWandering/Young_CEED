@@ -1,0 +1,1080 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Jupyter Notebook to accompany the paper: &#8212; Polar Wandering</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Polar Wandering</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="book/intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/PolarWandering/Young_CEED.git/main/v2/gh/PolarWandering/Young_CEED/main?urlpath=tree/2_Workflow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/PolarWandering/Young_CEED/blob/main/Preprocessing.ipynb/github/PolarWandering/Young_CEED/blob/main/2_Workflow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/PolarWandering/Young_CEED"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/2_Workflow.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   <em>
+    <strong>
+     Jupyter Notebook to accompany the paper:
+    </strong>
+   </em>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-nonparametric-framework-for-assessing-polar-wander">
+   <em>
+    <strong>
+     A nonparametric framework for assessing polar wander
+    </strong>
+   </em>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#by-l-c-gallo-1-l-c-gallo-geo-uio-no-m-domeier-1-f-sapienza-2">
+     <em>
+      <strong>
+       by L. C. Gallo
+       <span class="math notranslate nohighlight">
+        \(^1\)
+       </span>
+      </strong>
+     </em>
+     <em>
+      (l.c.gallo@geo.uio.no)
+     </em>
+     ***M. Domeier
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     , F. Sapienza
+     <span class="math notranslate nohighlight">
+      \(^2\)
+     </span>
+     ***
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-uncertainty-propagation-scheme-from-site-level-directional-data">
+   - Monte Carlo uncertainty propagation scheme from site-level directional data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-scientific-python-libraries">
+     *
+     <strong>
+      Import scientific Python libraries
+     </strong>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-all-site-level-data-from-the-collection-of-study-level-paleopoles">
+     1.
+     <strong>
+      Gather all site-level data from the collection of study-level paleopoles
+     </strong>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#we-can-now-see-how-a-single-run-looks-like">
+       We can now see how a single run looks like
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-now-proceed-to-run-the-workflow-a-great-number-of-times-in-order-to-to-get-the-ensemble-statistics">
+     4. We now proceed to run the workflow a great number of times in order to to get the ensemble statistics.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-we-need-to-calculate-the-time-varying-ensemble-statistics">
+     First we need to calculate the time-varying Ensemble statistics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-actual-path-in-sourthern-coordinates">
+     The actual path in Sourthern coordinates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensemble-stiastics-and-principal-components">
+       Ensemble Stiastics and Principal components
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Jupyter Notebook to accompany the paper:</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   <em>
+    <strong>
+     Jupyter Notebook to accompany the paper:
+    </strong>
+   </em>
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-nonparametric-framework-for-assessing-polar-wander">
+   <em>
+    <strong>
+     A nonparametric framework for assessing polar wander
+    </strong>
+   </em>
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#by-l-c-gallo-1-l-c-gallo-geo-uio-no-m-domeier-1-f-sapienza-2">
+     <em>
+      <strong>
+       by L. C. Gallo
+       <span class="math notranslate nohighlight">
+        \(^1\)
+       </span>
+      </strong>
+     </em>
+     <em>
+      (l.c.gallo@geo.uio.no)
+     </em>
+     ***M. Domeier
+     <span class="math notranslate nohighlight">
+      \(^1\)
+     </span>
+     , F. Sapienza
+     <span class="math notranslate nohighlight">
+      \(^2\)
+     </span>
+     ***
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#monte-carlo-uncertainty-propagation-scheme-from-site-level-directional-data">
+   - Monte Carlo uncertainty propagation scheme from site-level directional data
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#import-scientific-python-libraries">
+     *
+     <strong>
+      Import scientific Python libraries
+     </strong>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gather-all-site-level-data-from-the-collection-of-study-level-paleopoles">
+     1.
+     <strong>
+      Gather all site-level data from the collection of study-level paleopoles
+     </strong>
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#we-can-now-see-how-a-single-run-looks-like">
+       We can now see how a single run looks like
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#we-now-proceed-to-run-the-workflow-a-great-number-of-times-in-order-to-to-get-the-ensemble-statistics">
+     4. We now proceed to run the workflow a great number of times in order to to get the ensemble statistics.
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualization">
+   Visualization
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#first-we-need-to-calculate-the-time-varying-ensemble-statistics">
+     First we need to calculate the time-varying Ensemble statistics
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-actual-path-in-sourthern-coordinates">
+     The actual path in Sourthern coordinates
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#ensemble-stiastics-and-principal-components">
+       Ensemble Stiastics and Principal components
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section id="jupyter-notebook-to-accompany-the-paper">
+<h1><em><strong>Jupyter Notebook to accompany the paper:</strong></em><a class="headerlink" href="#jupyter-notebook-to-accompany-the-paper" title="Permalink to this headline">#</a></h1>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="a-nonparametric-framework-for-assessing-polar-wander">
+<h1><em><strong>A nonparametric framework for assessing polar wander</strong></em><a class="headerlink" href="#a-nonparametric-framework-for-assessing-polar-wander" title="Permalink to this headline">#</a></h1>
+<section id="by-l-c-gallo-1-l-c-gallo-geo-uio-no-m-domeier-1-f-sapienza-2">
+<h2><em><strong>by L. C. Gallo<span class="math notranslate nohighlight">\(^1\)</span></strong></em> <em>(<a class="reference external" href="mailto:l&#46;c&#46;gallo&#37;&#52;&#48;geo&#46;uio&#46;no">l<span>&#46;</span>c<span>&#46;</span>gallo<span>&#64;</span>geo<span>&#46;</span>uio<span>&#46;</span>no</a>)</em> ***M. Domeier<span class="math notranslate nohighlight">\(^1\)</span>, F. Sapienza<span class="math notranslate nohighlight">\(^2\)</span> ***<a class="headerlink" href="#by-l-c-gallo-1-l-c-gallo-geo-uio-no-m-domeier-1-f-sapienza-2" title="Permalink to this headline">#</a></h2>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="monte-carlo-uncertainty-propagation-scheme-from-site-level-directional-data">
+<h1>- Monte Carlo uncertainty propagation scheme from site-level directional data<a class="headerlink" href="#monte-carlo-uncertainty-propagation-scheme-from-site-level-directional-data" title="Permalink to this headline">#</a></h1>
+<p>This notebook illustrates the implementation of Section 2.2 in Gallo et al. (2023)</p>
+<section id="import-scientific-python-libraries">
+<h2>* <strong>Import scientific Python libraries</strong><a class="headerlink" href="#import-scientific-python-libraries" title="Permalink to this headline">#</a></h2>
+<p><strong>Import python libraries as well as functions written for the project within vgptools.</strong></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">pmagpy</span> <span class="kn">import</span> <span class="n">ipmag</span><span class="p">,</span> <span class="n">pmag</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+<span class="c1"># import cartopy.feature as cfeature</span>
+<span class="c1"># from cartopy.geodesic import Geodesic</span>
+<span class="c1"># from shapely.geometry import Polygon</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&quot;white&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="p">(</span><span class="n">get_files_in_directory</span><span class="p">,</span> <span class="n">spherical2cartesian</span><span class="p">,</span> 
+                               <span class="n">cartesian2spherical</span><span class="p">,</span> <span class="n">GCD_cartesian</span><span class="p">,</span> <span class="n">shape</span><span class="p">,</span> <span class="n">PD</span><span class="p">,</span> 
+                               <span class="n">eigen_decomposition</span><span class="p">,</span> <span class="n">get_angle</span><span class="p">)</span>                              
+<span class="kn">from</span> <span class="nn">vgptools.utils_compilation</span> <span class="kn">import</span> <span class="n">dfs_vgps_recomputed_poles</span> 
+<span class="kn">from</span> <span class="nn">vgptools.utils_APWPs</span> <span class="kn">import</span> <span class="n">running_mean_APWP</span><span class="p">,</span> <span class="n">running_mean_APWP_shape</span><span class="p">,</span> <span class="n">RM_stats</span>
+<span class="kn">from</span> <span class="nn">vgptools.utils_visualization</span> <span class="kn">import</span>  <span class="n">RM_stats</span><span class="p">,</span> <span class="n">plot_VGPs_and_APWP</span><span class="p">,</span> <span class="n">plot_APWP_RM_ensemble</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">,</span><span class="n">plot_pole_A95</span><span class="p">,</span> <span class="n">plot_pole</span><span class="p">,</span> <span class="n">PC</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="gather-all-site-level-data-from-the-collection-of-study-level-paleopoles">
+<h2>1. <strong>Gather all site-level data from the collection of study-level paleopoles</strong><a class="headerlink" href="#gather-all-site-level-data-from-the-collection-of-study-level-paleopoles" title="Permalink to this headline">#</a></h2>
+<p>In order to gather all the directions in one DataFrame <code class="docutils literal notranslate"><span class="pre">df_directions</span></code> we follow the workflow outlined in Notebook <code class="docutils literal notranslate"><span class="pre">1_Compile.ipynb</span></code> whose output corresponds to a <em>.csv</em> file that we import here to save computing time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">current_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+<span class="n">data_path_VGP</span> <span class="o">=</span> <span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/data/vgp_database&#39;</span>
+<span class="n">df_directions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>The following function uses Monte Carlo resampling to generate a pseudo-sample <span class="math notranslate nohighlight">\(X_b\)</span> where each datum <span class="math notranslate nohighlight">\(X_{bi}\)</span> is taken at random from the underlying probability distributions, that is:</p></li>
+</ol>
+<ul class="simple">
+<li><p>a direction <span class="math notranslate nohighlight">\(\hat \mu_i\)</span> from the probability distribution <span class="math notranslate nohighlight">\(\text{Fisher}(\mu_i, \kappa_i)\)</span></p></li>
+<li><p>an age <span class="math notranslate nohighlight">\(\hat t\)</span> from <span class="math notranslate nohighlight">\(N(t_i, \sigma_i)\)</span> or <span class="math notranslate nohighlight">\(U(t_{max}, t_{max})\)</span> (depending on whether <span class="math notranslate nohighlight">\(i\)</span> is radiometrically or stratigraphically constrained, respectively)</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\(X_{bi}\)</span>, calculate and store <span class="math notranslate nohighlight">\(VGP_i\)</span> and associated age <span class="math notranslate nohighlight">\(\hat t\)</span>.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_vgps_sampling_from_direction</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span>
+                                     <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span> 
+                                     <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                                     <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Takes a DF with the following site information: </span>
+<span class="sd">    - Study, site coordinates, mean direction, concentration parameter, mean age and errors) </span>
+<span class="sd">    </span>
+<span class="sd">    First, generates a pseudo-sample from the original dataset using nonparametric random sampling </span>
+<span class="sd">    with replacement (bootstrapped sample). Then, draws for each direction a random direction following </span>
+<span class="sd">    the kappa concentration parameter and mean direction. Then, it calculates from the random direction </span>
+<span class="sd">    a given VGP. </span>
+<span class="sd">    The assignation of ages to each pair direction/VGP, it is taken at random from either uniform </span>
+<span class="sd">    or normal distributions.</span>
+<span class="sd">    </span>
+<span class="sd">    Note: input directions must be all in the same mode (sensu pmagPy) so that we get coherent vgps. </span>
+<span class="sd">    Given that we want southern hemisphere vgps, we will work with reversed (&lt;0) inclinations (step already</span>
+<span class="sd">    done in 0_Preprocessing.ipynb)    </span>
+<span class="sd">    &#39;&#39;&#39;</span>    
+    <span class="n">Study</span><span class="p">,</span> <span class="n">age_bst</span><span class="p">,</span> <span class="n">decs</span><span class="p">,</span> <span class="n">incs</span><span class="p">,</span> <span class="n">slat</span><span class="p">,</span> <span class="n">slon</span><span class="p">,</span> <span class="n">indexes</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span> <span class="c1"># parameters of the pseudo-sample to be filled</span>
+    
+    <span class="n">k_mean</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">k_label</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># if site-level data has no reported kappa, we take the mean of the population instead.</span>
+    
+    <span class="n">df_pseudo</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">replace</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="c1"># generates a bootstrapped sample of the dataframe by randomly sampling with replacement</span>
+    
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df_pseudo</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>        
+        
+        <span class="c1"># we first generate one random direction from the original entry.</span>
+        <span class="n">kappa</span> <span class="o">=</span> <span class="n">k_mean</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">k_label</span><span class="p">])</span> <span class="k">else</span> <span class="n">row</span><span class="p">[</span><span class="n">k_label</span><span class="p">]</span> <span class="c1"># if we don&#39;t have kappa, we take the mean of the reported ones       </span>
+        
+        <span class="n">directions_temp</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fishrot</span><span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="n">kappa</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">dec_label</span><span class="p">],</span> <span class="n">inc</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="n">inc_label</span><span class="p">],</span> <span class="n">di_block</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+        
+        <span class="n">decs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">directions_temp</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">incs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">directions_temp</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="n">slat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">slat_label</span><span class="p">])</span>
+        <span class="n">slon</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">slon_label</span><span class="p">])</span>
+        <span class="n">indexes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">Study</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">study_label</span><span class="p">])</span>
+        
+        <span class="c1"># Assessing the uncertianty distribution (uniform or normal)</span>
+        <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">uncer_dist</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+            <span class="n">age_bst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">min_age_lab</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">max_age_lab</span><span class="p">])))</span>
+        <span class="k">else</span><span class="p">:</span>            
+            <span class="n">age_bst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">mean_age_lab</span><span class="p">],</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">max_age_lab</span><span class="p">]</span> <span class="o">-</span> <span class="n">row</span><span class="p">[</span><span class="n">mean_age_lab</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> 
+            <span class="c1"># the files were completed in such a way to have min and max ages, so we take sigma as a half of that range</span>
+    
+    <span class="n">dictionary</span> <span class="o">=</span> <span class="p">{</span>
+                  <span class="s1">&#39;Study&#39;</span><span class="p">:</span> <span class="n">Study</span><span class="p">,</span>
+                  <span class="s1">&#39;age&#39;</span><span class="p">:</span> <span class="n">age_bst</span><span class="p">,</span>
+                  <span class="s1">&#39;dec&#39;</span><span class="p">:</span> <span class="n">decs</span><span class="p">,</span>    
+                  <span class="s1">&#39;inc&#39;</span><span class="p">:</span> <span class="n">incs</span><span class="p">,</span>
+                  <span class="s1">&#39;slat&#39;</span><span class="p">:</span> <span class="n">slat</span><span class="p">,</span>
+                  <span class="s1">&#39;slon&#39;</span><span class="p">:</span> <span class="n">slon</span> 
+                  <span class="p">}</span>    
+    <span class="n">new_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>        
+       
+    <span class="c1">#new_df[&#39;plon&#39;] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[0], axis =1)</span>
+    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">],</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1">#new_df[&#39;plat&#39;] = new_df.apply(lambda row: pmag.dia_vgp(row.dec, row.inc, 1, row.slat, row.slon)[1], axis =1)</span>
+    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pmag</span><span class="o">.</span><span class="n">dia_vgp</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">],</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">])[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># set longitude in [-180,180]</span>
+    <span class="c1">#new_df[&#39;plon&#39;] = new_df.apply(lambda row: row.plon - 360 if row.plon &gt; 180 else row.plon, axis =1)</span>
+    <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">new_df</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">360</span><span class="p">)</span>
+
+    <span class="n">new_df</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="n">indexes</span>
+
+    <span class="k">return</span> <span class="n">new_df</span>
+</pre></div>
+</div>
+</div>
+</div>
+<ol class="simple">
+<li><p>The following function performs a Moving average:</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">moving_average_APWP</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="n">window_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Returns a data frame with a running mean (Moving average) APWP..</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters: </span>
+<span class="sd">    - Data Frame with the folowing columns that need to be set [[&#39;vgp_lat&#39;],[&#39;vgp_lon&#39;],[&#39;age&#39;]]</span>
+<span class="sd">    - time-step of the moving average (in Ma)</span>
+<span class="sd">    - window size of the moving average (in Ma)</span>
+<span class="sd">    </span>
+<span class="sd">    * it also calculates descriptive parameters for the underlying distribution of VGPs within each window, e.g. : </span>
+<span class="sd">    - Number of VGPs,</span>
+<span class="sd">    - Angular dispersion</span>
+<span class="sd">    - Concentration</span>
+<span class="sd">    - Shape (expressed as foliation, lineation, coplanarity and collinearity)</span>
+<span class="sd">     </span>
+<span class="sd">    * the APWP can also be described with some parameters, e.g.:</span>
+<span class="sd">    - Apparent Polar wander rate (in degrees per Ma) between each time interval</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">mean_pole_ages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">min_age</span><span class="p">,</span> <span class="n">max_age</span> <span class="o">+</span> <span class="n">time_step</span><span class="p">,</span> <span class="n">time_step</span><span class="p">)</span>
+    
+    <span class="n">running_means</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;n_studies&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">,</span><span class="s1">&#39;plon&#39;</span><span class="p">,</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="s1">&#39;foliation&#39;</span><span class="p">,</span><span class="s1">&#39;lineation&#39;</span><span class="p">,</span><span class="s1">&#39;collinearity&#39;</span><span class="p">,</span><span class="s1">&#39;coplanarity&#39;</span><span class="p">,</span><span class="s1">&#39;elong_dir&#39;</span><span class="p">])</span>
+    
+    <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">mean_pole_ages</span><span class="p">:</span>
+        <span class="n">window_min</span> <span class="o">=</span> <span class="n">age</span> <span class="o">-</span> <span class="p">(</span><span class="n">window_length</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+        <span class="n">window_max</span> <span class="o">=</span> <span class="n">age</span> <span class="o">+</span> <span class="p">(</span><span class="n">window_length</span> <span class="o">/</span> <span class="mf">2.</span><span class="p">)</span>
+        <span class="n">poles</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">data</span><span class="p">[</span><span class="n">age_label</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">window_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">age_label</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">window_max</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">poles</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span> <span class="k">continue</span>
+        
+        <span class="n">number_studies</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">poles</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">())</span>
+        <span class="n">mean</span> <span class="o">=</span> <span class="n">ipmag</span><span class="o">.</span><span class="n">fisher_mean</span><span class="p">(</span><span class="n">dec</span><span class="o">=</span><span class="n">poles</span><span class="p">[</span><span class="n">plon_label</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">inc</span><span class="o">=</span><span class="n">poles</span><span class="p">[</span><span class="n">plat_label</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+        
+        <span class="n">ArrayXYZ</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="n">plat_label</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="n">plon_label</span><span class="p">])])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">poles</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="n">shapes</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
+            <span class="n">PrinComp</span><span class="o">=</span><span class="n">PD</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
+            <span class="n">eVal</span><span class="p">,</span> <span class="n">eVec</span> <span class="o">=</span> <span class="n">eigen_decomposition</span><span class="p">(</span><span class="n">ArrayXYZ</span><span class="p">)</span>
+            <span class="n">elong_dir</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">eVec</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># from T&amp;K2004 (declination od the intermediate Evec)</span>
+            <span class="c1"># mean[&#39;inc&#39;]=np.degrees(cartesian2spherical(PrinComp))[0]</span>
+            <span class="c1"># mean[&#39;dec&#39;]=np.degrees(cartesian2spherical(PrinComp))[1]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shapes</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">poles</span><span class="p">)</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span> <span class="c1">#ensures that dict isn&#39;t empty</span>
+            <span class="n">running_means</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">age</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">age</span><span class="p">,</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="n">number_studies</span><span class="p">,</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span><span class="n">mean</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;csd&#39;</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span> <span class="n">mean</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> 
+                                      <span class="n">shapes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">shapes</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">elong_dir</span><span class="p">]</span>
+    <span class="c1"># Set longitudes in [-180, 180]</span>
+    <span class="c1">#running_means[&#39;plon&#39;] = running_means.apply(lambda row: row.plon - 360 if row.plon &gt; 180 else row.plon, axis =1)       </span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">360</span><span class="p">)</span>
+    <span class="c1"># running_means[&#39;elong_dir&#39;] = running_means[&#39;elong_dir&#39;].where(running_means[&#39;elong_dir&#39;] &lt;= 0, running_means[&#39;elong_dir&#39;] + 180)</span>
+    
+    <span class="c1"># The following block calculates rate of polar wander (degrees per million years) </span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">spherical2cartesian</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">])]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;PP_prev&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;PP_next&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shift</span><span class="p">(</span><span class="n">periods</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;GCD&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">GCD_cartesian</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;PP_prev&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">])),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;APW_rate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;GCD&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">diff</span><span class="p">()</span>
+    <span class="c1"># Calculate a &#39;kink&#39; angle for each position of the path</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;angle&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">get_angle</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;PP_prev&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">],</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;PP_next&#39;</span><span class="p">]),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">running_means</span> <span class="o">=</span> <span class="n">running_means</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;PPcartesian&#39;</span><span class="p">,</span> <span class="s1">&#39;PP_prev&#39;</span><span class="p">,</span> <span class="s1">&#39;PP_next&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>      
+    <span class="n">running_means</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># set -90 degrees of inclination for the present</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">])</span>
+    <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">==</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">running_means</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">])</span>
+    
+    <span class="k">return</span> <span class="n">running_means</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="we-can-now-see-how-a-single-run-looks-like">
+<h3>We can now see how a single run looks like<a class="headerlink" href="#we-can-now-see-how-a-single-run-looks-like" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the parameters for the Moving average</span>
+<span class="n">window_length</span><span class="o">=</span> <span class="mi">20</span>
+<span class="n">time_step</span><span class="o">=</span> <span class="mi">1</span> 
+<span class="n">max_age</span><span class="o">=</span> <span class="mi">65</span>
+<span class="n">min_age</span><span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="c1"># Generate a pseudo-sample of the original dataset in which every entry is a pseudo-sample taken for the error PDF</span>
+<span class="n">pseudo_df</span> <span class="o">=</span> <span class="n">get_vgps_sampling_from_direction</span><span class="p">(</span><span class="n">df_directions</span><span class="p">,</span> <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span>
+                                     <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span> 
+                                     <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                                     <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">)</span>
+
+<span class="c1"># Construct a Moving Average on the former data-set</span>
+<span class="n">RM</span> <span class="o">=</span> <span class="n">moving_average_APWP</span><span class="p">(</span><span class="n">pseudo_df</span><span class="p">,</span> <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> 
+                    <span class="n">window_length</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="n">min_age</span><span class="p">)</span>
+
+<span class="c1"># Visualization</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>    
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">RM</span><span class="o">.</span><span class="n">plat</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM</span><span class="o">.</span><span class="n">plat</span><span class="p">,</span> <span class="n">RM</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">RM</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">plot_pole</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/2_Workflow_11_0.png" src="_images/2_Workflow_11_0.png" />
+</div>
+</div>
+<ol class="simple">
+<li><p>The following functions performs the previous procedure a number of times a stores for each run the RM along with their descriptive parameters</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ensemble_RMs</span><span class="p">(</span><span class="n">df_vgps_original</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> 
+                 <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span> 
+                 <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                 <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span>
+                 <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+                 <span class="n">window_length</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function . . . </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;csd&#39;</span><span class="p">,</span><span class="s1">&#39;foliation&#39;</span><span class="p">,</span><span class="s1">&#39;lineation&#39;</span><span class="p">,</span><span class="s1">&#39;collinearity&#39;</span><span class="p">,</span><span class="s1">&#39;coplanarity&#39;</span><span class="p">])</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_bst</span><span class="p">):</span>
+    
+        <span class="c1"># Generate a pseudo-sample of the original dataset in which every entry is a pseudo-sample taken for the error PDF</span>
+        <span class="n">pseudo_df</span> <span class="o">=</span> <span class="n">get_vgps_sampling_from_direction</span><span class="p">(</span><span class="n">df_vgps_original</span><span class="p">,</span> <span class="n">study_label</span><span class="o">=</span> <span class="n">study_label</span><span class="p">,</span>
+                                             <span class="n">slat_label</span><span class="o">=</span><span class="n">slat_label</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="n">slon_label</span><span class="p">,</span> 
+                                             <span class="n">dec_label</span><span class="o">=</span><span class="n">dec_label</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="n">inc_label</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="n">k_label</span><span class="p">,</span>
+                                             <span class="n">mean_age_lab</span><span class="o">=</span><span class="n">mean_age_lab</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="n">min_age_lab</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="n">max_age_lab</span><span class="p">)</span>
+
+        <span class="c1"># Construct a Moving Average on the former data-set</span>
+        <span class="n">RM</span> <span class="o">=</span> <span class="n">moving_average_APWP</span><span class="p">(</span><span class="n">pseudo_df</span><span class="p">,</span> <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span> 
+                            <span class="n">window_length</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="n">min_age</span><span class="p">)</span>
+ 
+        <span class="n">RM</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">running_means_global</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RM</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">180</span><span class="p">,</span> <span class="n">running_means_global</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">360</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">running_means_global</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="we-now-proceed-to-run-the-workflow-a-great-number-of-times-in-order-to-to-get-the-ensemble-statistics">
+<h2>4. We now proceed to run the workflow a great number of times in order to to get the ensemble statistics.<a class="headerlink" href="#we-now-proceed-to-run-the-workflow-a-great-number-of-times-in-order-to-to-get-the-ensemble-statistics" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+<span class="n">df_final</span> <span class="o">=</span> <span class="n">ensemble_RMs</span><span class="p">(</span><span class="n">df_directions</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> 
+                 <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span> 
+                 <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                 <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span>
+                 <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+                 <span class="n">window_length</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 45.9 s, sys: 193 ms, total: 46.1 s
+Wall time: 46.2 s
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="visualization">
+<h1>Visualization<a class="headerlink" href="#visualization" title="Permalink to this headline">#</a></h1>
+<section id="first-we-need-to-calculate-the-time-varying-ensemble-statistics">
+<h2>First we need to calculate the time-varying Ensemble statistics<a class="headerlink" href="#first-we-need-to-calculate-the-time-varying-ensemble-statistics" title="Permalink to this headline">#</a></h2>
+<p>We take advantage of the groupby method to perform the statistics of each parameter of interest in the entire datades grouped by Age</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Since the Latitude and Longitude covaries, we need to calculate the Principal component for each timre-dependant point Cloud </span>
+<span class="n">ensemble_PC</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set principal component for each Age</span>
+
+<span class="c1"># Ensemble Statistics (quantiles) for each time-varying parameter:</span>
+<span class="n">ensemble_lat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span>  <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">ensemble_lon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span>  <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+
+<span class="c1">#Ensemble&#39;s parameters (e.g. Apparent polar wander rate)</span>
+<span class="n">ensemble_apw</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;APW_rate&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="the-actual-path-in-sourthern-coordinates">
+<h2>The actual path in Sourthern coordinates<a class="headerlink" href="#the-actual-path-in-sourthern-coordinates" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Visualization</span>
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span><span class="mi">180</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span><span class="o">-</span><span class="mi">60</span><span class="p">]</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">proj</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Orthographic</span><span class="p">(</span><span class="n">central_longitude</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">central_latitude</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">axes</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">proj</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">coastlines</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">stock_img</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">(</span><span class="n">extent</span><span class="p">,</span> <span class="n">crs</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">RM</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">RM</span><span class="o">.</span><span class="n">plat</span><span class="p">,</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM</span><span class="o">.</span><span class="n">plat</span><span class="p">,</span> <span class="n">RM</span><span class="o">.</span><span class="n">plon</span><span class="p">,</span> <span class="n">RM</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
+    <span class="n">plot_pole</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+    
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="ensemble-stiastics-and-principal-components">
+<h3>Ensemble Stiastics and Principal components<a class="headerlink" href="#ensemble-stiastics-and-principal-components" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">set_theme</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;darkgrid&quot;</span><span class="p">)</span>
+<span class="c1"># sns.set_theme(style=&quot;white&quot;, palette=None)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">),</span> <span class="n">sharex</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Ensemble&#39;s Latitude and Longitudes</span>
+<span class="n">ensemble_lat</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">ensemble_lon</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="n">ensemble_PC</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set principal component for each window</span>
+
+<span class="c1">#Ensemble&#39;s parameters (e.g. Elongation)</span>
+<span class="n">ensemble_apw</span> <span class="o">=</span> <span class="n">quantiles</span><span class="p">(</span><span class="n">df_final</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;APW_rate&quot;</span><span class="p">)</span> <span class="c1"># set quantiles of latitude groupedby age for visualization purposes</span>
+
+<span class="c1"># ensemble_elong = quantiles(df_final,&quot;age&quot;,&quot;foliation&quot;) # set quantiles of latitude groupedby age for visualization purposes</span>
+<span class="c1"># ensemble_apw = quantiles(df_final,&quot;age&quot;,&quot;APW_rate	&quot;) # set quantiles of latitude groupedby age for visualization purposes</span>
+
+<span class="c1"># Set Axis Labels</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Latitude (°N)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Longitude (°E)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;APW (°)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+<span class="c1"># axes[1].set_ylabel(r&#39;APW (°)&#39;, fontweight =&#39;bold&#39;, fontsize = 12)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Age (Ma)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
+
+<span class="c1"># LATITUDES </span>
+<span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df_final</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble_lat</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#7DBFD2&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.40</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#427E8C&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lat</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#427E8C&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#314B54&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>  
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">1</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#427E8C&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">2</span><span class="p">)</span>  
+    
+<span class="c1"># LONGITUDES     </span>
+<span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df_final</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Moving Average realization&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble_lon</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#7DBFD2&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.40</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ensemble 0.16-0.84 percentiles &quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_lon</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#590E0E&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ensemble_PC</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_PC</span><span class="o">.</span><span class="n">PC</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#314B54&quot;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    
+<span class="c1"># APW (°)     </span>
+<span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df_final</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
+    <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">APW_rate</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="c1"># axes[1,1].plot(df_run.age.tolist(), df_run.plon.tolist(), color=&quot;#4F4F4F&quot;, zorder =0, linewidth=0.2, label = &#39;Moving Average realization&#39;)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">ensemble_apw</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_apw</span><span class="o">.</span><span class="n">q16</span><span class="p">,</span><span class="n">ensemble_apw</span><span class="o">.</span><span class="n">q84</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span> <span class="s2">&quot;#7DBFD2&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.40</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Ensemble 0.16-0.84 percentiles &quot;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ensemble_apw</span><span class="o">.</span><span class="n">X</span><span class="p">,</span> <span class="n">ensemble_apw</span><span class="o">.</span><span class="n">q50</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;#427E8C&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># axes[1,1].plot(ensemble_PC.X, ensemble_lon.q16,color=&quot;#590E0E&quot;, zorder =3, linewidth=0.2)</span>
+
+
+<span class="c1"># plt.savefig(current_path + &#39;/figures/3/ensemble.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)   </span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&lt;matplotlib.lines.Line2D at 0x7fd8d4974be0&gt;]
+</pre></div>
+</div>
+<img alt="_images/2_Workflow_22_1.png" src="_images/2_Workflow_22_1.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">quantiles</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    class to generate quantiles.</span>
+<span class="sd">    note: input fro longitudes should live in [-180,180]</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span><span class="p">):</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">xlabel</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>        
+        <span class="bp">self</span><span class="o">.</span><span class="n">Y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)[</span><span class="n">ylabel</span><span class="p">]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">q5</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.05</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q16</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.16</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q25</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.25</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q50</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.50</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q75</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.75</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q84</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.84</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">q95</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">.95</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mean</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Y</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+    
+<span class="k">class</span> <span class="nc">PC</span><span class="p">:</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Class to calculate Principal Componenents as a function of time from a time dependant ensemble of directions</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">,</span> <span class="n">xlabel</span><span class="p">,</span> <span class="n">LatLabel</span><span class="p">,</span> <span class="n">LonLabel</span><span class="p">):</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">xlabel</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">=</span><span class="n">df</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">xlabel</span><span class="o">=</span><span class="n">xlabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LatLabel</span><span class="o">=</span><span class="n">LatLabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">LonLabel</span><span class="o">=</span><span class="n">LonLabel</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">groupby</span><span class="o">=</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">PC</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">lats</span><span class="p">,</span> <span class="n">lons</span><span class="p">,</span> <span class="n">maxGCD95</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">age</span><span class="p">,</span> <span class="n">df_age</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">groupby</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">spherical2cartesian</span><span class="p">([</span> <span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">LatLabel</span><span class="p">]),</span><span class="n">np</span><span class="o">.</span><span class="n">radians</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">LonLabel</span><span class="p">])])</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="n">df_age</span><span class="o">.</span><span class="n">iterrows</span><span class="p">()])</span>
+            
+            <span class="n">PrinComp</span><span class="o">=</span><span class="n">PD</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+            <span class="n">gcds</span> <span class="o">=</span> <span class="p">[</span><span class="n">GCD_cartesian</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">PrinComp</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">array</span><span class="p">)]</span>
+            
+            <span class="n">maxGCD95</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">gcds</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+            <span class="n">lats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">PrinComp</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">lons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">cartesian2spherical</span><span class="p">(</span><span class="n">PrinComp</span><span class="p">))[</span><span class="mi">1</span><span class="p">])</span>
+                       
+        <span class="n">lats</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=-</span><span class="mi">90</span> <span class="c1"># set the present day field in -90</span>
+        
+        <span class="k">return</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lons</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">lats</span><span class="p">),</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">maxGCD95</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Young CEED Team<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
