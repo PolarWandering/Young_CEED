@@ -133,32 +133,28 @@ def get_pseudo_vgps(df):
     the lower and upper bounds of the distribution of reported VGPs.
     Note: column labels are presently hard-coded into this, if relevant.
     '''
-    Study, age_bst, vgp_lat_bst, vgp_lon_bst = [], [], [], []
+    
+    data = {'Study': [], 'Plat': [], 'Plon': [], 'mean_age': []}
 
     for index, row in df.iterrows():
-        
-        # we first generate N VGPs following with N the number of VGPs from the original pole.
         directions_temp = ipmag.fishrot(k = row.K, n = row.N, dec = row.Plon, inc = row.Plat, di_block = False)
         
-        vgp_lon_bst.append(directions_temp[0])
-        vgp_lat_bst.append(directions_temp[1])
+        vgp_lon_bst = directions_temp[0]
+        vgp_lat_bst = directions_temp[1]
     
-        age_bst.append([np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)) for _ in range(row.N)])
-        Study.append([row.Study for _ in range(row.N)])
+        if row.uncer_dist == 'uniform':
+            ages = [np.random.randint(np.floor(row.min_age),np.ceil(row.max_age)) for _ in range(row.N)]    
+        elif row.uncer_dist == 'normal':
+            ages = [np.random.normal(row.mean_age,(row.max_age - row.min_age) / 2) for _ in range(row.N)]
+            
+        studies = [row.Study for _ in range(row.N)]
+ 
+        data['Study'] += studies
+        data['Plat'] += vgp_lat_bst
+        data['Plon'] += vgp_lon_bst
+        data['mean_age'] += ages
     
-    vgp_lon_bst = [item for sublist in vgp_lon_bst for item in sublist]
-    vgp_lat_bst = [item for sublist in vgp_lat_bst for item in sublist] 
-    age_bst = [item for sublist in age_bst for item in sublist]
-    Study = [item for sublist in Study for item in sublist]
-    
-    dictionary = {
-                  'Study': Study,
-                  'Plat': vgp_lat_bst,    
-                  'Plon': vgp_lon_bst,
-                  'mean_age': age_bst
-                  }    
-    
-    pseudo_vgps = pd.DataFrame(dictionary)
+    pseudo_vgps = pd.DataFrame(data)
 
     return pseudo_vgps
 
