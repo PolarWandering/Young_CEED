@@ -459,7 +459,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_filtered_vgps, df_pole_compilation = dfs_vgps_recomputed_poles(data_path_VGP, by_study = True) # takes as many as poles as are described for one are</span>
-<span class="n">df_filtered_vgps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
+<span class="n">df_filtered_directions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_vgps_filtered.csv&#39;</span><span class="p">)</span>
 <span class="n">df_pole_compilation</span>  <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_pole_compilation_by_study.csv&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -733,21 +733,18 @@ Wall time: 1min 31s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">df_RM_ensemble</span> <span class="o">=</span> <span class="n">ensemble_RMs</span><span class="p">(</span><span class="n">df_directions</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
-                 <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span>
-                 <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
-                 <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span>
-                 <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
-                 <span class="n">window_length</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="n">min_age</span><span class="p">)</span>
+<span class="n">df_RM_ensemble</span> <span class="o">=</span> <span class="n">MC_error_prop_ensemble_results</span><span class="p">(</span><span class="n">df_filtered_directions</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+                                                 <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span>
+                                                 <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                                                 <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span>
+                                                 <span class="n">plon_label</span> <span class="o">=</span> <span class="s1">&#39;plon&#39;</span><span class="p">,</span> <span class="n">plat_label</span><span class="o">=</span><span class="s1">&#39;plat&#39;</span><span class="p">,</span> <span class="n">age_label</span> <span class="o">=</span> <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+                                                 <span class="n">window_length</span><span class="o">=</span><span class="n">window_length</span><span class="p">,</span> <span class="n">time_step</span><span class="o">=</span><span class="n">time_step</span><span class="p">,</span> <span class="n">max_age</span><span class="o">=</span><span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="o">=</span><span class="n">min_age</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="n">File</span> <span class="o">&lt;</span><span class="n">timed</span> <span class="n">exec</span><span class="o">&gt;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-
-<span class="ne">NameError</span>: name &#39;ensemble_RMs&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 44.9 s, sys: 170 ms, total: 45 s
+Wall time: 45 s
 </pre></div>
 </div>
 </div>
@@ -758,16 +755,6 @@ Wall time: 1min 31s
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ensemble_PC_Gallo</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">df_RM_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span> <span class="c1"># set principal component for each Age</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="nn">Input In [11],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">ensemble_PC_Gallo</span> <span class="o">=</span> <span class="n">PC</span><span class="p">(</span><span class="n">df_RM_ensemble</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span><span class="s2">&quot;plat&quot;</span><span class="p">,</span><span class="s2">&quot;plon&quot;</span><span class="p">)</span>
-
-<span class="ne">NameError</span>: name &#39;df_RM_ensemble&#39; is not defined
 </pre></div>
 </div>
 </div>
@@ -832,7 +819,7 @@ Wall time: 1min 31s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7fddfce449d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f7a21046440&gt;
 </pre></div>
 </div>
 <img alt="_images/3_Comparissons_18_1.png" src="_images/3_Comparissons_18_1.png" />
