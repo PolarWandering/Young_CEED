@@ -780,7 +780,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the parameters for the Moving average</span>
-<span class="n">window_length</span><span class="o">=</span> <span class="mi">20</span>
+<span class="n">window_length</span><span class="o">=</span> <span class="mi">19</span>
 <span class="n">time_step</span><span class="o">=</span> <span class="mi">1</span> 
 <span class="n">max_age</span><span class="o">=</span> <span class="mi">65</span>
 <span class="n">min_age</span><span class="o">=</span> <span class="mi">0</span>
@@ -869,7 +869,7 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
-<span class="n">df_RM_ensemble</span> <span class="o">=</span> <span class="n">ensemble_RMs</span><span class="p">(</span><span class="n">df_directions</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+<span class="n">df_RM_ensemble</span> <span class="o">=</span> <span class="n">ensemble_RMs</span><span class="p">(</span><span class="n">df_directions</span><span class="p">,</span> <span class="n">n_bst</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
                  <span class="n">study_label</span><span class="o">=</span> <span class="s1">&#39;Study&#39;</span><span class="p">,</span> <span class="n">slat_label</span><span class="o">=</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span> <span class="n">slon_label</span><span class="o">=</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span>
                  <span class="n">dec_label</span><span class="o">=</span><span class="s1">&#39;dec_reverse&#39;</span><span class="p">,</span> <span class="n">inc_label</span><span class="o">=</span><span class="s1">&#39;inc_reverse&#39;</span><span class="p">,</span> <span class="n">k_label</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
                  <span class="n">mean_age_lab</span><span class="o">=</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">min_age_lab</span><span class="o">=</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span> <span class="n">max_age_lab</span><span class="o">=</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span>
@@ -879,8 +879,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 43.4 s, sys: 169 ms, total: 43.6 s
-Wall time: 43.6 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: user 1min 21s, sys: 336 ms, total: 1min 22s
+Wall time: 1min 22s
 </pre></div>
 </div>
 </div>
@@ -936,21 +936,21 @@ Wall time: 43.6 s
     <tr>
       <th>0</th>
       <td>0.0</td>
-      <td>305.0</td>
-      <td>16.848351</td>
-      <td>2.022067</td>
-      <td>19.7336</td>
-      <td>0.420687</td>
-      <td>2.617893</td>
-      <td>6.222893</td>
-      <td>3.03858</td>
+      <td>302.0</td>
+      <td>16.751498</td>
+      <td>2.038372</td>
+      <td>19.790565</td>
+      <td>0.426646</td>
+      <td>2.609231</td>
+      <td>6.115687</td>
+      <td>3.035877</td>
       <td>0.0</td>
       <td>15.0</td>
       <td>0.000000</td>
       <td>-90.000000</td>
-      <td>-17.465964</td>
-      <td>2.646646</td>
-      <td>2.547991</td>
+      <td>162.387388</td>
+      <td>2.573599</td>
+      <td>2.452402</td>
       <td>-1.0</td>
       <td>NaN</td>
       <td>NaN</td>
@@ -975,8 +975,8 @@ Wall time: 43.6 s
       <td>2.646646</td>
       <td>2.547991</td>
       <td>3.0</td>
-      <td>0.00000</td>
-      <td>0.00000</td>
+      <td>0.110993</td>
+      <td>0.110993</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -998,31 +998,31 @@ Wall time: 43.6 s
       <td>2.646646</td>
       <td>2.547991</td>
       <td>2.0</td>
-      <td>0.00000</td>
-      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
       <th>3</th>
       <td>0.0</td>
-      <td>306.0</td>
-      <td>16.659288</td>
-      <td>2.030893</td>
-      <td>19.84526</td>
-      <td>0.438644</td>
-      <td>2.598874</td>
-      <td>5.924794</td>
-      <td>3.037518</td>
+      <td>305.0</td>
+      <td>16.848351</td>
+      <td>2.022067</td>
+      <td>19.7336</td>
+      <td>0.420687</td>
+      <td>2.617893</td>
+      <td>6.222893</td>
+      <td>3.03858</td>
       <td>3.0</td>
       <td>15.0</td>
-      <td>1.304635</td>
-      <td>-88.062654</td>
-      <td>-18.523832</td>
-      <td>2.680480</td>
-      <td>2.611551</td>
+      <td>-0.914402</td>
+      <td>-87.951651</td>
+      <td>-17.465964</td>
+      <td>2.646646</td>
+      <td>2.547991</td>
       <td>-2.0</td>
-      <td>0.13517</td>
-      <td>0.13517</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
       <td>NaN</td>
     </tr>
     <tr>
@@ -1044,9 +1044,9 @@ Wall time: 43.6 s
       <td>2.680480</td>
       <td>2.611551</td>
       <td>-2.0</td>
-      <td>0.00000</td>
-      <td>0.00000</td>
-      <td>NaN</td>
+      <td>0.135170</td>
+      <td>0.135170</td>
+      <td>175.743984</td>
     </tr>
   </tbody>
 </table>
@@ -1137,7 +1137,7 @@ Wall time: 43.6 s
 <span class="n">axes</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Age (Ma)&#39;</span><span class="p">,</span> <span class="n">fontweight</span> <span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">12</span><span class="p">)</span>
 
 <span class="c1"># LATITUDES </span>
-<span class="n">df_RM_ensemble_50</span> <span class="o">=</span> <span class="n">df_RM_ensemble</span><span class="p">[</span><span class="n">df_RM_ensemble</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">50</span><span class="p">))]</span>
+<span class="n">df_RM_ensemble_50</span> <span class="o">=</span> <span class="n">df_RM_ensemble</span><span class="p">[</span><span class="n">df_RM_ensemble</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100</span><span class="p">))]</span>
 
 <span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df_RM_ensemble_50</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
     <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">age</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;#4F4F4F&quot;</span><span class="p">,</span> <span class="n">zorder</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
@@ -1176,7 +1176,7 @@ Wall time: 43.6 s
 <span class="c1"># axes[1,1].plot(ensemble_PC.X, ensemble_lon.q16,color=&quot;#590E0E&quot;, zorder =3, linewidth=0.2)</span>
 
 
-<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">3.5</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
 <span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
@@ -1185,7 +1185,7 @@ Wall time: 43.6 s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9230cadcf0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7f9200677af0&gt;
 </pre></div>
 </div>
 <img alt="_images/2_Workflow_25_1.png" src="_images/2_Workflow_25_1.png" />

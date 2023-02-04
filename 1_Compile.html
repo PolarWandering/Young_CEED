@@ -429,7 +429,6 @@ title="Print to PDF"
 
 <span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
-<span class="kn">import</span> <span class="nn">matplotlib.gridspec</span> <span class="k">as</span> <span class="nn">gridspec</span>
 
 <span class="kn">from</span> <span class="nn">vgptools.auxiliar</span> <span class="kn">import</span> <span class="n">get_files_in_directory</span>
 
@@ -477,7 +476,7 @@ title="Print to PDF"
 
             <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">recalc_vgps</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>       
             <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">go_reverse</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>        
-            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_alpha95</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>        
+            <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_alpha95</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>
             <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_k</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">)</span>
             <span class="n">df_vgps_temp</span> <span class="o">=</span> <span class="n">get_ages</span><span class="p">(</span><span class="n">df_vgps_temp</span><span class="p">,</span> <span class="n">round_ceil</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 
@@ -516,11 +515,12 @@ We can group the paleopoles within the same study with different numbers in the 
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">original_selection</span><span class="p">(</span><span class="n">df_unfiltered</span><span class="p">,</span> <span class="n">df_poles_original</span><span class="p">):</span>
 <span class="w">    </span>
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
-<span class="sd">    input: Pass an unfiltered DF </span>
-<span class="sd">    output: Selected entries that were considered by their authors to the calculation of PPs.</span>
+<span class="sd">    input: Pass an unfiltered DF (including all directions, both included and excluded from the original pole calculations)</span>
+<span class="sd">    output: A selection of entries that were considered by their authors for the calculation of PPs.</span>
 <span class="sd">    </span>
-<span class="sd">    Note: This is achieved taking advantage on the values in column df_unfiltered[`in_study_pole`]. Sero</span>
-<span class="sd">    valued entries were discarder and integers labels different poles within the same study.</span>
+<span class="sd">    Note: It is achieved by utilizing the values in column df_unfiltered[`in_study_pole`]. If the value </span>
+<span class="sd">    in this column was zero (0), he authors discarded entries. If entries are considered for different </span>
+<span class="sd">    studies, they are grouped according to a different value.</span>
 <span class="sd">    &#39;&#39;&#39;</span>    
     
     <span class="n">df_unfiltered</span><span class="p">[</span><span class="s1">&#39;keep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>    
@@ -542,16 +542,17 @@ We can group the paleopoles within the same study with different numbers in the 
                 <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;slat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;slon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> 
                 <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-                
+            
+            <span class="n">unc_distr</span> <span class="o">=</span> <span class="n">df_poles_original</span><span class="p">[(</span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;Study&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">study</span><span class="p">)</span><span class="o">&amp;</span> <span class="p">(</span><span class="n">df_poles_original</span><span class="p">[</span><span class="s1">&#39;pole&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">pole</span><span class="p">)][</span><span class="s1">&#39;uncer_dist&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             
             <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;Study&#39;</span><span class="p">:</span> <span class="n">study</span><span class="p">,</span> <span class="s1">&#39;pole&#39;</span><span class="p">:</span> <span class="n">pole</span><span class="p">,</span> 
                                                               <span class="s1">&#39;slat&#39;</span><span class="p">:</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="s1">&#39;slon&#39;</span><span class="p">:</span> <span class="n">mean_site</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
                                                               <span class="s1">&#39;Plat&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;inc&#39;</span><span class="p">],</span> <span class="s1">&#39;Plon&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
                                                               <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;n&#39;</span><span class="p">],</span> <span class="s1">&#39;K&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">],</span> <span class="s1">&#39;A95&#39;</span><span class="p">:</span> <span class="n">ppole</span><span class="p">[</span><span class="s1">&#39;alpha95&#39;</span><span class="p">],</span>
                                                               <span class="s1">&#39;min_age&#39;</span><span class="p">:</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">min_age</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="s1">&#39;max_age&#39;</span><span class="p">:</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">max_age</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> 
-                                                              <span class="s1">&#39;mean_age&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">df_pole</span><span class="o">.</span><span class="n">max_age</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">min_age</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span> <span class="p">},</span> 
+                                                              <span class="s1">&#39;mean_age&#39;</span><span class="p">:</span> <span class="p">(</span><span class="n">df_pole</span><span class="o">.</span><span class="n">max_age</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">+</span> <span class="n">df_pole</span><span class="o">.</span><span class="n">min_age</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;uncer_dist&#39;</span><span class="p">:</span> <span class="n">unc_distr</span><span class="p">},</span> 
                                                               <span class="n">ignore_index</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>        
-    <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[[</span><span class="s1">&#39;Study&#39;</span><span class="p">,</span><span class="s1">&#39;pole&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span><span class="s1">&#39;Plat&#39;</span><span class="p">,</span><span class="s1">&#39;Plon&#39;</span><span class="p">,</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span><span class="s1">&#39;mean_age&#39;</span><span class="p">]]</span>
+    <span class="n">df_pole_compilation</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[[</span><span class="s1">&#39;Study&#39;</span><span class="p">,</span><span class="s1">&#39;pole&#39;</span><span class="p">,</span><span class="s1">&#39;N&#39;</span><span class="p">,</span><span class="s1">&#39;K&#39;</span><span class="p">,</span><span class="s1">&#39;A95&#39;</span><span class="p">,</span><span class="s1">&#39;slat&#39;</span><span class="p">,</span><span class="s1">&#39;slon&#39;</span><span class="p">,</span><span class="s1">&#39;Plat&#39;</span><span class="p">,</span><span class="s1">&#39;Plon&#39;</span><span class="p">,</span><span class="s1">&#39;min_age&#39;</span><span class="p">,</span><span class="s1">&#39;max_age&#39;</span><span class="p">,</span><span class="s1">&#39;mean_age&#39;</span><span class="p">,</span><span class="s1">&#39;uncer_dist&#39;</span><span class="p">]]</span>
     <span class="k">return</span> <span class="n">df_filtered</span><span class="p">,</span> <span class="n">df_pole_compilation</span>
 </pre></div>
 </div>
@@ -564,21 +565,18 @@ We can group the paleopoles within the same study with different numbers in the 
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">shape</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(40, 12)
-</pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="create-a-csv-with-the-compiled-dataframes">
 <h3>Create a csv with the compiled DataFrames<a class="headerlink" href="#create-a-csv-with-the-compiled-dataframes" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_filtered.to_csv(current_path +&#39;/data/df_vgps_filtered.csv&#39;, index = False)</span>
+<span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_pole_compilation</span><span class="p">[</span><span class="s1">&#39;N&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int&#39;</span><span class="p">)</span>
+<span class="n">df_pole_compilation</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span><span class="s1">&#39;/data/df_pole_compilation_by_study.csv&#39;</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># df_filtered.to_csv(current_path +&#39;/data/df_vgps_filtered.csv&#39;, index = False)</span>
