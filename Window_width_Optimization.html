@@ -308,8 +308,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
-     The following block iterates through different window widths (it takes ~20 min)
+    <a class="reference internal nav-link" href="#the-following-block-iterates-different-window-widths-training-and-validation-subsets-takes-20-min">
+     The following block iterates different window widths training and validation subsets (takes ~20 min)
     </a>
    </li>
   </ul>
@@ -344,8 +344,8 @@ title="Print to PDF"
   </a>
   <ul class="visible nav section-nav flex-column">
    <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
-     The following block iterates through different window widths (it takes ~20 min)
+    <a class="reference internal nav-link" href="#the-following-block-iterates-different-window-widths-training-and-validation-subsets-takes-20-min">
+     The following block iterates different window widths training and validation subsets (takes ~20 min)
     </a>
    </li>
   </ul>
@@ -372,7 +372,7 @@ title="Print to PDF"
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">from</span> <span class="nn">pmagpy</span> <span class="kn">import</span> <span class="n">ipmag</span><span class="p">,</span> <span class="n">pmag</span>
-<span class="kn">from</span> <span class="nn">kneed</span> <span class="kn">import</span> <span class="n">KneeLocator</span>
+<span class="kn">from</span> <span class="nn">kneed</span> <span class="kn">import</span> <span class="n">KneeLocator</span> <span class="c1"># Satopaa et al.(2011) knee finding technique (https://github.com/arvkevi/kneed#citation)</span>
 <span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">UnivariateSpline</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
@@ -401,8 +401,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="the-following-block-iterates-through-different-window-widths-it-takes-20-min">
-<h2>The following block iterates through different window widths (it takes ~20 min)<a class="headerlink" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min" title="Permalink to this headline">#</a></h2>
+<section id="the-following-block-iterates-different-window-widths-training-and-validation-subsets-takes-20-min">
+<h2>The following block iterates different window widths training and validation subsets (takes ~20 min)<a class="headerlink" href="#the-following-block-iterates-different-window-widths-training-and-validation-subsets-takes-20-min" title="Permalink to this headline">#</a></h2>
 <p>This process involves iterating through different window widths, ranging from 5 million years to 45 million years, and dividing the original dataset into two subgroups, one for training and one for validation. We then run a Moving Average (MA) on the training subgroup and in the validations group. The time-varying distance between the Moving averages on training and validation sets is calculated and we store its mean and standard deviation values. The underlying idea is to train the model with the training subgroup using a certain window width and then evaluate its performance on the validation subgroup with the same window width. This iteration is done for different window widths to find the optimal window size.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -415,7 +415,8 @@ title="Print to PDF"
 
 <span class="n">df_ensemble</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;step_size&#39;</span><span class="p">,</span><span class="s1">&#39;window_lenght&#39;</span><span class="p">,</span><span class="s1">&#39;n_training&#39;</span><span class="p">,</span><span class="s1">&#39;mean_distance&#39;</span><span class="p">,</span><span class="s1">&#39;std_distance&#39;</span><span class="p">])</span>
 
-    
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># seed for reproducibility</span>
+
 <span class="k">for</span> <span class="n">window</span> <span class="ow">in</span> <span class="n">window_lengths</span><span class="p">:</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
@@ -426,9 +427,6 @@ title="Print to PDF"
 
         <span class="n">mean_distances</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">std_distances</span> <span class="o">=</span> <span class="p">[]</span>
-
-        <span class="c1"># train_ = get_vgps_sampling_from_direction(train)</span>
-        <span class="c1"># test_ = get_vgps_sampling_from_direction(test)</span>
 
         <span class="n">RM_train_</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
         <span class="n">RM_test_</span> <span class="o">=</span> <span class="n">running_mean_APWP_shape</span><span class="p">(</span><span class="n">test</span><span class="p">,</span> <span class="s1">&#39;vgp_lon_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;vgp_lat_SH&#39;</span><span class="p">,</span> <span class="s1">&#39;mean_age&#39;</span><span class="p">,</span> <span class="n">window</span><span class="p">,</span> <span class="n">step</span><span class="p">,</span> <span class="n">max_age</span><span class="p">,</span> <span class="n">min_age</span><span class="p">)</span>
@@ -547,6 +545,8 @@ Wall time: 26min 38s
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Distance between Train and Validation (°)&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Window width (Ma)&#39;</span><span class="p">)</span>    
 
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># seed for reproducibility</span>
+
 <span class="c1"># Plot the </span>
 <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;window_lenght&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;mean_distance&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span> 
                <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;#207AAC&#39;</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">25</span> <span class="p">,</span> <span class="n">edgecolor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Mean Distance&#39;</span><span class="p">)</span>
@@ -589,7 +589,7 @@ Wall time: 26min 38s
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff484d23790&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff4715ebf70&gt;
 </pre></div>
 </div>
 <img alt="_images/Window_width_Optimization_7_1.png" src="_images/Window_width_Optimization_7_1.png" />
