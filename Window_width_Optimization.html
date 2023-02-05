@@ -302,9 +302,21 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
-   The following block iterates through different window widths (it takes ~20 min)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Compile the directions / VGPs
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
+     The following block iterates through different window widths (it takes ~20 min)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimal-elbow-point-i-e-window-width">
+   Optimal elbow point (i.e. Window width)
   </a>
  </li>
 </ul>
@@ -326,9 +338,21 @@ title="Print to PDF"
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
-   The following block iterates through different window widths (it takes ~20 min)
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   1. Compile the directions / VGPs
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-following-block-iterates-through-different-window-widths-it-takes-20-min">
+     The following block iterates through different window widths (it takes ~20 min)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#optimal-elbow-point-i-e-window-width">
+   Optimal elbow point (i.e. Window width)
   </a>
  </li>
 </ul>
@@ -560,18 +584,33 @@ Wall time: 26min 38s
 <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">df_knees</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;knees&#39;</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;probability&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;#106084&#39;</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">bins</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Elbow point (Ma)&#39;</span><span class="p">)</span> <span class="c1">#, label = &#39;Elbow point Probability&#39;)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper center&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/cross_validation/graph.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+<span class="c1"># plt.savefig(current_path + &#39;/figures/cross_validation/graph.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;knees&#39;, ylabel=&#39;Probability of Elbow point&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff484d23790&gt;
 </pre></div>
 </div>
 <img alt="_images/Window_width_Optimization_7_1.png" src="_images/Window_width_Optimization_7_1.png" />
 </div>
 </div>
 </section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="optimal-elbow-point-i-e-window-width">
+<h1>Optimal elbow point (i.e. Window width)<a class="headerlink" href="#optimal-elbow-point-i-e-window-width" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The optimal elbow point is : </span><span class="si">{</span><span class="n">df_knees</span><span class="o">.</span><span class="n">knees</span><span class="o">.</span><span class="n">median</span><span class="p">()</span><span class="si">}</span><span class="s2"> (Ma)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The optimal elbow point is : 21.0 (Ma)
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
