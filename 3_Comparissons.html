@@ -867,6 +867,7 @@ Wall time: 14min 50s
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="misfit-of-the-classical-approach-vs-the-psuedovgp-and-our-current-approach">
 <h1>Misfit of the Classical approach vs. the psuedoVGP and our current approach<a class="headerlink" href="#misfit-of-the-classical-approach-vs-the-psuedovgp-and-our-current-approach" title="Permalink to this headline">#</a></h1>
+<p>Here, we compare the results of the classic approach (running means on paleopoles) with the approach proposed in the current contribution and the Moving averages on <span class="math notranslate nohighlight">\(pseudo\)</span>-VGPs drawn from the Paleopoles <em>pdf</em> s</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">RM_1_classic</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
@@ -905,7 +906,7 @@ Wall time: 14min 50s
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:xlabel=&#39;age&#39;, ylabel=&#39;Angle&#39;&gt;
 </pre></div>
 </div>
-<img alt="_images/3_Comparissons_23_1.png" src="_images/3_Comparissons_23_1.png" />
+<img alt="_images/3_Comparissons_24_1.png" src="_images/3_Comparissons_24_1.png" />
 </div>
 </div>
 <section id="this-study">
@@ -933,13 +934,13 @@ Wall time: 14min 50s
 <span class="c1"># Runs in grey (just plotting 50 runs)</span>
 <span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">df_RM_ensemble</span><span class="p">[</span><span class="n">df_RM_ensemble</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/6/RM_VGPs.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>  
+<span class="c1"># plt.savefig(current_path + &#39;/figures/6/RM_VGPs.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)  </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_Comparissons_25_0.png" src="_images/3_Comparissons_25_0.png" />
+<img alt="_images/3_Comparissons_26_0.png" src="_images/3_Comparissons_26_0.png" />
 </div>
 </div>
 </section>
@@ -968,13 +969,13 @@ Wall time: 14min 50s
 <span class="c1"># Runs in grey (just plotting 50 runs)</span>
 <span class="k">for</span> <span class="n">run</span><span class="p">,</span> <span class="n">df_run</span> <span class="ow">in</span> <span class="n">RM_2_ensemble_pseudoVGP</span><span class="p">[</span><span class="n">RM_2_ensemble_pseudoVGP</span><span class="p">[</span><span class="s1">&#39;run&#39;</span><span class="p">]</span><span class="o">&lt;</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;run&#39;</span><span class="p">):</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_run</span><span class="o">.</span><span class="n">plon</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">df_run</span><span class="o">.</span><span class="n">plat</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span><span class="n">transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">Geodetic</span><span class="p">(),</span> <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;grey&quot;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/6/RM_pseudo_VGPs.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>  
+<span class="c1"># plt.savefig(current_path + &#39;/figures/6/RM_pseudo_VGPs.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)  </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_Comparissons_27_0.png" src="_images/3_Comparissons_27_0.png" />
+<img alt="_images/3_Comparissons_28_0.png" src="_images/3_Comparissons_28_0.png" />
 </div>
 </div>
 </section>
@@ -996,13 +997,13 @@ Wall time: 14min 50s
 <span class="c1">#Color coded Paleopoles and 95 circles.</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">RM_1_classic</span><span class="p">[</span><span class="s1">&#39;plat&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span><span class="n">RM_1_classic</span><span class="p">[</span><span class="s1">&#39;plon&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">RM_1_classic</span><span class="p">[</span><span class="s1">&#39;A95&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">RM_1_classic</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span><span class="o">.</span><span class="n">transpose</span><span class="p">()):</span>
     <span class="n">plot_pole_A95</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span><span class="mi">0</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">current_path</span> <span class="o">+</span> <span class="s1">&#39;/figures/6/RM_CLASSIC.svg&#39;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>    
+<span class="c1"># plt.savefig(current_path + &#39;/figures/6/RM_CLASSIC.svg&#39;, dpi =600, bbox_inches=&#39;tight&#39;)    </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/3_Comparissons_29_0.png" src="_images/3_Comparissons_29_0.png" />
+<img alt="_images/3_Comparissons_30_0.png" src="_images/3_Comparissons_30_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
